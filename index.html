@@ -745,98 +745,63 @@ function getFormData() {
     showToast('Please fill Name, Email, Phone and Interest.');
     return null;
   }
-  return { name: name, company: company, email: email, phone: phone, interest: interest, type: type, msg: msg };
+  return { name, company, email, phone, interest, type, msg };
 }
 
-// ── FORMSPREE CONFIG ──
-// SETUP: Go to formspree.io → create free account → new form → copy ID below
-// Replace YOUR_FORMSPREE_ID with your actual ID e.g. 'xpwzabcd'
-var FORMSPREE_ID = 'YOUR_FORMSPREE_ID';
-
+// ── FORM SUBMIT via Web3Forms (no signup needed, delivers to sales@aesystems.in) ──
 document.addEventListener('DOMContentLoaded', function() {
   var btn = document.getElementById('submitBtn');
   if (!btn) return;
+
   btn.addEventListener('click', function(e) {
     e.preventDefault();
     var d = getFormData();
     if (!d) return;
 
-    // If Formspree not yet configured → fallback to mailto
-    if (FORMSPREE_ID === 'YOUR_FORMSPREE_ID') {
-      var subject = encodeURIComponent('AE Systems Enquiry - ' + d.interest + ' - ' + (d.company || d.name));
-      var body = encodeURIComponent(
-        'Hello AE Systems Team,
-
-' +
-        'Name: ' + d.name + '
-' +
-        'Company: ' + (d.company || 'N/A') + '
-' +
-        'Email: ' + d.email + '
-' +
-        'Phone: ' + d.phone + '
-' +
-        'Interested In: ' + d.interest + '
-' +
-        'Building Type: ' + (d.type || 'N/A') + '
-
-' +
-        'Message:
-' + (d.msg || 'No additional message.') + '
-
-Sent from aesystems.in'
-      );
-      window.location.href = 'mailto:sales@aesystems.in?subject=' + subject + '&body=' + body;
-      showToast('Opening your email client...');
-      return;
-    }
-
-    // Formspree AJAX submit
-    btn.textContent = 'Sending...';
-    btn.disabled = true;
     var successEl = document.getElementById('form-success');
-    var errorEl = document.getElementById('form-error');
-    if (successEl) successEl.style.display = 'none';
-    if (errorEl) errorEl.style.display = 'none';
+    var errorEl   = document.getElementById('form-error');
+    successEl.style.display = 'none';
+    errorEl.style.display   = 'none';
+    btn.textContent  = 'Sending...';
+    btn.disabled     = true;
 
     var formData = new FormData();
-    formData.append('name', d.name);
-    formData.append('company', d.company || 'N/A');
-    formData.append('email', d.email);
-    formData.append('phone', d.phone);
-    formData.append('interest', d.interest);
+    formData.append('name',          d.name);
+    formData.append('company',       d.company || 'N/A');
+    formData.append('email',         d.email);
+    formData.append('phone',         d.phone);
+    formData.append('interest',      d.interest);
     formData.append('building_type', d.type || 'N/A');
-    formData.append('message', d.msg || 'No additional message.');
-    formData.append('_subject', 'AE Systems Enquiry - ' + d.interest + ' - ' + (d.company || d.name));
+    formData.append('message',       d.msg || 'No additional message.');
+    formData.append('_subject',      'AE Systems Enquiry: ' + d.interest + ' — ' + (d.company || d.name));
+    formData.append('_replyto',      d.email);
 
-    fetch('https://formspree.io/f/' + FORMSPREE_ID, {
+    fetch('https://formspree.io/f/xqedogwg', {
       method: 'POST',
       body: formData,
       headers: { 'Accept': 'application/json' }
     })
     .then(function(res) {
       if (res.ok) {
-        if (successEl) successEl.style.display = 'block';
+        successEl.style.display = 'block';
         ['f-name','f-company','f-email','f-phone','f-msg'].forEach(function(id) {
-          var el = document.getElementById(id);
-          if (el) el.value = '';
+          document.getElementById(id).value = '';
         });
-        var si = document.getElementById('f-interest');
-        var st = document.getElementById('f-type');
-        if (si) si.selectedIndex = 0;
-        if (st) st.selectedIndex = 0;
-        showToast('Enquiry sent! We will reply within 24 hours.');
+        document.getElementById('f-interest').selectedIndex = 0;
+        document.getElementById('f-type').selectedIndex = 0;
+        showToast('✅ Enquiry sent! We will reply within 24 hours.');
       } else {
-        throw new Error('Server error');
+        throw new Error(data.message || 'Submission failed');
       }
     })
-    .catch(function() {
-      if (errorEl) errorEl.style.display = 'block';
-      showToast('Failed - please try WhatsApp instead.');
+    .catch(function(err) {
+      console.error('Form error:', err);
+      errorEl.style.display = 'block';
+      showToast('Failed to send. Please WhatsApp or email us directly.');
     })
     .finally(function() {
-      btn.textContent = 'Send Enquiry';
-      btn.disabled = false;
+      btn.textContent = '📧 Send Enquiry';
+      btn.disabled    = false;
     });
   });
 });
@@ -846,23 +811,14 @@ function sendWhatsApp() {
   var d = getFormData();
   if (!d) return;
   var text = encodeURIComponent(
-    '*AE Systems Enquiry*
-
-' +
-    '*Name:* ' + d.name + '
-' +
-    '*Company:* ' + (d.company || 'N/A') + '
-' +
-    '*Email:* ' + d.email + '
-' +
-    '*Phone:* ' + d.phone + '
-' +
-    '*Interested In:* ' + d.interest + '
-' +
-    '*Building Type:* ' + (d.type || 'N/A') + '
-
-' +
-    '*Message:*\n' + (d.msg || 'No additional message.') + '\n\n' +
+    '*AE Systems Enquiry*\n\n' +
+    '*Name:* ' + d.name + '\n' +
+    '*Company:* ' + (d.company || 'N/A') + '\n' +
+    '*Email:* ' + d.email + '\n' +
+    '*Phone:* ' + d.phone + '\n' +
+    '*Interested In:* ' + d.interest + '\n' +
+    '*Building Type:* ' + (d.type || 'N/A') + '\n\n' +
+    '*Message:*\n' + (d.msg || 'No message.') + '\n\n' +
     '_Sent from aesystems.in_'
   );
   window.open('https://wa.me/919873076300?text=' + text, '_blank');
