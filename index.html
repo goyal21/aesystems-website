@@ -611,19 +611,19 @@ footer{background:var(--dk2);border-top:1px solid rgba(200,160,60,.15);padding:4
         <h2 class="contact-tagline">Ready to Make Your<br>Building <span>Smarter?</span></h2>
         <p class="contact-desc">Whether you want to request a POC, book a live dashboard demo, or get a site-specific proposal — reach out. One of our engineers will respond within 24 hours.</p>
         <div class="contact-details">
-          <div class="cd"><div class="cd-icon">📧</div><div><div class="cd-label">Email</div><div class="cd-val"><a href="mailto:sales@aesystems.in">sales@aesystems.in</a></div></div></div>
+          <div class="cd"><div class="cd-icon">📧</div><div><div class="cd-label">Email</div><div class="cd-val"><a href="/cdn-cgi/l/email-protection#ee9d8f828b9dae8f8b9d979d9a8b839dc08780"><span class="__cf_email__" data-cfemail="3d4e5c51584e7d5c584e444e4958504e135453">[email&#160;protected]</span></a></div></div></div>
           <div class="cd"><div class="cd-icon">📞</div><div><div class="cd-label">Phone</div><div class="cd-val"><a href="tel:+919873076300">+91 98730 76300</a></div></div></div>
           <div class="cd"><div class="cd-icon">📍</div><div><div class="cd-label">Office</div><div class="cd-val">Avenix Engineering Systems Pvt Ltd<br>WeWork Berger Delhi One, Sector 16B<br>C-001/A2, Gautam Buddha Nagar<br>Noida, UP — 201301</div></div></div>
         </div>
         <div class="contact-action-btns">
-          <a href="mailto:sales@aesystems.in?subject=AE%20Systems%20Enquiry&body=Hello%20AE%20Systems%20Team%2C%0A%0AI%20would%20like%20to%20know%20more%20about%20your%20solutions." class="btn btn-red">📧 Email Us</a>
+          <a href="/cdn-cgi/l/email-protection#7003111c150330111503090304151d035e191e4f0305121a1513044d313555424023090304151d03554240351e010519020956121f14094d38151c1c1f554240313555424023090304151d035542402415111d55423355403155403139554240071f051c145542401c191b15554240041f5542401b1e1f075542401d1f021555424011121f0504554240091f0502554240031f1c0504191f1e035e" class="btn btn-red">📧 Email Us</a>
           <a href="https://wa.me/919873076300?text=Hello%20AE%20Systems%2C%20I%20would%20like%20to%20know%20more%20about%20your%20HVAC%20BMS%20solutions." target="_blank" class="btn btn-wa">💬 WhatsApp Us</a>
         </div>
       </div>
 
       <div class="contact-form">
         <div class="form-title">Send Us an Enquiry</div>
-        <div style="font-size:0.72rem;color:#555;margin-bottom:16px;letter-spacing:0.5px">⚡ Powered by Formspree — replies go to <span style="color:var(--gold)">sales@aesystems.in</span></div>
+        
         <div class="form-row">
           <div class="form-group"><label class="form-label">Your Name *</label><input type="text" class="form-input" id="f-name" name="name" placeholder="Full Name" required></div>
           <div class="form-group"><label class="form-label">Company *</label><input type="text" class="form-input" id="f-company" name="company" placeholder="Company Name" required></div>
@@ -685,7 +685,7 @@ footer{background:var(--dk2);border-top:1px solid rgba(200,160,60,.15);padding:4
       </div>
       <div class="footer-col"><h4>Company</h4><ul><li><a href="#about">Who We Are</a></li><li><a href="#services">Services</a></li><li><a href="#clients">Clients</a></li><li><a href="#contact">Contact</a></li></ul></div>
       <div class="footer-col"><h4>IT-OT Solutions</h4><ul><li><a href="#solution">SAAR AI-BMS</a></li><li><a href="#services">HVAC Optimisation</a></li><li><a href="#services">3D Digital Twin</a></li><li><a href="#services">Energy Analytics</a></li></ul></div>
-      <div class="footer-col"><h4>Get Started</h4><ul><li><a href="#poc">Request a POC</a></li><li><a href="#poc">Book a Demo</a></li><li><a href="#poc">Get a Proposal</a></li><li><a href="#contact">sales@aesystems.in</a></li></ul></div>
+      <div class="footer-col"><h4>Get Started</h4><ul><li><a href="#poc">Request a POC</a></li><li><a href="#poc">Book a Demo</a></li><li><a href="#poc">Get a Proposal</a></li><li><a href="#contact"><span class="__cf_email__" data-cfemail="cebdafa2abbd8eafabbdb7bdbaaba3bde0a7a0">[email&#160;protected]</span></a></li></ul></div>
     </div>
     <div class="footer-bottom">
       <div class="footer-copy">&copy; 2025 <span>AE Systems</span>. All rights reserved. &nbsp;|&nbsp; Authorised National Partner of SAAR System Solutions</div>
@@ -697,7 +697,7 @@ footer{background:var(--dk2);border-top:1px solid rgba(200,160,60,.15);padding:4
 <!-- Toast -->
 <div class="toast" id="toast"></div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // ── MOBILE MENU ──
 function toggleMenu() {
   const h = document.getElementById('hamburger');
@@ -806,24 +806,4 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
-// ── WHATSAPP ──
-function sendWhatsApp() {
-  var d = getFormData();
-  if (!d) return;
-  var text = encodeURIComponent(
-    '*AE Systems Enquiry*\n\n' +
-    '*Name:* ' + d.name + '\n' +
-    '*Company:* ' + (d.company || 'N/A') + '\n' +
-    '*Email:* ' + d.email + '\n' +
-    '*Phone:* ' + d.phone + '\n' +
-    '*Interested In:* ' + d.interest + '\n' +
-    '*Building Type:* ' + (d.type || 'N/A') + '\n\n' +
-    '*Message:*\n' + (d.msg || 'No message.') + '\n\n' +
-    '_Sent from aesystems.in_'
-  );
-  window.open('https://wa.me/919873076300?text=' + text, '_blank');
-  showToast('Opening WhatsApp...');
-}
-</script>
-</body>
-</html>
+// ─�
