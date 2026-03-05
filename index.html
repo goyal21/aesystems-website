@@ -732,6 +732,425 @@ footer{background:var(--dk2);border-top:1px solid rgba(200,160,60,.15);padding:4
 
 
 
+
+<!-- ═══ ANIMATION LAYER — SCROLL REVEALS + COUNTERS + PARALLAX ═══ -->
+<style>
+/* ── SCROLL REVEAL BASE ── */
+.reveal{opacity:0;transform:translateY(40px);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-left{opacity:0;transform:translateX(-50px);transition:opacity .75s cubic-bezier(.22,1,.36,1),transform .75s cubic-bezier(.22,1,.36,1)}
+.reveal-left.visible{opacity:1;transform:translateX(0)}
+.reveal-right{opacity:0;transform:translateX(50px);transition:opacity .75s cubic-bezier(.22,1,.36,1),transform .75s cubic-bezier(.22,1,.36,1)}
+.reveal-right.visible{opacity:1;transform:translateX(0)}
+.reveal-scale{opacity:0;transform:scale(.92);transition:opacity .65s cubic-bezier(.22,1,.36,1),transform .65s cubic-bezier(.22,1,.36,1)}
+.reveal-scale.visible{opacity:1;transform:scale(1)}
+/* stagger delays */
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
+.d4{transition-delay:.4s}.d5{transition-delay:.5s}.d6{transition-delay:.6s}
+
+/* ── ANIMATED SECTION EYEBROWS + TITLES ── */
+@keyframes slideLineIn{from{width:0}to{width:48px}}
+.grule{animation:none}
+.grule.visible{animation:slideLineIn .5s ease forwards}
+
+@keyframes shimmerText{
+  0%{background-position:200% center}
+  100%{background-position:-200% center}
+}
+.sec-title .g{
+  background:linear-gradient(90deg,var(--gold),#fff,var(--gold),var(--gold2),var(--gold));
+  background-size:300% auto;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+
+/* ── HERO ENTRANCE ── */
+@keyframes heroFadeUp{from{opacity:0;transform:translateY(32px)}to{opacity:1;transform:translateY(0)}}
+.hero-badge{animation:heroFadeUp .6s ease forwards}
+.hero-title{animation:heroFadeUp .7s .1s ease both}
+.hero-sub{animation:heroFadeUp .7s .2s ease both}
+.hero-partner{animation:heroFadeUp .7s .3s ease both}
+.hero-btns{animation:heroFadeUp .7s .35s ease both}
+.hero-stats{animation:heroFadeUp .7s .45s ease both}
+
+/* hero ring subtle rotation */
+@keyframes ringRotate{from{transform:translateY(-50%) rotate(0deg)}to{transform:translateY(-50%) rotate(360deg)}}
+.hero-ring{animation:ringRotate 60s linear infinite}
+
+/* ── SCROLLING TICKER MARQUEE ── */
+.ae-ticker-wrap{width:100%;overflow:hidden;background:linear-gradient(90deg,var(--red) 0%,#6b1212 100%);padding:11px 0;border-top:1px solid rgba(200,160,60,.2);border-bottom:1px solid rgba(200,160,60,.2)}
+.ae-ticker-inner{display:flex;width:max-content;animation:tickerScroll 40s linear infinite}
+.ae-ticker-inner:hover{animation-play-state:paused}
+.ae-ticker-item{white-space:nowrap;font-size:.68rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:#fff;padding:0 32px;display:flex;align-items:center;gap:10px}
+.ae-ticker-dot{width:4px;height:4px;border-radius:50%;background:var(--gold);display:inline-block}
+@keyframes tickerScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* ── STATS COUNTER ── */
+.hs-num,.as-num,.cost-num{font-variant-numeric:tabular-nums;transition:color .3s}
+
+/* ── CARD HOVER LIFTS ── */
+.svc-card{transition:transform .28s cubic-bezier(.22,1,.36,1),box-shadow .28s,border-color .28s!important}
+.svc-card:hover{transform:translateY(-8px);box-shadow:0 20px 48px rgba(0,0,0,.45)!important}
+.why-card{transition:transform .28s cubic-bezier(.22,1,.36,1),box-shadow .28s!important}
+.why-card:hover{transform:translateY(-6px);box-shadow:0 16px 40px rgba(0,0,0,.4)!important}
+.about-card{transition:transform .28s cubic-bezier(.22,1,.36,1),box-shadow .28s!important}
+.about-card:hover{transform:translateY(-5px);box-shadow:0 14px 36px rgba(0,0,0,.4)!important}
+.cl-card{transition:transform .28s cubic-bezier(.22,1,.36,1),border-color .28s!important}
+.cl-card:hover{transform:translateY(-5px)}
+.prob-card{transition:transform .28s cubic-bezier(.22,1,.36,1),box-shadow .28s!important}
+.prob-card:hover{transform:translateX(6px);box-shadow:0 12px 32px rgba(0,0,0,.4)!important}
+.cost-box{transition:transform .28s cubic-bezier(.22,1,.36,1),box-shadow .28s!important}
+.cost-box:hover{transform:translateY(-6px);box-shadow:0 16px 40px rgba(139,26,26,.25)!important}
+.poc-step{transition:transform .28s cubic-bezier(.22,1,.36,1)!important}
+.poc-step:hover{transform:translateY(-4px)}
+
+/* ── BUTTON PULSE ── */
+@keyframes btnPulse{0%,100%{box-shadow:0 0 0 0 rgba(139,26,26,.4)}50%{box-shadow:0 0 0 10px rgba(139,26,26,0)}}
+.btn-red{animation:btnPulse 3s ease infinite}
+.btn-red:hover{animation:none}
+
+/* ── NAV SCROLL SHRINK ── */
+nav.scrolled{height:60px!important;box-shadow:0 4px 32px rgba(0,0,0,.18)!important}
+nav.scrolled .nav-logo img{height:38px!important;transition:height .3s}
+nav{transition:height .3s,box-shadow .3s}
+.nav-logo img{transition:height .3s}
+
+/* ── ACTIVE NAV LINK ── */
+.nav-links a.active-link{color:var(--red)!important}
+.nav-links a.active-link::after{width:100%!important}
+
+/* ── SECTION PROGRESS LINE ── */
+#ae-progress{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--red),var(--gold));z-index:10000;width:0%;transition:width .1s linear;pointer-events:none}
+
+/* ── PROCESS STEP CONNECTOR ── */
+.process-step{opacity:0;transform:translateX(-30px);transition:opacity .6s,transform .6s}
+.process-step.visible{opacity:1;transform:translateX(0)}
+
+/* ── COMP TABLE ROW HOVER ── */
+.comp-row{transition:background .2s}
+.comp-row:hover{background:rgba(200,160,60,.04)!important}
+
+/* ── FLOATING WHATSAPP ENHANCED ── */
+@keyframes waPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+.wa-float{animation:waPulse 2.5s ease infinite!important}
+
+/* ── SECTION DIVIDER LINE ── */
+section{position:relative}
+section::before{content:"";position:absolute;top:0;left:5%;right:5%;height:1px;background:linear-gradient(90deg,transparent,rgba(200,160,60,.08),transparent)}
+
+/* ── EYEBROW FADE ── */
+.eyebrow{opacity:0;transform:translateY(12px);transition:opacity .5s,transform .5s}
+.eyebrow.visible{opacity:1;transform:translateY(0)}
+</style>
+
+<script>
+(function(){
+"use strict";
+
+/* ── 1. PROGRESS BAR ── */
+var prog = document.createElement('div');
+prog.id = 'ae-progress';
+document.body.prepend(prog);
+
+window.addEventListener('scroll', function(){
+  var docH = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  var pct  = (window.scrollY / docH * 100).toFixed(1);
+  prog.style.width = pct + '%';
+}, {passive:true});
+
+/* ── 2. NAV SHRINK ON SCROLL ── */
+var nav = document.getElementById('mainNav');
+window.addEventListener('scroll', function(){
+  if(!nav) return;
+  if(window.scrollY > 60){ nav.classList.add('scrolled'); }
+  else { nav.classList.remove('scrolled'); }
+}, {passive:true});
+
+/* ── 3. ACTIVE NAV LINK (IntersectionObserver) ── */
+var sections = document.querySelectorAll('section[id]');
+var navLinks  = document.querySelectorAll('.nav-links a[href^="#"]');
+var sectionObs = new IntersectionObserver(function(entries){
+  entries.forEach(function(entry){
+    if(entry.isIntersecting){
+      var id = '#' + entry.target.id;
+      navLinks.forEach(function(a){
+        a.classList.toggle('active-link', a.getAttribute('href') === id);
+      });
+    }
+  });
+}, {threshold:0.3, rootMargin:'-60px 0px -60px 0px'});
+sections.forEach(function(s){ sectionObs.observe(s); });
+
+/* ── 4. SCROLL REVEAL (all elements) ── */
+function addRevealClasses(){
+  /* eyebrows */
+  document.querySelectorAll('.eyebrow').forEach(function(el,i){
+    el.classList.add('reveal'); el.style.transitionDelay = '0s';
+  });
+  /* grules */
+  document.querySelectorAll('.grule').forEach(function(el){
+    el.style.width = '0';
+    el.style.overflow = 'hidden';
+    el.style.transition = 'width .5s ease';
+  });
+  /* sec-titles */
+  document.querySelectorAll('.sec-title').forEach(function(el,i){
+    el.classList.add('reveal');
+    el.style.transitionDelay = '.1s';
+  });
+  /* body-text */
+  document.querySelectorAll('.body-text').forEach(function(el,i){
+    el.classList.add('reveal');
+    el.style.transitionDelay = '.18s';
+  });
+  /* about cards */
+  document.querySelectorAll('.about-card').forEach(function(el,i){
+    el.classList.add('reveal');
+    el.style.transitionDelay = (i*0.1) + 's';
+  });
+  /* about stats */
+  document.querySelectorAll('.as-box').forEach(function(el,i){
+    el.classList.add('reveal-scale');
+    el.style.transitionDelay = (i*0.1) + 's';
+  });
+  /* svc groups */
+  document.querySelectorAll('.svc-group-title').forEach(function(el){
+    el.classList.add('reveal');
+  });
+  document.querySelectorAll('.svc-card').forEach(function(el,i){
+    el.classList.add('reveal-scale');
+    el.style.transitionDelay = ((i%3)*0.12) + 's';
+  });
+  /* prob cards */
+  document.querySelectorAll('.prob-card').forEach(function(el,i){
+    el.classList.add('reveal');
+    el.style.transitionDelay = (i*0.12) + 's';
+  });
+  /* cost boxes */
+  document.querySelectorAll('.cost-box').forEach(function(el,i){
+    el.classList.add('reveal-scale');
+    el.style.transitionDelay = (i*0.15) + 's';
+  });
+  /* solution how items */
+  document.querySelectorAll('.how-item').forEach(function(el,i){
+    el.classList.add('reveal');
+    el.style.transitionDelay = (i*0.1) + 's';
+  });
+  /* why cards */
+  document.querySelectorAll('.why-card').forEach(function(el,i){
+    el.classList.add('reveal-scale');
+    el.style.transitionDelay = (i*0.1) + 's';
+  });
+  /* comp rows */
+  document.querySelectorAll('.comp-row').forEach(function(el,i){
+    el.classList.add('reveal');
+    el.style.transitionDelay = (i*0.06) + 's';
+  });
+  /* client cards */
+  document.querySelectorAll('.cl-card').forEach(function(el,i){
+    el.classList.add('reveal');
+    el.style.transitionDelay = (i*0.12) + 's';
+  });
+  /* poc steps */
+  document.querySelectorAll('.poc-step').forEach(function(el,i){
+    el.classList.add('reveal');
+    el.style.transitionDelay = (i*0.15) + 's';
+  });
+  /* poc delivers */
+  document.querySelectorAll('.poc-del').forEach(function(el,i){
+    el.classList.add('reveal-scale');
+    el.style.transitionDelay = (i*0.1) + 's';
+  });
+  /* process steps */
+  document.querySelectorAll('.process-step').forEach(function(el,i){
+    el.style.transitionDelay = (i*0.15) + 's';
+  });
+  /* hero stats boxes */
+  document.querySelectorAll('.hero-stats > div:not(.hs-div)').forEach(function(el,i){
+    /* already animated via CSS heroFadeUp */
+  });
+  /* cost quote */
+  var cq = document.querySelector('.cost-quote');
+  if(cq){ cq.classList.add('reveal'); cq.style.transitionDelay='.3s'; }
+  /* solution quote */
+  var sq = document.querySelector('.solution-quote');
+  if(sq){ sq.classList.add('reveal'); sq.style.transitionDelay='.25s'; }
+  /* two-col children */
+  document.querySelectorAll('.two-col > div').forEach(function(el,i){
+    if(!el.querySelector('.sec-title') && !el.querySelector('.svc-card')){
+      el.classList.add(i%2===0 ? 'reveal-left' : 'reveal-right');
+    }
+  });
+  /* footer brand */
+  var fb = document.querySelector('.footer-brand');
+  if(fb){ fb.classList.add('reveal'); }
+}
+addRevealClasses();
+
+/* ── 5. OBSERVER — trigger reveals + grule + counters ── */
+var revealObs = new IntersectionObserver(function(entries){
+  entries.forEach(function(entry){
+    if(entry.isIntersecting){
+      entry.target.classList.add('visible');
+      /* animate grule width */
+      if(entry.target.classList.contains('grule')){
+        entry.target.style.width = '48px';
+      }
+      revealObs.unobserve(entry.target);
+    }
+  });
+}, {threshold:0.12, rootMargin:'0px 0px -50px 0px'});
+
+document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.reveal-scale,.grule,.eyebrow,.process-step').forEach(function(el){
+  revealObs.observe(el);
+});
+
+/* ── 6. ANIMATED COUNTER ── */
+function animateCounter(el, target, prefix, suffix, decimals){
+  var start = 0;
+  var dur   = 1800;
+  var startTime = null;
+  function step(ts){
+    if(!startTime) startTime = ts;
+    var prog = Math.min((ts - startTime) / dur, 1);
+    var ease = 1 - Math.pow(1 - prog, 3);
+    var cur  = start + (target - start) * ease;
+    var disp = decimals ? cur.toFixed(decimals) : Math.floor(cur);
+    el.textContent = (prefix||'') + disp + (suffix||'');
+    if(prog < 1) requestAnimationFrame(step);
+    else el.textContent = (prefix||'') + target + (suffix||'');
+  }
+  requestAnimationFrame(step);
+}
+
+var countersStarted = false;
+function startCounters(){
+  if(countersStarted) return;
+  countersStarted = true;
+  /* hero stats */
+  var hsNums = document.querySelectorAll('.hs-num');
+  /* about stats */
+  var asNums = document.querySelectorAll('.as-num');
+  /* cost stats */
+  var costNums = document.querySelectorAll('.cost-num');
+
+  var counterData = [
+    /* hero stats: 20-30%, 7+, 12, IIT (skip IIT) */
+    {sel:'.hero-stats .hs-num', items:[
+      {target:30, prefix:'20–', suffix:'%'},
+      {target:7,  prefix:'',   suffix:'+'},
+      {target:12, prefix:'',   suffix:''},
+      null
+    ]},
+    /* about stats */
+    {sel:'.about-stats .as-num', items:[
+      {target:20, prefix:'~',  suffix:'%'},
+      {target:12, prefix:'',   suffix:''},
+      null,
+      null
+    ]},
+    /* cost stats */
+    {sel:'.cost-stats .cost-num', items:[
+      null,
+      null,
+      null
+    ]}
+  ];
+
+  /* hero */
+  var hh = document.querySelectorAll('.hero-stats .hs-num');
+  if(hh[1]) animateCounter(hh[1], 7,  '', '+', 0);
+  if(hh[2]) animateCounter(hh[2], 12, '', '',  0);
+  /* about */
+  var aa = document.querySelectorAll('.about-stats .as-num');
+  if(aa[1]) animateCounter(aa[1], 12, '', '', 0);
+}
+
+/* observe cost section to trigger counters */
+var counterTrigger = document.querySelector('#about');
+if(counterTrigger){
+  var ctrObs = new IntersectionObserver(function(entries){
+    if(entries[0].isIntersecting){ startCounters(); ctrObs.disconnect(); }
+  }, {threshold:0.3});
+  ctrObs.observe(counterTrigger);
+}
+
+/* ── 7. INJECT SCROLLING TICKER after hero ── */
+var heroSection = document.getElementById('hero');
+if(heroSection && heroSection.nextElementSibling){
+  var ticker = document.createElement('div');
+  ticker.className = 'ae-ticker-wrap';
+  var items = [
+    'AI-Based HVAC Optimisation','Smart BMS Platform','IIT Jammu Validated',
+    '20–30% Energy Savings','Make in India','Digital Twin Technology',
+    'VFD Integration','Multi-Brand Compatible','3D Monitoring Dashboard',
+    'Predictive Maintenance','IT-OT Convergence','National Sales Partner',
+    'AI-Based HVAC Optimisation','Smart BMS Platform','IIT Jammu Validated',
+    '20–30% Energy Savings','Make in India','Digital Twin Technology',
+    'VFD Integration','Multi-Brand Compatible','3D Monitoring Dashboard',
+    'Predictive Maintenance','IT-OT Convergence','National Sales Partner'
+  ];
+  var inner = '<div class="ae-ticker-inner">';
+  items.forEach(function(t){
+    inner += '<span class="ae-ticker-item"><span class="ae-ticker-dot"></span>' + t + '</span>';
+  });
+  inner += '</div>';
+  ticker.innerHTML = inner;
+  heroSection.parentNode.insertBefore(ticker, heroSection.nextElementSibling);
+}
+
+/* ── 8. SMOOTH SECTION TRANSITION — subtle background shift ── */
+var bgObs = new IntersectionObserver(function(entries){
+  entries.forEach(function(entry){
+    if(entry.isIntersecting){
+      var sec = entry.target;
+      /* light flash on section border */
+      var before = document.createElement('span');
+    }
+  });
+}, {threshold:0.1});
+sections.forEach(function(s){ bgObs.observe(s); });
+
+/* ── 9. PARALLAX on hero-ring (subtle) ── */
+window.addEventListener('scroll', function(){
+  var ring = document.querySelector('.hero-ring');
+  if(!ring) return;
+  ring.style.transform = 'translateY(calc(-50% + ' + (window.scrollY * 0.12) + 'px))';
+}, {passive:true});
+
+/* ── 10. CTA button text bounce on hover ── */
+document.querySelectorAll('.btn').forEach(function(btn){
+  btn.addEventListener('mouseenter', function(){
+    this.style.transform = 'translateY(-3px)';
+  });
+  btn.addEventListener('mouseleave', function(){
+    this.style.transform = '';
+  });
+});
+
+/* ── 11. COST QUOTE — typewriter-style reveal ── */
+var cq = document.querySelector('.cost-quote p');
+if(cq){
+  var cqObs = new IntersectionObserver(function(entries){
+    if(entries[0].isIntersecting){
+      cq.style.borderLeft = '3px solid var(--gold)';
+      cq.style.paddingLeft = '20px';
+      cq.style.transition = 'padding .5s, border .5s';
+      cqObs.disconnect();
+    }
+  }, {threshold:0.7});
+  cqObs.observe(cq);
+}
+
+/* ── 12. WA FLOAT pulse class ── */
+var waFloat = document.querySelector('.wa-float');
+/* already handled in CSS */
+
+})();
+</script>
+
+
 </body>
 </html><script>
 /* AE Systems - Main JS */
@@ -845,32 +1264,41 @@ document.addEventListener('DOMContentLoaded', function() {
       headers: { 'Accept': 'application/json' }
     })
     .then(function(res) {
-      if (res.ok) {
+      return res.json().then(function(data) { return { ok: res.ok, data: data }; });
+    })
+    .then(function(result) {
+      if (result.ok) {
         if (successEl) successEl.style.display = 'block';
         ['f-name', 'f-company', 'f-email', 'f-phone', 'f-msg'].forEach(function(id) {
           var el = document.getElementById(id);
           if (el) el.value = '';
         });
-        var fi = document.getElementById('f-interest');
-        var ft = document.getElementById('f-type');
-        if (fi) fi.selectedIndex = 0;
-        if (ft) ft.selectedIndex = 0;
-        showToast('Enquiry sent! We will reply within 24 hours.');
-      } else {
-        throw new Error('Submission failed');
+        var sel1 = document.getElementById('f-interest');
+        var sel2 = document.getElementById('f-type');
+        if (sel1) sel1.selectedIndex = 0;
+        if (sel2) sel2.selectedIndex = 0;
+        btn.textContent = '✅ Sent!';
+        setTimeout(function() { btn.textContent = '📧 Send Enquiry'; btn.disabled = false; }, 4000);
+            } else {
+        if (errorEl) {
+          errorEl.style.display = 'block';
+          errorEl.textContent = '⚠️ Failed to send. Please email us at sales@aesystems.in';
+        }
+        btn.textContent = '📧 Send Enquiry';
+        btn.disabled = false;
       }
     })
     .catch(function(err) {
-      console.error('Form error:', err);
-      if (errorEl) errorEl.style.display = 'block';
-      showToast('Failed to send. Please WhatsApp or email us directly.');
-    })
-    .finally(function() {
-      btn.textContent = 'Send Enquiry';
-      btn.disabled    = false;
+      if (errorEl) {
+        errorEl.style.display = 'block';
+        errorEl.textContent = '⚠️ Network error. Please try WhatsApp or email us directly.';
+      }
+      btn.textContent = '📧 Send Enquiry';
+      btn.disabled = false;
     });
   });
 });
+
 </script>
 </body>
 </html>
