@@ -180,15 +180,7 @@ background:linear-gradient(90deg,#00C2FF,#00E5C3);
 /* ═══════════════════════
    HERO
 ═══════════════════════ */
-#hero{
-margin-top:100px;
-min-height:100vh;
-display:flex;
-align-items:center;
-padding:120px 5% 80px;
-position:relative;
-overflow:hidden
-}
+
 .hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 68% 45%,rgba(0,194,255,.08),transparent 58%),radial-gradient(ellipse at 18% 82%,rgba(0,229,195,.06),transparent 52%),linear-gradient(140deg,#0A0F1E 0%,#0D1B2A 55%,#0A0F1E 100%)}
 .hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(0,194,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(0,194,255,.025) 1px,transparent 1px);background-size:55px 55px;pointer-events:none}
 .hero-ring{position:absolute;right:-60px;top:50%;transform:translateY(-50%);width:520px;height:520px;border-radius:50%;border:1px solid rgba(0,194,255,.07);box-shadow:0 0 0 70px rgba(0,194,255,.02),0 0 0 140px rgba(0,229,195,.015),0 0 0 210px rgba(0,194,255,.008);pointer-events:none}
