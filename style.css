@@ -193,7 +193,13 @@ background:linear-gradient(90deg,#00C2FF,#00E5C3);
 .hero-partner{font-size:0.68rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#3A5470;margin-bottom:36px}
 .hero-partner span{color:var(--gold)}
 .hero-btns{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:52px}
-.hero-stats{display:flex;gap:36px;flex-wrap:wrap;align-items:center}
+.hero-stats{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:30px;
+align-items:center;
+margin-top:10px;
+}
 .hs-num{font-family:"Barlow Condensed",sans-serif;font-size:2.2rem;font-weight:900;color:var(--gold);line-height:1}
 .hs-lbl{font-size:0.6rem;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:#3A5470;margin-top:3px}
 .hs-div{width:1px;height:36px;background:rgba(0,229,195,.2)}
