@@ -232,10 +232,15 @@ if(counterTrigger){
 }
 
 /* ── 7. INJECT SCROLLING TICKER after hero ── */
-var heroSection = document.getElementById('hero');
-if(heroSection && heroSection.nextElementSibling){
+/* ── 7. INJECT SCROLLING TICKER after header ── */
+
+var nav = document.getElementById('mainNav');
+
+if(nav){
+
   var ticker = document.createElement('div');
   ticker.className = 'ae-ticker-wrap';
+
   var items = [
     'AI-Based HVAC Optimisation','Smart BMS Platform','IIT Jammu Validated',
     '20–30% Energy Savings','Make in India','Digital Twin Technology',
@@ -246,15 +251,18 @@ if(heroSection && heroSection.nextElementSibling){
     'VFD Integration','Multi-Brand Compatible','3D Monitoring Dashboard',
     'Predictive Maintenance','IT-OT Convergence','National Sales Partner'
   ];
+
   var inner = '<div class="ae-ticker-inner">';
   items.forEach(function(t){
     inner += '<span class="ae-ticker-item"><span class="ae-ticker-dot"></span>' + t + '</span>';
   });
   inner += '</div>';
-  ticker.innerHTML = inner;
-  heroSection.parentNode.insertBefore(ticker, heroSection.nextElementSibling);
-}
 
+  ticker.innerHTML = inner;
+
+  nav.parentNode.insertBefore(ticker, nav.nextSibling);
+
+}
 /* ── 8. SMOOTH SECTION TRANSITION — subtle background shift ── */
 var bgObs = new IntersectionObserver(function(entries){
   entries.forEach(function(entry){
