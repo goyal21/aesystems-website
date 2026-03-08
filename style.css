@@ -198,11 +198,13 @@ display:grid;
 grid-template-columns:repeat(4,1fr);
 gap:30px;
 align-items:center;
-margin-top:140px;
+margin-top:32px;
 }
 .hs-num{font-family:"Barlow Condensed",sans-serif;font-size:2.2rem;font-weight:900;color:var(--gold);line-height:1}
 .hs-lbl{font-size:0.6rem;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:#3A5470;margin-top:3px}
-.hs-div{width:1px;height:36px;background:rgba(0,229,195,.2)}
+.hs-div{
+display:none;
+}
 @media(max-width:580px){.hs-div{display:none}.hero-stats{gap:20px}}
 
 
