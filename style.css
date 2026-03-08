@@ -592,6 +592,9 @@ height:2px;
 background:#A8BDD0;
 border-radius:2px;
 }
+.mobile-menu{
+display:none;
+}
 @media (max-width:900px){
 
 .nav-links{
