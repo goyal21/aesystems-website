@@ -101,7 +101,7 @@ color:#00C2FF;
 
 .ticker{
 position:fixed;
-top:72px;
+top:72px;      /* header height */
 left:0;
 right:0;
 
@@ -110,11 +110,9 @@ color:#00E5C3;
 
 font-size:0.72rem;
 letter-spacing:1px;
-
 padding:6px 0;
 
 overflow:hidden;
-
 z-index:9997;
 }
 
