@@ -147,7 +147,7 @@ animation:tickerMove 22s linear infinite;
 100%{transform:translateX(-100%);}
 }
 /* ═══ LAYOUT HELPERS ═══ */
-section{padding:88px 5%}
+section{padding:72px 5%;}
 .inner{max-width:1180px;margin:0 auto}
 .two-col{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
 .three-col{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
