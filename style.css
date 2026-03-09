@@ -241,7 +241,7 @@ section{padding:88px 5%}
 ═══════════════════════ */
 #contact{background:#F4F7FB;border-top:1px solid rgba(0,194,255,.08)}
 .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;margin-top:0}
-.contact-tagline{font-family:"Playfair Display",serif;font-size:1.8rem;color:var(--text-dark);line-height:1.35;margin-bottom:22px}
+.contact-tagline{font-family:"Playfair Display",serif;font-size:1.8rem;color:#0A0F1E;line-height:1.35;margin-bottom:22px}
 .contact-tagline span{color:var(--gold)}
 .contact-desc{font-size:0.9rem;color:#3A5470;line-height:1.85;margin-bottom:32px}
 .contact-details{display:flex;flex-direction:column;gap:16px;margin-bottom:28px}
