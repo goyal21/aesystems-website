@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DPT283QL6C"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DPT283QL6C');
+</script>
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta name="theme-color" content="#0A0F1E">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<title>Partner with AE Systems | Channel Partner Programme India</title>
+<meta name="description" content="Join the AE Systems Partner Programme. Resell IIT Jammu-validated SAAR AI-BMS and HVAC optimisation solutions across India. Apply to become a channel partner today.">
+<link rel="canonical" href="https://www.aesystems.in/partners.html">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;900&family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+
+/* ── PARTNER HERO ── */
+#partner-hero {
+  min-height: 80vh;
+  display: flex;
+  align-items: flex-start;
+  padding: 30px 5%;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(140deg, #0A0F1E 0%, #0D1B2A 55%, #0A0F1E 100%);
+}
+
+/* ── EXISTING PARTNER LOGIN STRIP ── */
+.partner-login-strip {
+  background: rgba(0,229,195,0.07);
+  border: 1px solid rgba(0,229,195,0.2);
+  border-radius: 6px;
+  padding: 14px 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+}
+.partner-login-strip-text {
+  font-size: 0.83rem;
+  color: #A8BDD0;
+  font-weight: 500;
+}
+.partner-login-strip-text span {
+  color: var(--teal);
+  font-weight: 700;
+}
+
+/* ── BENEFIT CARDS ── */
+#why-partner { background: #FFFFFF; border-top: 1px solid rgba(0,194,255,.08); }
+.benefit-card {
+  background: #FFFFFF;
+  border: 1px solid rgba(0,194,255,.1);
+  border-left: 3px solid var(--teal);
+  border-radius: 6px;
+  padding: 28px 22px;
+  transition: all .35s;
+  box-shadow: 0 2px 12px rgba(0,0,0,.05);
+}
+.benefit-card:hover {
+  border-color: rgba(0,194,255,.35);
+  border-left-color: var(--teal);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0,0,0,.09);
+}
+.benefit-icon { font-size: 1.8rem; margin-bottom: 14px; }
+.benefit-title {
+  font-family: "Poppins", sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: #0A0F1E;
+  margin-bottom: 10px;
+}
+.benefit-text { font-size: 0.86rem; color: #3A5470; line-height: 1.8; }
+
+/* ── PARTNER JOURNEY (dark section) ── */
+#partner-journey {
+  background: #0D1B2A;
+  border-top: 1px solid rgba(0,194,255,.15);
+}
+#partner-journey .eyebrow .et { color: #A8BDD0; }
+#partner-journey .sec-title { color: #FFFFFF; }
+#partner-journey .grule { background: linear-gradient(90deg, var(--cyan), var(--teal)); }
+
+.journey-steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 48px;
+  position: relative;
+}
+.journey-steps::before {
+  content: "";
+  position: absolute;
+  top: 28px;
+  left: 16.67%;
+  right: 16.67%;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(0,229,195,.15), var(--teal), rgba(0,229,195,.15));
+  z-index: 0;
+}
+.journey-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(0,229,195,.12);
+  border-radius: 8px;
+  padding: 32px 24px;
+  transition: border-color .3s, background .3s;
+}
+.journey-step:hover {
+  background: rgba(0,229,195,.05);
+  border-color: rgba(0,229,195,.28);
+}
+.journey-num {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #1B3A5C;
+  border: 2px solid var(--teal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 1.2rem;
+  font-weight: 900;
+  color: var(--teal);
+}
+.journey-title {
+  font-family: "Poppins", sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #FFFFFF;
+}
+.journey-sub {
+  font-size: 0.82rem;
+  color: #A8BDD0;
+  line-height: 1.65;
+}
+
+/* ── APPLY SECTION ── */
+#apply { background: #F4F7FB; border-top: 1px solid rgba(0,194,255,.08); }
+.apply-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  gap: 60px;
+  align-items: start;
+}
+.apply-perk {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 12px;
+  font-size: 0.84rem;
+  color: #1B3A5C;
+  line-height: 1.55;
+}
+.apply-perk::before {
+  content: "✓";
+  color: var(--teal);
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.apply-login-card {
+  margin-top: 28px;
+  padding: 20px 22px;
+  background: #FFFFFF;
+  border: 1px solid rgba(0,194,255,.15);
+  border-left: 3px solid var(--teal);
+  border-radius: 6px;
+  box-shadow: 0 2px 10px rgba(0,0,0,.05);
+}
+.apply-login-label {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 6px;
+}
+.apply-login-text {
+  font-size: 0.84rem;
+  color: #3A5470;
+  line-height: 1.7;
+  margin-bottom: 16px;
+}
+
+/* ── RESPONSIVE ── */
+@media(max-width: 860px) {
+  .apply-grid { grid-template-columns: 1fr; gap: 36px; }
+  .journey-steps { grid-template-columns: 1fr; }
+  .journey-steps::before { display: none; }
+}
+@media(max-width: 580px) {
+  #partner-hero { padding: 20px 4% 60px; }
+  .partner-login-strip { flex-direction: column; align-items: flex-start; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- ═══ NAV ═══ -->
+<nav id="mainNav">
+  <a href="index.html" class="nav-logo">
+    <img src="assets/logo.svg" alt="AE Systems" class="logo">
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="index.html#services">Services</a></li>
+    <li><a href="index.html#problem">Solutions</a></li>
+    <li><a href="index.html#why">Why Us</a></li>
+    <li><a href="index.html#clients">Clients</a></li>
+    <li><a href="index.html#poc">POC</a></li>
+    <li><a href="partners.html" style="color:var(--teal)">Partners</a></li>
+    <li><a href="index.html#contact" class="nav-cta">Get in Touch</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html#about" onclick="closeMenu()">About</a>
+  <a href="index.html#services" onclick="closeMenu()">Services</a>
+  <a href="index.html#problem" onclick="closeMenu()">Solutions</a>
+  <a href="index.html#why" onclick="closeMenu()">Why Us</a>
+  <a href="index.html#clients" onclick="closeMenu()">Clients</a>
+  <a href="index.html#poc" onclick="closeMenu()">POC</a>
+  <a href="partners.html" onclick="closeMenu()">Partners</a>
+  <a href="index.html#contact" onclick="closeMenu()">Get in Touch</a>
+</div>
+
+<main>
+
+<!-- ═══ HERO ═══ -->
+<section id="partner-hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-ring"></div>
+  <div class="hero-content">
+
+    <div class="hero-badge"><div class="hero-badge-dot"></div>Channel Partner Programme · Open for Applications</div>
+
+    <div class="partner-login-strip">
+      <div class="partner-login-strip-text">Already a registered partner? <span>Access your dashboard, leads, and resources.</span></div>
+      <a href="https://partners.aesystems.in" target="_blank" class="btn btn-gold" style="white-space:nowrap;font-size:0.7rem">🔐 Partner Login →</a>
+    </div>
+
+    <h1 class="hero-title">Grow Your Business<br>with <span class="g">AE Systems.</span></h1>
+    <p class="hero-sub">Join India's fastest-growing IT-OT partner network. Resell IIT Jammu-validated SAAR AI-BMS solutions — and help enterprises cut energy costs by 20–30%. Proven product. Attractive margins. Full support from day one.</p>
+
+    <div class="hero-btns">
+      <a href="#apply" class="btn btn-red">Apply to Partner →</a>
+      <a href="#why-partner" class="btn btn-gold">Why Partner with Us</a>
+    </div>
+
+    <div class="hero-stats">
+      <div><div class="hs-num">20–30%</div><div class="hs-lbl">Energy Savings to Sell</div></div>
+      <div class="hs-div"></div>
+      <div><div class="hs-num">12</div><div class="hs-lbl">Patents — Defensible Tech</div></div>
+      <div class="hs-div"></div>
+      <div><div class="hs-num">PAN</div><div class="hs-lbl">India Opportunity</div></div>
+      <div class="hs-div"></div>
+      <div><div class="hs-num">IIT</div><div class="hs-lbl">Research Backed</div></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══ WHY PARTNER ═══ -->
+<section id="why-partner">
+  <div class="inner">
+    <div class="eyebrow"><div class="el"></div><span class="et">Why Partner with AE Systems</span></div>
+    <div class="grule"></div>
+    <div class="two-col" style="margin-bottom:52px;align-items:start">
+      <h2 class="sec-title">A Product That<br><span class="g">Sells Itself.</span></h2>
+      <p class="body-text">The HVAC energy optimisation market in India is underserved and growing fast. Buildings across hotels, hospitals, factories, and offices are spending crores on avoidable electricity bills. SAAR AI-BMS solves that — with proof. Your job is to open the door. We help you close.</p>
+    </div>
+    <div class="three-col">
+      <div class="benefit-card reveal-scale">
+        <div class="benefit-icon">💰</div>
+        <div class="benefit-title">Attractive Revenue Model</div>
+        <div class="benefit-text">Earn competitive margins on every deployment. Recurring AMC revenue year after year. The more buildings you bring on, the more you earn — passively.</div>
+      </div>
+      <div class="benefit-card reveal-scale">
+        <div class="benefit-icon">🏛️</div>
+        <div class="benefit-title">IIT Jammu Validated Tech</div>
+        <div class="benefit-text">12 patents. Live campus deployment with 20%+ savings proven. You walk into every sales meeting with independent institutional validation behind you.</div>
+      </div>
+      <div class="benefit-card reveal-scale">
+        <div class="benefit-icon">🇮🇳</div>
+        <div class="benefit-title">Make in India Advantage</div>
+        <div class="benefit-text">100% indigenous hardware and software. A natural edge with PSUs, government bodies, and enterprises under the Atmanirbhar Bharat programme.</div>
+      </div>
+      <div class="benefit-card reveal-scale">
+        <div class="benefit-icon">🤝</div>
+        <div class="benefit-title">Full Sales & Tech Support</div>
+        <div class="benefit-text">You are never on your own. AE Systems provides pre-sales support, technical training, proposal templates, and co-selling assistance on every deal you bring in.</div>
+      </div>
+      <div class="benefit-card reveal-scale">
+        <div class="benefit-icon">🗺️</div>
+        <div class="benefit-title">Exclusive Territory Rights</div>
+        <div class="benefit-text">Qualified partners receive protected geographies. Build your regional pipeline without worrying about channel conflict. First-mover advantage in your city.</div>
+      </div>
+      <div class="benefit-card reveal-scale">
+        <div class="benefit-icon">📦</div>
+        <div class="benefit-title">Full IT-OT Portfolio</div>
+        <div class="benefit-text">Beyond BMS — sell IT infrastructure, ELV, networking, and cybersecurity under one partner agreement. One relationship, multiple revenue streams.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PARTNER JOURNEY ═══ -->
+<section id="partner-journey">
+  <div class="inner">
+    <div class="eyebrow" style="justify-content:center"><div class="el"></div><span class="et">Your Partner Journey</span><div class="el"></div></div>
+    <div class="grule mx-auto"></div>
+    <h2 class="sec-title center">Simple to Start.<br><span class="g">Built to Scale.</span></h2>
+    <div class="journey-steps">
+      <div class="journey-step reveal">
+        <div class="journey-num">01</div>
+        <div class="journey-title">Apply</div>
+        <div class="journey-sub">Fill the partner application below. Tell us about your business, geography, and the sectors you serve. We review within 48 hours.</div>
+      </div>
+      <div class="journey-step reveal">
+        <div class="journey-num">02</div>
+        <div class="journey-title">Onboard</div>
+        <div class="journey-sub">Get certified on SAAR AI-BMS. Access the partner portal, sales collateral, pricing guides, and a dedicated AE Systems account manager.</div>
+      </div>
+      <div class="journey-step reveal">
+        <div class="journey-num">03</div>
+        <div class="journey-title">Start Earning</div>
+        <div class="journey-sub">Bring in your first lead. We co-sell, you earn. Build recurring AMC revenue with every building deployed. Grow your book of business with us.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ APPLY FORM ═══ -->
+<section id="apply">
+  <div class="inner">
+    <div class="eyebrow"><div class="el"></div><span class="et">Partner Application</span></div>
+    <div class="grule"></div>
+    <div class="apply-grid">
+
+      <!-- LEFT: context + login card -->
+      <div>
+        <h2 class="sec-title">Let's Build<br><span class="g">Together.</span></h2>
+        <p class="body-text" style="margin-bottom:24px">Tell us about your business and we'll be in touch within 48 hours. No commitment required at this stage — just a conversation.</p>
+        <div class="apply-perk">Application reviewed within 48 hours</div>
+        <div class="apply-perk">Dedicated account manager assigned on approval</div>
+        <div class="apply-perk">Access to partner pricing and sales collateral</div>
+        <div class="apply-perk">Free technical certification on SAAR AI-BMS</div>
+        <div class="apply-perk">Co-selling support on your very first deal</div>
+        <div class="apply-perk">Protected territory rights for qualified partners</div>
+
+        <div class="apply-login-card">
+          <div class="apply-login-label">Existing Partners</div>
+          <div class="apply-login-text">Already onboarded? Log in to access your leads, resources, commission tracker, and support portal.</div>
+          <a href="https://partners.aesystems.in" target="_blank" class="btn btn-red" style="width:100%;justify-content:center">🔐 Partner Login →</a>
+        </div>
+      </div>
+
+      <!-- RIGHT: form -->
+      <div class="contact-form">
+        <div class="form-title">Partner Application Form</div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">First Name *</label>
+            <input type="text" class="form-input" id="p-fname" placeholder="First Name" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Last Name *</label>
+            <input type="text" class="form-input" id="p-lname" placeholder="Last Name" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Company Name *</label>
+            <input type="text" class="form-input" id="p-company" placeholder="Your Company" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">City / Region *</label>
+            <input type="text" class="form-input" id="p-city" placeholder="e.g. Mumbai, Delhi NCR" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Business Email *</label>
+            <input type="email" class="form-input" id="p-email" placeholder="you@company.com" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Phone *</label>
+            <input type="tel" class="form-input" id="p-phone" placeholder="+91 XXXXX XXXXX" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Partner Type *</label>
+          <select class="form-input form-select" id="p-type" style="background:#F4F7FB;color:#0A0F1E;border-color:rgba(0,194,255,.2)">
+            <option value="">Select partner type...</option>
+            <option>Reseller / Channel Partner</option>
+            <option>System Integrator</option>
+            <option>HVAC Contractor</option>
+            <option>ELV Contractor</option>
+            <option>IT Solutions Provider</option>
+            <option>Consultant / Advisor</option>
+            <option>Other</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Primary Sector You Serve</label>
+          <select class="form-input form-select" id="p-sector" style="background:#F4F7FB;color:#0A0F1E;border-color:rgba(0,194,255,.2)">
+            <option value="">Select primary sector...</option>
+            <option>Hotels / Hospitality</option>
+            <option>Hospitals / Healthcare</option>
+            <option>Industrial / Manufacturing</option>
+            <option>Corporate Offices</option>
+            <option>Government / PSU</option>
+            <option>Educational Institutions</option>
+            <option>Data Centers</option>
+            <option>Mixed / Multiple Sectors</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Tell Us About Your Business</label>
+          <textarea class="form-input form-textarea" id="p-msg" placeholder="How many clients do you currently serve? Which geographies? Any existing BMS or HVAC relationships? Anything that helps us understand the opportunity together..."></textarea>
+        </div>
+
+        <div class="form-submit-group">
+          <button type="submit" class="form-submit" id="partnerSubmitBtn">🤝 Submit Application</button>
+          <button type="button" class="form-wa" onclick="partnerWhatsApp()">💬 WhatsApp Instead</button>
+        </div>
+
+        <div id="partner-success" style="display:none;margin-top:14px;background:rgba(0,229,195,0.08);border:1px solid var(--teal);border-radius:4px;padding:13px 16px;font-size:0.84rem;color:var(--gold);text-align:center">
+          ✅ Application received! We'll be in touch within 48 hours.
+        </div>
+        <div id="partner-error" style="display:none;margin-top:14px;background:rgba(0,194,255,0.08);border:1px solid var(--cyan);border-radius:4px;padding:13px 16px;font-size:0.84rem;color:#ff9090;text-align:center">
+          ⚠️ Something went wrong. Please WhatsApp or email us directly at sales@aesystems.in
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="assets/logo.svg" alt="AE Systems" class="footer-logo">
+      </div>
+      <div class="footer-col"><h4>Company</h4><ul><li><a href="index.html#about">Who We Are</a></li><li><a href="index.html#services">Services</a></li><li><a href="index.html#clients">Clients</a></li><li><a href="index.html#contact">Contact</a></li></ul></div>
+      <div class="footer-col"><h4>IT-OT Solutions</h4><ul><li><a href="index.html#solution">SAAR AI-BMS</a></li><li><a href="index.html#services">HVAC Optimisation</a></li><li><a href="index.html#services">3D Digital Twin</a></li><li><a href="index.html#services">Energy Analytics</a></li></ul></div>
+      <div class="footer-col"><h4>Partners</h4><ul><li><a href="partners.html">Become a Partner</a></li><li><a href="https://partners.aesystems.in" target="_blank">Partner Login</a></li><li><a href="index.html#poc">Request a POC</a></li><li><a href="mailto:sales@aesystems.in">sales@aesystems.in</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">&copy; 2026 <span>AE Systems</span>. All rights reserved. &nbsp;|&nbsp; Authorised National Partner of SAAR System Solutions</div>
+      <div class="footer-iit">IIT Jammu Validated &middot; Make in India 🇮🇳</div>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<a href="https://wa.me/919873076300" class="wa-float" target="_blank" aria-label="Chat on WhatsApp">
+  <svg viewBox="0 0 32 32" width="26" height="26">
+    <path fill="white" d="M19.11 17.36c-.28-.14-1.65-.81-1.91-.9-.26-.09-.45-.14-.64.14-.19.28-.73.9-.9 1.09-.16.19-.33.21-.61.07-.28-.14-1.18-.43-2.25-1.37-.83-.74-1.39-1.66-1.55-1.94-.16-.28-.02-.43.12-.57.12-.12.28-.33.42-.49.14-.16.19-.28.28-.47.09-.19.05-.35-.02-.49-.07-.14-.64-1.55-.88-2.12-.23-.55-.47-.47-.64-.48-.16-.01-.35-.01-.54-.01-.19 0-.49.07-.75.35-.26.28-.98.96-.98 2.34 0 1.38 1 2.71 1.14 2.9.14.19 1.97 3.01 4.77 4.22.67.29 1.19.46 1.59.59.67.21 1.28.18 1.76.11.54-.08 1.65-.67 1.88-1.31.23-.64.23-1.19.16-1.31-.07-.12-.26-.19-.54-.33z"/>
+  </svg>
+</a>
+
+<script src="script.js"></script>
+<script>
+function partnerWhatsApp() {
+  var fname   = document.getElementById('p-fname').value.trim();
+  var lname   = document.getElementById('p-lname').value.trim();
+  var company = document.getElementById('p-company').value.trim();
+  var city    = document.getElementById('p-city').value.trim();
+  var email   = document.getElementById('p-email').value.trim();
+  var phone   = document.getElementById('p-phone').value.trim();
+  var type    = document.getElementById('p-type').value;
+  var sector  = document.getElementById('p-sector').value;
+  var msg     = document.getElementById('p-msg').value.trim();
+
+  if (!fname || !email || !phone || !type) {
+    showToast('Please fill Name, Email, Phone and Partner Type.');
+    return;
+  }
+  var text = encodeURIComponent(
+    'AE Systems — Partner Application\n\n' +
+    'Name: ' + fname + ' ' + lname + '\n' +
+    'Company: ' + (company || 'N/A') + '\n' +
+    'City: ' + (city || 'N/A') + '\n' +
+    'Email: ' + email + '\n' +
+    'Phone: ' + phone + '\n' +
+    'Partner Type: ' + type + '\n' +
+    'Sector: ' + (sector || 'N/A') + '\n\n' +
+    'About My Business:\n' + (msg || 'No additional info.') +
+    '\n\nSent from aesystems.in/partners'
+  );
+  window.open('https://wa.me/919873076300?text=' + text, '_blank');
+  showToast('Opening WhatsApp...');
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+  var btn = document.getElementById('partnerSubmitBtn');
+  if (!btn) return;
+
+  btn.addEventListener('click', function (e) {
+    e.preventDefault();
+
+    var fname   = document.getElementById('p-fname').value.trim();
+    var lname   = document.getElementById('p-lname').value.trim();
+    var company = document.getElementById('p-company').value.trim();
+    var city    = document.getElementById('p-city').value.trim();
+    var email   = document.getElementById('p-email').value.trim();
+    var phone   = document.getElementById('p-phone').value.trim();
+    var type    = document.getElementById('p-type').value;
+    var sector  = document.getElementById('p-sector').value;
+    var msg     = document.getElementById('p-msg').value.trim();
+
+    if (!fname || !email || !phone || !type) {
+      showToast('Please fill Name, Email, Phone and Partner Type.');
+      return;
+    }
+
+    var successEl = document.getElementById('partner-success');
+    var errorEl   = document.getElementById('partner-error');
+    if (successEl) successEl.style.display = 'none';
+    if (errorEl)   errorEl.style.display   = 'none';
+    btn.textContent = 'Sending...';
+    btn.disabled    = true;
+
+    var formData = new FormData();
+    formData.append('name',         fname + ' ' + lname);
+    formData.append('company',      company || 'N/A');
+    formData.append('city',         city || 'N/A');
+    formData.append('email',        email);
+    formData.append('phone',        phone);
+    formData.append('partner_type', type);
+    formData.append('sector',       sector || 'N/A');
+    formData.append('message',      msg || 'No additional info.');
+    formData.append('_subject',     'AE Systems Partner Application: ' + (company || fname) + ' — ' + type);
+    formData.append('_replyto',     email);
+
+    fetch('https://formspree.io/f/xqedogwg', {
+      method: 'POST',
+      body: formData,
+      headers: { 'Accept': 'application/json' }
+    })
+    .then(function (res) {
+      return res.json().then(function (data) { return { ok: res.ok, data: data }; });
+    })
+    .then(function (result) {
+      if (result.ok) {
+        if (successEl) successEl.style.display = 'block';
+        ['p-fname','p-lname','p-company','p-city','p-email','p-phone','p-msg'].forEach(function (id) {
+          var el = document.getElementById(id);
+          if (el) el.value = '';
+        });
+        document.getElementById('p-type').selectedIndex   = 0;
+        document.getElementById('p-sector').selectedIndex = 0;
+        btn.textContent = '✅ Submitted!';
+        setTimeout(function () { btn.textContent = '🤝 Submit Application'; btn.disabled = false; }, 4000);
+      } else {
+        if (errorEl) { errorEl.style.display = 'block'; errorEl.textContent = '⚠️ Failed to send. Please email us at sales@aesystems.in'; }
+        btn.textContent = '❌ Failed — Try Again';
+        btn.disabled = false;
+      }
+    })
+    .catch(function () {
+      if (errorEl) { errorEl.style.display = 'block'; errorEl.textContent = '⚠️ Network error. Please WhatsApp or email us directly.'; }
+      btn.textContent = '❌ Try Again';
+      btn.disabled = false;
+    });
+  });
+});
+</script>
+
+</body>
+</html>
