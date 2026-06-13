@@ -294,14 +294,6 @@ footer{background:#0A0F1E;border-top:1px solid rgba(0,229,195,.15);padding:40px 
 .toast{position:fixed;bottom:32px;right:32px;background:var(--dk3);border:1px solid var(--teal);border-radius:6px;padding:14px 22px;font-size:0.82rem;color:#fff;z-index:99999;transform:translateY(80px);opacity:0;transition:all .4s;pointer-events:none}
 .toast.show{transform:translateY(0);opacity:1}
 
-/* ═══════════════════════
-   CLIENT LOGO STRIP
-═══════════════════════ */
-.client-logos{display:flex;align-items:center;justify-content:space-around;gap:32px;flex-wrap:wrap;margin-top:44px;padding:26px 32px;background:#FFFFFF;border:1px solid rgba(0,194,255,.12);border-radius:8px;box-shadow:0 2px 12px rgba(0,0,0,.05)}
-.client-logos img{height:52px;width:auto;max-width:160px;object-fit:contain;opacity:.9;transition:transform .2s,opacity .2s}
-.client-logos img:hover{transform:scale(1.06);opacity:1}
-.client-logos-label{font-size:0.62rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:#3A5470;text-align:center;margin-top:36px}
-@media(max-width:580px){.client-logos{gap:20px;padding:20px}.client-logos img{height:38px;max-width:120px}}
 
 /* ══════════════════════════════════════
    SCROLLING TICKER MARQUEE
