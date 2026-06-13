@@ -407,22 +407,3 @@ nav.scrolled{box-shadow:0 4px 36px rgba(0,0,0,.55)}
   .hero-badge-dot,.cl-live{animation:none}
 }
 
-/* ═══════════════════════
-   CLIENT LOGO STRIP
-═══════════════════════ */
-.client-logos{display:flex;align-items:center;justify-content:space-around;gap:32px;flex-wrap:wrap;margin-top:44px;padding:26px 32px;background:#FFFFFF;border:1px solid rgba(0,194,255,.12);border-radius:8px;box-shadow:0 2px 12px rgba(0,0,0,.05)}
-.client-logos img{height:50px;width:auto;max-width:150px;object-fit:contain;filter:grayscale(1);opacity:.6;transition:filter .3s,opacity .3s}
-.client-logos img:hover{filter:none;opacity:1}
-.client-logos-label{font-size:0.62rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:#3A5470;text-align:center;margin-top:36px}
-@media(max-width:580px){.client-logos{gap:20px;padding:20px}.client-logos img{height:36px;max-width:110px}}
-
-/* ═══════════════════════
-   PLATFORM SCREENSHOTS (Solution section)
-═══════════════════════ */
-.solution-shots{display:grid;grid-template-columns:1.55fr 1fr;gap:18px;margin-top:56px}
-.solution-shot{background:#0D1B2A;border:1px solid rgba(0,194,255,.2);border-radius:10px;overflow:hidden;box-shadow:0 20px 56px rgba(10,15,30,.16)}
-.solution-shot-bar{display:flex;align-items:center;gap:6px;padding:10px 14px;border-bottom:1px solid rgba(0,194,255,.15)}
-.solution-shot-bar span{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.16)}
-.solution-shot img{display:block;width:100%;height:auto}
-.solution-shot-caption{padding:12px 16px;font-size:0.68rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#A8BDD0;border-top:1px solid rgba(0,194,255,.12)}
-@media(max-width:720px){.solution-shots{grid-template-columns:1fr}}
