@@ -119,11 +119,17 @@ function addRevealClasses(){
   });
   /* process steps */
   document.querySelectorAll('.process-step').forEach(function(el,i){
+    el.classList.add('reveal');
     el.style.transitionDelay = (i*0.15) + 's';
   });
-  /* hero stats boxes */
-  document.querySelectorAll('.hero-stats > div:not(.hs-div)').forEach(function(el,i){
-    /* already animated via CSS heroFadeUp */
+  /* partner page: benefit cards + journey steps */
+  document.querySelectorAll('.benefit-card').forEach(function(el,i){
+    el.classList.add('reveal-scale');
+    el.style.transitionDelay = ((i%3)*0.12) + 's';
+  });
+  document.querySelectorAll('.journey-step').forEach(function(el,i){
+    el.classList.add('reveal');
+    el.style.transitionDelay = (i*0.15) + 's';
   });
   /* cost quote */
   var cq = document.querySelector('.cost-quote');
@@ -157,9 +163,17 @@ var revealObs = new IntersectionObserver(function(entries){
   });
 }, {threshold:0.12, rootMargin:'0px 0px -50px 0px'});
 
-document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.reveal-scale,.grule,.eyebrow,.process-step').forEach(function(el){
-  revealObs.observe(el);
-});
+if(location.hash){
+  /* deep link: show everything immediately, no entrance animations */
+  document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.reveal-scale,.eyebrow,.process-step').forEach(function(el){
+    el.classList.add('visible');
+  });
+  document.querySelectorAll('.grule').forEach(function(el){ el.style.width = '48px'; });
+} else {
+  document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.reveal-scale,.grule,.eyebrow,.process-step').forEach(function(el){
+    revealObs.observe(el);
+  });
+}
 
 /* ── 6. ANIMATED COUNTER ── */
 function animateCounter(el, target, prefix, suffix, decimals){
@@ -183,36 +197,6 @@ var countersStarted = false;
 function startCounters(){
   if(countersStarted) return;
   countersStarted = true;
-  /* hero stats */
-  var hsNums = document.querySelectorAll('.hs-num');
-  /* about stats */
-  var asNums = document.querySelectorAll('.as-num');
-  /* cost stats */
-  var costNums = document.querySelectorAll('.cost-num');
-
-  var counterData = [
-    /* hero stats: 20-30%, 7+, 12, IIT (skip IIT) */
-    {sel:'.hero-stats .hs-num', items:[
-      {target:30, prefix:'20–', suffix:'%'},
-      {target:7,  prefix:'',   suffix:'+'},
-      {target:12, prefix:'',   suffix:''},
-      null
-    ]},
-    /* about stats */
-    {sel:'.about-stats .as-num', items:[
-      {target:20, prefix:'~',  suffix:'%'},
-      {target:12, prefix:'',   suffix:''},
-      null,
-      null
-    ]},
-    /* cost stats */
-    {sel:'.cost-stats .cost-num', items:[
-      null,
-      null,
-      null
-    ]}
-  ];
-
   /* hero */
   var hh = document.querySelectorAll('.hero-stats .hs-num');
   if(hh[1]) animateCounter(hh[1], 7,  '', '+', 0);
@@ -231,11 +215,7 @@ if(counterTrigger){
   ctrObs.observe(counterTrigger);
 }
 
-/* ── 7. INJECT SCROLLING TICKER after hero ── */
 /* ── 7. INJECT SCROLLING TICKER after header ── */
-
-var nav = document.getElementById('mainNav');
-
 if(nav){
 
   var ticker = document.createElement('div');
@@ -263,26 +243,15 @@ if(nav){
   nav.parentNode.insertBefore(ticker, nav.nextSibling);
 
 }
-/* ── 8. SMOOTH SECTION TRANSITION — subtle background shift ── */
-var bgObs = new IntersectionObserver(function(entries){
-  entries.forEach(function(entry){
-    if(entry.isIntersecting){
-      var sec = entry.target;
-      /* light flash on section border */
-      var before = document.createElement('span');
-    }
-  });
-}, {threshold:0.1});
-sections.forEach(function(s){ bgObs.observe(s); });
 
-/* ── 9. PARALLAX on hero-ring (subtle) ── */
+/* ── 8. PARALLAX on hero-ring (subtle) ── */
 window.addEventListener('scroll', function(){
   var ring = document.querySelector('.hero-ring');
   if(!ring) return;
   ring.style.transform = 'translateY(calc(-50% + ' + (window.scrollY * 0.12) + 'px))';
 }, {passive:true});
 
-/* ── 10. CTA button text bounce on hover ── */
+/* ── 9. CTA button text bounce on hover ── */
 document.querySelectorAll('.btn').forEach(function(btn){
   btn.addEventListener('mouseenter', function(){
     this.style.transform = 'translateY(-3px)';
@@ -292,7 +261,7 @@ document.querySelectorAll('.btn').forEach(function(btn){
   });
 });
 
-/* ── 11. COST QUOTE — typewriter-style reveal ── */
+/* ── 10. COST QUOTE — accent reveal ── */
 var cq = document.querySelector('.cost-quote p');
 if(cq){
   var cqObs = new IntersectionObserver(function(entries){
@@ -305,10 +274,6 @@ if(cq){
   }, {threshold:0.7});
   cqObs.observe(cq);
 }
-
-/* ── 12. WA FLOAT pulse class ── */
-var waFloat = document.querySelector('.wa-float');
-/* already handled in CSS */
 
 })();
 
@@ -391,10 +356,11 @@ function sendWhatsApp() {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-  var btn = document.getElementById('submitBtn');
-  if (!btn) return;
+  var form = document.getElementById('enquiryForm');
+  var btn  = document.getElementById('submitBtn');
+  if (!form || !btn) return;
 
-  btn.addEventListener('click', function(e) {
+  form.addEventListener('submit', function(e) {
     e.preventDefault();
     var d = getFormData();
     if (!d) return;
@@ -437,7 +403,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (sel1) sel1.selectedIndex = 0;
         if (sel2) sel2.selectedIndex = 0;
         btn.textContent = '\u2705 Sent!';
-        setTimeout(function() { btn.textContent = '\U0001F4E7 Send Enquiry'; btn.disabled = false; }, 4000);
+        setTimeout(function() { btn.textContent = '\ud83d\udce7 Send Enquiry'; btn.disabled = false; }, 4000);
       } else {
         if (errorEl) {
           errorEl.style.display = 'block';
@@ -457,15 +423,3 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 });
-
-function toggleMenu(){
-
-const h = document.getElementById("hamburger");
-const m = document.getElementById("mobileMenu");
-
-if(!h || !m) return;
-
-h.classList.toggle("open");
-m.classList.toggle("open");
-
-}

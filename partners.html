@@ -20,7 +20,13 @@
 <title>Partner with AE Systems | Channel Partner Programme India</title>
 <meta name="description" content="Join the AE Systems Partner Programme. Resell IIT Jammu-validated SAAR AI-BMS and HVAC optimisation solutions across India. Apply to become a channel partner today.">
 <link rel="canonical" href="https://www.aesystems.in/partners.html">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;900&family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700;900&display=swap" rel="stylesheet">
+<meta property="og:title" content="Partner with AE Systems | Channel Partner Programme India">
+<meta property="og:description" content="Resell IIT Jammu-validated SAAR AI-BMS and HVAC optimisation solutions across India. Attractive margins, protected territories, full support.">
+<meta property="og:image" content="https://www.aesystems.in/assets/og-image.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.aesystems.in/partners.html">
+<meta name="twitter:card" content="summary_large_image">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 <style>
 
@@ -299,32 +305,32 @@
       <p class="body-text">The HVAC energy optimisation market in India is underserved and growing fast. Buildings across hotels, hospitals, factories, and offices are spending crores on avoidable electricity bills. SAAR AI-BMS solves that — with proof. Your job is to open the door. We help you close.</p>
     </div>
     <div class="three-col">
-      <div class="benefit-card reveal-scale">
+      <div class="benefit-card">
         <div class="benefit-icon">💰</div>
         <div class="benefit-title">Attractive Revenue Model</div>
         <div class="benefit-text">Earn competitive margins on every deployment. Recurring AMC revenue year after year. The more buildings you bring on, the more you earn — passively.</div>
       </div>
-      <div class="benefit-card reveal-scale">
+      <div class="benefit-card">
         <div class="benefit-icon">🏛️</div>
         <div class="benefit-title">IIT Jammu Validated Tech</div>
         <div class="benefit-text">12 patents. Live campus deployment with 20%+ savings proven. You walk into every sales meeting with independent institutional validation behind you.</div>
       </div>
-      <div class="benefit-card reveal-scale">
+      <div class="benefit-card">
         <div class="benefit-icon">🇮🇳</div>
         <div class="benefit-title">Make in India Advantage</div>
         <div class="benefit-text">100% indigenous hardware and software. A natural edge with PSUs, government bodies, and enterprises under the Atmanirbhar Bharat programme.</div>
       </div>
-      <div class="benefit-card reveal-scale">
+      <div class="benefit-card">
         <div class="benefit-icon">🤝</div>
         <div class="benefit-title">Full Sales & Tech Support</div>
         <div class="benefit-text">You are never on your own. AE Systems provides pre-sales support, technical training, proposal templates, and co-selling assistance on every deal you bring in.</div>
       </div>
-      <div class="benefit-card reveal-scale">
+      <div class="benefit-card">
         <div class="benefit-icon">🗺️</div>
         <div class="benefit-title">Exclusive Territory Rights</div>
         <div class="benefit-text">Qualified partners receive protected geographies. Build your regional pipeline without worrying about channel conflict. First-mover advantage in your city.</div>
       </div>
-      <div class="benefit-card reveal-scale">
+      <div class="benefit-card">
         <div class="benefit-icon">📦</div>
         <div class="benefit-title">Full IT-OT Portfolio</div>
         <div class="benefit-text">Beyond BMS — sell IT infrastructure, ELV, networking, and cybersecurity under one partner agreement. One relationship, multiple revenue streams.</div>
@@ -340,17 +346,17 @@
     <div class="grule mx-auto"></div>
     <h2 class="sec-title center">Simple to Start.<br><span class="g">Built to Scale.</span></h2>
     <div class="journey-steps">
-      <div class="journey-step reveal">
+      <div class="journey-step">
         <div class="journey-num">01</div>
         <div class="journey-title">Apply</div>
         <div class="journey-sub">Fill the partner application below. Tell us about your business, geography, and the sectors you serve. We review within 48 hours.</div>
       </div>
-      <div class="journey-step reveal">
+      <div class="journey-step">
         <div class="journey-num">02</div>
         <div class="journey-title">Onboard</div>
         <div class="journey-sub">Get certified on SAAR AI-BMS. Access the partner portal, sales collateral, pricing guides, and a dedicated AE Systems account manager.</div>
       </div>
-      <div class="journey-step reveal">
+      <div class="journey-step">
         <div class="journey-num">03</div>
         <div class="journey-title">Start Earning</div>
         <div class="journey-sub">Bring in your first lead. We co-sell, you earn. Build recurring AMC revenue with every building deployed. Grow your book of business with us.</div>
@@ -385,7 +391,7 @@
       </div>
 
       <!-- RIGHT: form -->
-      <div class="contact-form">
+      <form class="contact-form" id="partnerForm">
         <div class="form-title">Partner Application Form</div>
 
         <div class="form-row">
@@ -423,7 +429,7 @@
 
         <div class="form-group">
           <label class="form-label">Partner Type *</label>
-          <select class="form-input form-select" id="p-type" style="background:#F4F7FB;color:#0A0F1E;border-color:rgba(0,194,255,.2)">
+          <select class="form-input form-select" id="p-type" required style="background:#F4F7FB;color:#0A0F1E;border-color:rgba(0,194,255,.2)">
             <option value="">Select partner type...</option>
             <option>Reseller / Channel Partner</option>
             <option>System Integrator</option>
@@ -466,7 +472,7 @@
         <div id="partner-error" style="display:none;margin-top:14px;background:rgba(0,194,255,0.08);border:1px solid var(--cyan);border-radius:4px;padding:13px 16px;font-size:0.84rem;color:#ff9090;text-align:center">
           ⚠️ Something went wrong. Please WhatsApp or email us directly at sales@aesystems.in
         </div>
-      </div>
+      </form>
 
     </div>
   </div>
@@ -534,10 +540,11 @@ function partnerWhatsApp() {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-  var btn = document.getElementById('partnerSubmitBtn');
-  if (!btn) return;
+  var form = document.getElementById('partnerForm');
+  var btn  = document.getElementById('partnerSubmitBtn');
+  if (!form || !btn) return;
 
-  btn.addEventListener('click', function (e) {
+  form.addEventListener('submit', function (e) {
     e.preventDefault();
 
     var fname   = document.getElementById('p-fname').value.trim();

@@ -1,5 +1,5 @@
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
+html:focus-within{scroll-behavior:smooth}
 body{font-family:"Poppins","Barlow",sans-serif;background:#F4F7FB;color:#0A0F1E;overflow-x:hidden;line-height:1.6}
 ::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:#0D1B2A}::-webkit-scrollbar-thumb{background:#00E5C3;border-radius:3px}
 :root{--cyan:#00C2FF;--cyan2:#0099CC;--teal:#00E5C3;--teal2:#33EDD0;--amber:#FF8C00;
@@ -48,7 +48,7 @@ section{padding:88px 5%}
 .eyebrow{display:flex;align-items:center;gap:10px;margin-bottom:14px}
 .el{width:28px;height:1px;background:var(--gold)}
 .et{font-size:0.72rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold)}
-.sec-title{font-family:"Poppins","Playfair Display",serif;font-size:clamp(2.2rem,4vw,3.6rem);font-weight:700;line-height:1.15;color:#0A0F1E;margin-bottom:16px}
+.sec-title{font-family:"Poppins",sans-serif;font-size:clamp(2.2rem,4vw,3.6rem);font-weight:700;line-height:1.15;color:#0A0F1E;margin-bottom:16px}
 .g{background:linear-gradient(90deg,#00C2FF,#00E5C3);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
 .g{color:var(--gold)}.r{color:var(--red2)}
 .body-text{font-size:1rem;font-weight:400;color:#3A5470;line-height:1.9}
@@ -69,11 +69,11 @@ section{padding:88px 5%}
 .hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 68% 45%,rgba(0,194,255,.08),transparent 58%),radial-gradient(ellipse at 18% 82%,rgba(0,229,195,.06),transparent 52%),linear-gradient(140deg,#0A0F1E 0%,#0D1B2A 55%,#0A0F1E 100%)}
 .hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(0,194,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(0,194,255,.025) 1px,transparent 1px);background-size:55px 55px;pointer-events:none}
 .hero-ring{position:absolute;right:-60px;top:50%;transform:translateY(-50%);width:520px;height:520px;border-radius:50%;border:1px solid rgba(0,194,255,.07);box-shadow:0 0 0 70px rgba(0,194,255,.02),0 0 0 140px rgba(0,229,195,.015),0 0 0 210px rgba(0,194,255,.008);pointer-events:none}
-.hero-content{position:relative;z-index:2;max-width:660px;text-align:left;}
+.hero-content{position:relative;z-index:2;max-width:760px;text-align:left;}
 .hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(0,194,255,.07);border:1px solid rgba(0,194,255,.22);color:var(--teal);font-size:0.6rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:6px 14px;border-radius:2px;margin-top:0px;margin-bottom:22px}
 .hero-badge-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);animation:blink 2s infinite}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
-.hero-title{font-family:"Poppins","Playfair Display",serif;font-size:clamp(2.8rem,5.5vw,5.2rem);font-weight:900;line-height:1.05;color:#FFFFFF;margin-bottom:22px;text-align:left;}
+.hero-title{font-family:"Poppins",sans-serif;font-size:clamp(2.8rem,5.5vw,5.2rem);font-weight:900;line-height:1.05;color:#FFFFFF;margin-bottom:22px;text-align:left;}
 .hero-sub{font-size:0.97rem;font-weight:300;color:#A8BDD0;line-height:1.88;max-width:520px;margin-bottom:38px;border-left:2px solid var(--cyan);padding-left:18px}
 .hero-partner{font-size:0.68rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#3A5470;margin-bottom:36px}
 .hero-partner span{color:var(--gold)}
@@ -168,15 +168,19 @@ section{padding:88px 5%}
 ═══════════════════════ */
 #competitive{background:#F4F7FB;border-top:1px solid rgba(0,194,255,.08)}
 .comp-wrap{background:#FFFFFF;border:1px solid rgba(0,194,255,.15);border-radius:8px;overflow:hidden;margin-top:48px;box-shadow:0 4px 20px rgba(0,0,0,.07)}
-.comp-head{display:grid;grid-template-columns:2.2fr 1fr 1fr 1fr 1fr;background:#F4F7FB;border-bottom:1px solid rgba(0,194,255,.12);padding:13px 20px;gap:6px}
+.comp-head{display:grid;grid-template-columns:2.2fr 1fr 1fr;background:#F4F7FB;border-bottom:1px solid rgba(0,194,255,.12);padding:13px 20px;gap:6px}
 .ch{font-size:0.6rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#3A5470;text-align:center}
 .ch.ae{color:var(--gold);text-align:center}
-.comp-row{display:grid;grid-template-columns:2.2fr 1fr 1fr 1fr 1fr;padding:12px 20px;gap:6px;border-bottom:1px solid rgba(0,0,0,.04);align-items:center;transition:background .2s}
+.comp-row{display:grid;grid-template-columns:2.2fr 1fr 1fr;padding:12px 20px;gap:6px;border-bottom:1px solid rgba(0,0,0,.04);align-items:center;transition:background .2s}
 .comp-row:hover{background:rgba(0,194,255,.05)}.comp-row:last-child{border-bottom:none}
 .cf{font-size:0.79rem;color:#1B3A5C}
 .cv{text-align:center;font-size:0.7rem;font-weight:700}
 .yes{color:#4CAF50}.no{color:#CBD5E0}.par{color:var(--gold);font-size:0.6rem}
-@media(max-width:720px){.comp-wrap{display:none}}
+@media(max-width:720px){
+  .comp-head,.comp-row{grid-template-columns:1.5fr .7fr .7fr;padding:11px 14px}
+  .cf{font-size:0.72rem}
+  .ch{font-size:0.55rem;letter-spacing:1px}
+}
 
 /* ═══════════════════════
    CLIENTS
@@ -375,22 +379,50 @@ margin-top:80px;
   .ps-num{min-width:auto;width:40px;height:40px;font-size:0.9rem}
   .ps-body{padding:16px}
   .cl-card{flex-direction:column}
-  .comp-wrap{display:none}
-
-@media (max-width:768px){
-
-#hero{
-min-height:auto;
-padding:60px 5%;
 }
 
-.hero-title{
-font-size:2.3rem;
+@media(max-width:768px){
+  #hero{min-height:auto;padding:60px 5%}
+  .hero-title{font-size:2.3rem}
+  .hero-sub{font-size:0.9rem}
 }
 
-.hero-sub{
-font-size:0.9rem;
+/* ═══════════════════════
+   SCROLL REVEAL, PROGRESS BAR & NAV STATES
+═══════════════════════ */
+#ae-progress{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--cyan),var(--teal));z-index:10001}
+.reveal,.reveal-left,.reveal-right,.reveal-scale{opacity:0;transition:opacity .6s ease,transform .6s ease}
+.reveal{transform:translateY(24px)}
+.reveal-left{transform:translateX(-32px)}
+.reveal-right{transform:translateX(32px)}
+.reveal-scale{transform:scale(.94)}
+.reveal.visible,.reveal-left.visible,.reveal-right.visible,.reveal-scale.visible{opacity:1;transform:none}
+nav.scrolled{box-shadow:0 4px 36px rgba(0,0,0,.55)}
+.nav-links a.active-link{color:var(--cyan)}
+.nav-links a.active-link::after{width:100%}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .reveal,.reveal-left,.reveal-right,.reveal-scale{opacity:1;transform:none;transition:none}
+  .ae-ticker-inner{animation:none}
+  .hero-badge-dot,.cl-live{animation:none}
 }
 
-}
-}
+/* ═══════════════════════
+   CLIENT LOGO STRIP
+═══════════════════════ */
+.client-logos{display:flex;align-items:center;justify-content:space-around;gap:32px;flex-wrap:wrap;margin-top:44px;padding:26px 32px;background:#FFFFFF;border:1px solid rgba(0,194,255,.12);border-radius:8px;box-shadow:0 2px 12px rgba(0,0,0,.05)}
+.client-logos img{height:50px;width:auto;max-width:150px;object-fit:contain;filter:grayscale(1);opacity:.6;transition:filter .3s,opacity .3s}
+.client-logos img:hover{filter:none;opacity:1}
+.client-logos-label{font-size:0.62rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:#3A5470;text-align:center;margin-top:36px}
+@media(max-width:580px){.client-logos{gap:20px;padding:20px}.client-logos img{height:36px;max-width:110px}}
+
+/* ═══════════════════════
+   PLATFORM SCREENSHOTS (Solution section)
+═══════════════════════ */
+.solution-shots{display:grid;grid-template-columns:1.55fr 1fr;gap:18px;margin-top:56px}
+.solution-shot{background:#0D1B2A;border:1px solid rgba(0,194,255,.2);border-radius:10px;overflow:hidden;box-shadow:0 20px 56px rgba(10,15,30,.16)}
+.solution-shot-bar{display:flex;align-items:center;gap:6px;padding:10px 14px;border-bottom:1px solid rgba(0,194,255,.15)}
+.solution-shot-bar span{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.16)}
+.solution-shot img{display:block;width:100%;height:auto}
+.solution-shot-caption{padding:12px 16px;font-size:0.68rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#A8BDD0;border-top:1px solid rgba(0,194,255,.12)}
+@media(max-width:720px){.solution-shots{grid-template-columns:1fr}}

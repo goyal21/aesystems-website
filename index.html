@@ -46,7 +46,6 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="AE Systems | Smart BMS & HVAC Energy Optimization India">
 <meta name="twitter:description" content="AI-powered BMS that cuts HVAC electricity bills by 20-30%. IIT Jammu validated. Make in India.">
-<meta property="og:image" content="https://www.aesystems.in/assets/og-image.svg">
 <!-- ═══ GEO / LOCAL SEO ═══ -->
 <meta name="geo.region" content="IN-UP">
 <meta name="geo.placename" content="Noida, Uttar Pradesh, India">
@@ -70,8 +69,7 @@
   6. Save and re-upload to Hostinger. Done!
   Until configured, the Email button falls back to mailto: automatically.
 -->
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;900&family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700;900&display=swap" rel="stylesheet">
-<link rel="preload" as="image" href="og-image.svg">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700;900&display=swap" rel="stylesheet">
 <link rel="preload" href="style.css" as="style">
 <link rel="stylesheet" href="style.css">
 </head>
@@ -260,6 +258,18 @@
         </div>
       </div>
     </div>
+    <div class="solution-shots">
+      <div class="solution-shot">
+        <div class="solution-shot-bar"><span></span><span></span><span></span></div>
+        <img src="assets/products/analytics.png" alt="SAAR BMS real-time analytics dashboard showing energy, temperature and meter status" loading="lazy">
+        <div class="solution-shot-caption">SAAR BMS — Real-Time Analytics Dashboard</div>
+      </div>
+      <div class="solution-shot">
+        <div class="solution-shot-bar"><span></span><span></span><span></span></div>
+        <img src="assets/products/digital-twin.png" alt="3D digital twin live view of a facility with energy and power readings" loading="lazy">
+        <div class="solution-shot-caption">3D Digital Twin — Live Facility View</div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -373,6 +383,14 @@
     <div class="grule"></div>
     <h2 class="sec-title">Real Deployments.<br><span class="g">Real Results.</span></h2>
     <p class="body-text">From IIT research campuses to industrial factories and corporate offices — AE Systems has deployed and is actively deploying SAAR BMS solutions across sectors.</p>
+    <p class="client-logos-label">Trusted Across Institutions &amp; Enterprises</p>
+    <div class="client-logos">
+      <img src="assets/clients/iit-jammu.png" alt="IIT Jammu" loading="lazy">
+      <img src="assets/clients/berger-paints.png" alt="Berger Paints India Limited" loading="lazy">
+      <img src="assets/clients/orange-business.png" alt="Orange Business" loading="lazy">
+      <img src="assets/clients/trellisys.png" alt="Trellisys" loading="lazy">
+      <img src="assets/clients/bhima-farm.png" alt="Bhima Farm" loading="lazy">
+    </div>
     <div class="two-cards mt48">
       <div class="cl-card"><div class="cl-dot-wrap"><div class="cl-dot cl-done"></div><div class="cl-slabel">Done</div></div><div><div class="cl-name">IIT Jammu</div><div class="cl-desc">Installed 7 BMS controllers across classrooms with complete AHU automation and control. Real-time monitoring with 20%+ verified energy savings delivered.</div><span class="cl-tag tdone">✓ Completed</span></div></div>
       <div class="cl-card"><div class="cl-dot-wrap"><div class="cl-dot cl-live"></div><div class="cl-slabel">Live</div></div><div><div class="cl-name">Leading Paint Manufacturer</div><div class="cl-desc">Automating multiple chillers with full remote control, real-time monitoring and energy optimisation through SAAR controllers and cloud dashboard. Factory operations — North India.</div><span class="cl-tag tlive">⟳ Ongoing</span></div></div>
@@ -455,9 +473,9 @@
         </div>
       </div>
 
-      <div class="contact-form">
+      <form class="contact-form" id="enquiryForm">
         <div class="form-title">Send Us an Enquiry</div>
-        
+
         <div class="form-row">
           <div class="form-group"><label class="form-label">Your Name *</label><input type="text" class="form-input" id="f-name" name="name" placeholder="Full Name" required></div>
           <div class="form-group"><label class="form-label">Company *</label><input type="text" class="form-input" id="f-company" name="company" placeholder="Company Name" required></div>
@@ -467,7 +485,7 @@
           <div class="form-group"><label class="form-label">Phone *</label><input type="tel" class="form-input" id="f-phone" name="phone" placeholder="+91 XXXXX XXXXX" required></div>
         </div>
         <div class="form-group"><label class="form-label">I'm Interested In *</label>
-          <select class="form-input form-select" id="f-interest" name="interest" style="background:#F4F7FB;color:#0A0F1E;border-color:rgba(0,194,255,.2)">
+          <select class="form-input form-select" id="f-interest" name="interest" required style="background:#F4F7FB;color:#0A0F1E;border-color:rgba(0,194,255,.2)">
             <option value="">Select enquiry type...</option>
             <option>Request a POC — 30-Day Trial</option>
             <option>Book a Live Demo</option>
@@ -504,7 +522,7 @@
         <div id="form-error" style="display:none;margin-top:14px;background:rgba(0,194,255,0.08);border:1px solid var(--cyan);border-radius:4px;padding:13px 16px;font-size:0.84rem;color:#ff9090;text-align:center">
           ⚠️ Something went wrong. Please try WhatsApp or email us directly.
         </div>
-      </div>
+      </form>
     </div>
   </div>
 </section>
@@ -539,7 +557,7 @@
 <svg viewBox="0 0 32 32" width="26" height="26">
 <path fill="white" d="M19.11 17.36c-.28-.14-1.65-.81-1.91-.9-.26-.09-.45-.14-.64.14-.19.28-.73.9-.9 1.09-.16.19-.33.21-.61.07-.28-.14-1.18-.43-2.25-1.37-.83-.74-1.39-1.66-1.55-1.94-.16-.28-.02-.43.12-.57.12-.12.28-.33.42-.49.14-.16.19-.28.28-.47.09-.19.05-.35-.02-.49-.07-.14-.64-1.55-.88-2.12-.23-.55-.47-.47-.64-.48-.16-.01-.35-.01-.54-.01-.19 0-.49.07-.75.35-.26.28-.98.96-.98 2.34 0 1.38 1 2.71 1.14 2.9.14.19 1.97 3.01 4.77 4.22.67.29 1.19.46 1.59.59.67.21 1.28.18 1.76.11.54-.08 1.65-.67 1.88-1.31.23-.64.23-1.19.16-1.31-.07-.12-.26-.19-.54-.33z"/>
 </svg>
-
+</a>
 
 <script src="script.js"></script>
 
