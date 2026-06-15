@@ -536,3 +536,163 @@ nav.scrolled{box-shadow:0 4px 36px rgba(0,0,0,.55)}
 .dk-1 .form-input:focus{background:rgba(0,194,255,.1)!important;border-color:var(--teal)!important}
 .dk-1 .form-input::placeholder{color:#3A5470!important}
 
+/* ═══════════════════════════════════════════════════════════════
+   THEME TOGGLE BUTTON
+══════════════════════════════════════════════════════════════════ */
+.nav-right{display:flex;align-items:center;gap:8px}
+.theme-toggle{background:transparent;border:1px solid rgba(0,229,195,.35);border-radius:50%;width:34px;height:34px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--teal);transition:all .25s;flex-shrink:0;padding:0;line-height:1}
+.theme-toggle:hover{background:rgba(0,229,195,.12);border-color:var(--teal);transform:scale(1.1)}
+.theme-toggle svg{pointer-events:none;display:block}
+.theme-toggle .icon-moon{display:none}
+html.light-mode .theme-toggle{border-color:rgba(0,150,200,.4);color:#1B3A5C}
+html.light-mode .theme-toggle:hover{background:rgba(0,150,200,.1)}
+html.light-mode .theme-toggle .icon-sun{display:none}
+html.light-mode .theme-toggle .icon-moon{display:block}
+
+/* ═══════════════════════════════════════════════════════════════
+   LIGHT MODE  —  html.light-mode
+   Brand colours only: Midnight Core #0A0F1E, Deep Navy #0D1B2A,
+   Steel Blue #1B3A5C, Arctic Teal #00E5C3, Electric Cyan #00C2FF,
+   Slate Mid #3A5470, Cloud Silver #A8BDD0, and light fills.
+══════════════════════════════════════════════════════════════════ */
+
+/* ─ Logo swap ─ */
+.nav-logo img.logo-light{display:none}
+html.light-mode .nav-logo img.logo-dark{display:none}
+html.light-mode .nav-logo img.logo-light{display:block}
+
+/* ─ Global ─ */
+html.light-mode body{background:#F4F7FB;color:#0A0F1E}
+html.light-mode ::-webkit-scrollbar-track{background:#EDF5FB}
+
+/* ─ Nav ─ */
+html.light-mode nav{background:#FFFFFF !important;border-bottom-color:rgba(0,194,255,.2) !important;box-shadow:0 2px 16px rgba(0,100,180,.08) !important}
+html.light-mode .nav-links a{color:#1B3A5C !important}
+html.light-mode .nav-links a:hover{color:var(--cyan) !important}
+html.light-mode .hamburger span{background:#0D1B2A !important}
+html.light-mode .mobile-menu{background:#FFFFFF !important;border-bottom-color:rgba(0,194,255,.2) !important;box-shadow:0 8px 32px rgba(0,100,180,.1) !important}
+html.light-mode .mobile-menu a{color:#1B3A5C !important;border-bottom-color:rgba(0,194,255,.1) !important}
+html.light-mode .mobile-menu a:last-child{background:var(--teal);color:#0A0F1E !important}
+
+/* ─ Ticker ─ */
+html.light-mode .ae-ticker-wrap{background:linear-gradient(90deg,#EDF5FB 0%,#F4F7FB 100%) !important;border-top-color:rgba(0,194,255,.15) !important;border-bottom-color:rgba(0,194,255,.15) !important}
+html.light-mode .ae-ticker-item{color:#1B3A5C !important}
+
+/* ─ Hero ─ */
+html.light-mode .hero-bg{background:linear-gradient(155deg,#E8F4FF 0%,#EDF5FB 35%,#F0F8FF 65%,#E4F2FA 100%) !important}
+html.light-mode .hero-grid{background-image:radial-gradient(circle,rgba(0,150,200,.15) 1px,transparent 1px) !important}
+html.light-mode .hero-orb-1{background:radial-gradient(circle,rgba(0,194,255,.12) 0%,rgba(0,229,195,.04) 40%,transparent 70%) !important}
+html.light-mode .hero-orb-2{background:radial-gradient(circle,rgba(0,229,195,.09) 0%,rgba(0,100,200,.03) 45%,transparent 70%) !important}
+html.light-mode .hero-ring{border-color:rgba(0,194,255,.1) !important;box-shadow:0 0 0 80px rgba(0,194,255,.012),0 0 0 160px rgba(0,229,195,.008),0 0 0 240px rgba(0,194,255,.004) !important}
+html.light-mode .hero-title{color:#0A0F1E !important}
+html.light-mode .hero-sub{color:#3A5470 !important;border-left-color:rgba(0,194,255,.4) !important}
+html.light-mode .hero-partner{color:#3A5470 !important}
+html.light-mode .hero-badge{background:rgba(0,194,255,.07) !important;border-color:rgba(0,194,255,.22) !important}
+html.light-mode .hero-stats{background:rgba(255,255,255,.75) !important;border-color:rgba(0,194,255,.18) !important}
+html.light-mode .hs-lbl{color:#3A5470 !important}
+
+/* ─ Section backgrounds ─ */
+html.light-mode #about{background:#F4F7FB !important;border-top-color:rgba(0,194,255,.12) !important}
+html.light-mode #services{background:#FFFFFF !important;border-top-color:rgba(0,194,255,.1) !important}
+html.light-mode #problem{background:#F4F7FB !important;border-top-color:rgba(0,194,255,.1) !important}
+html.light-mode #cost{background:#EDF5FB !important;border-top-color:rgba(0,194,255,.1) !important}
+html.light-mode #cost::before{background:radial-gradient(ellipse at 50% 50%,rgba(0,194,255,.05),transparent 70%) !important}
+html.light-mode #solution{background:#FFFFFF !important;border-top-color:rgba(0,194,255,.1) !important}
+html.light-mode #why{background:#F4F7FB !important;border-top-color:rgba(0,194,255,.1) !important}
+html.light-mode #competitive{background:#FFFFFF !important;border-top-color:rgba(0,194,255,.12) !important}
+html.light-mode #clients{background:#F4F7FB !important;border-top-color:rgba(0,194,255,.1) !important}
+html.light-mode #poc{background:#EDF5FB !important;border-top-color:rgba(0,194,255,.1) !important}
+html.light-mode #process{background:#FFFFFF !important;border-top-color:rgba(0,194,255,.1) !important}
+html.light-mode #contact{background:#F4F7FB !important;border-top-color:rgba(0,194,255,.12) !important}
+
+/* ─ dk zone typography reset ─ */
+html.light-mode .dk-1 .sec-title,html.light-mode .dk-2 .sec-title{color:#0A0F1E !important}
+html.light-mode .dk-1 .body-text,html.light-mode .dk-2 .body-text{color:#3A5470 !important}
+
+/* ─ About ─ */
+html.light-mode .dk-1 .about-card{background:#FFFFFF !important;border-color:rgba(0,194,255,.15) !important;box-shadow:0 2px 12px rgba(0,0,0,.05) !important}
+html.light-mode .dk-1 .ac-text{color:#3A5470 !important}
+html.light-mode .dk-1 .as-box{background:#FFFFFF !important;border-color:rgba(0,194,255,.15) !important;box-shadow:0 2px 8px rgba(0,0,0,.05) !important}
+html.light-mode .dk-1 .as-lbl{color:#3A5470 !important}
+
+/* ─ Services ─ */
+html.light-mode .dk-1 .svc-card{background:#FFFFFF !important;border-color:rgba(0,194,255,.15) !important;box-shadow:0 2px 12px rgba(0,0,0,.05) !important}
+html.light-mode .dk-1 .svc-card:hover{border-color:rgba(0,194,255,.35) !important;box-shadow:0 16px 36px rgba(0,0,0,.1) !important}
+html.light-mode .dk-1 .svc-title{color:#0A0F1E !important}
+html.light-mode .dk-1 .svc-text{color:#3A5470 !important}
+
+/* ─ Problem ─ */
+html.light-mode .dk-1 .prob-card{background:#FFFFFF !important;border-color:rgba(0,194,255,.15) !important;box-shadow:0 2px 10px rgba(0,0,0,.05) !important}
+html.light-mode .dk-1 .prob-card:hover{border-color:rgba(0,194,255,.3) !important;box-shadow:0 8px 24px rgba(0,0,0,.08) !important}
+html.light-mode .dk-1 .prob-num{color:rgba(0,194,255,.2) !important}
+html.light-mode .dk-1 .prob-title{color:#0A0F1E !important}
+html.light-mode .dk-1 .prob-text{color:#3A5470 !important}
+
+/* ─ Cost of Doing Nothing ─ */
+html.light-mode .dk-2 .cost-box{background:#FFFFFF !important;border-color:rgba(0,194,255,.15) !important;box-shadow:0 2px 12px rgba(0,0,0,.06) !important}
+html.light-mode .dk-2 .cost-title{color:#0A0F1E !important}
+html.light-mode .dk-2 .cost-text{color:#3A5470 !important}
+html.light-mode .dk-2 .cost-quote{background:rgba(0,194,255,.04) !important;border-color:rgba(0,229,195,.22) !important}
+html.light-mode .dk-2 .cost-quote p{color:#1B3A5C !important}
+
+/* ─ Solution ─ */
+html.light-mode .dk-1 .solution-quote{background:#FFFFFF !important;border-color:rgba(0,229,195,.28) !important;color:#1B3A5C !important}
+html.light-mode .dk-1 .how-item{background:#FFFFFF !important;border-color:rgba(0,194,255,.15) !important;box-shadow:0 2px 10px rgba(0,0,0,.05) !important}
+html.light-mode .dk-1 .how-item:hover{border-color:rgba(0,194,255,.3) !important;box-shadow:0 8px 24px rgba(0,0,0,.08) !important}
+html.light-mode .dk-1 .how-title{color:#0A0F1E !important}
+html.light-mode .dk-1 .how-text{color:#3A5470 !important}
+
+/* ─ Why AE Systems ─ */
+html.light-mode .dk-1 .why-card{background:#FFFFFF !important;border-color:rgba(0,194,255,.15) !important;box-shadow:0 2px 12px rgba(0,0,0,.05) !important}
+html.light-mode .dk-1 .why-card:hover{border-color:rgba(0,194,255,.3) !important;box-shadow:0 12px 32px rgba(0,0,0,.09) !important}
+html.light-mode .dk-1 .why-title{color:#0A0F1E !important}
+html.light-mode .dk-1 .why-text{color:#3A5470 !important}
+
+/* ─ Competitive Table ─ */
+html.light-mode .dk-1 .comp-wrap{background:#FFFFFF !important;border-color:rgba(0,194,255,.15) !important}
+html.light-mode .dk-1 .comp-head{background:#F4F7FB !important;border-bottom-color:rgba(0,194,255,.12) !important}
+html.light-mode .dk-1 .ch{color:#3A5470 !important}
+html.light-mode .dk-1 .comp-row{border-bottom-color:rgba(0,0,0,.05) !important}
+html.light-mode .dk-1 .comp-row:hover{background:rgba(0,194,255,.04) !important}
+html.light-mode .dk-1 .cf{color:#1B3A5C !important}
+
+/* ─ Clients ─ */
+html.light-mode .dk-1 .cl-card{background:#FFFFFF !important;border-color:rgba(0,194,255,.15) !important;box-shadow:0 2px 10px rgba(0,0,0,.05) !important}
+html.light-mode .dk-1 .cl-card:hover{border-color:rgba(0,194,255,.3) !important;box-shadow:0 10px 28px rgba(0,0,0,.09) !important}
+html.light-mode .dk-1 .cl-name{color:#0A0F1E !important}
+html.light-mode .dk-1 .cl-desc{color:#3A5470 !important}
+html.light-mode .dk-1 .cl-soon{background:#CBD5E0 !important}
+html.light-mode .dk-1 .cl-slabel{color:#3A5470 !important}
+html.light-mode .dk-1 .tsoon{color:#3A5470 !important;background:rgba(58,84,112,.08) !important;border-color:rgba(58,84,112,.2) !important}
+
+/* ─ POC Programme ─ */
+html.light-mode .dk-2 .poc-box{background:#FFFFFF !important;border-color:rgba(0,229,195,.22) !important;box-shadow:0 4px 20px rgba(0,0,0,.07) !important}
+html.light-mode .dk-2 .poc-title{color:#0A0F1E !important}
+html.light-mode .dk-2 .poc-sub{color:#3A5470 !important}
+html.light-mode .dk-2 .poc-stitle{color:#0A0F1E !important}
+html.light-mode .dk-2 .poc-ssub{color:#3A5470 !important}
+html.light-mode .dk-2 .poc-delivers{background:rgba(0,194,255,.05) !important;border-color:rgba(0,194,255,.18) !important}
+html.light-mode .dk-2 .poc-del{color:#1B3A5C !important}
+html.light-mode .poc-num{background:#F4F7FB !important}
+
+/* ─ How We Work ─ */
+html.light-mode .dk-1 .ps-body{background:#FFFFFF !important;border-color:rgba(0,194,255,.15) !important;box-shadow:0 2px 10px rgba(0,0,0,.05) !important}
+html.light-mode .dk-1 .ps-body:hover{border-color:rgba(0,229,195,.35) !important;box-shadow:0 8px 24px rgba(0,0,0,.08) !important}
+html.light-mode .dk-1 .ps-title{color:#0A0F1E !important}
+html.light-mode .dk-1 .ps-text{color:#3A5470 !important}
+html.light-mode .dk-1 .process-tagline{color:#3A5470 !important}
+html.light-mode .ps-num{background:#F4F7FB !important}
+
+/* ─ Contact ─ */
+html.light-mode .dk-1 .contact-desc{color:#3A5470 !important}
+html.light-mode .dk-1 .cd-label{color:#3A5470 !important}
+html.light-mode .dk-1 .cd-val,html.light-mode .dk-1 .cd-val a{color:#1B3A5C !important}
+html.light-mode .dk-1 .contact-form{background:#FFFFFF !important;border-color:rgba(0,194,255,.18) !important;box-shadow:0 4px 20px rgba(0,0,0,.07) !important}
+html.light-mode .dk-1 .form-label{color:#1B3A5C !important}
+html.light-mode .dk-1 .form-input{background:#F4F7FB !important;border-color:rgba(0,194,255,.22) !important;color:#0A0F1E !important}
+html.light-mode .dk-1 .form-input:focus{background:rgba(0,229,195,.04) !important;border-color:var(--teal) !important}
+html.light-mode .dk-1 .form-input::placeholder{color:#A8BDD0 !important}
+
+/* ─ Toast ─ */
+html.light-mode .toast{background:#FFFFFF !important;color:#0A0F1E !important;border-color:var(--teal) !important;box-shadow:0 4px 20px rgba(0,0,0,.12) !important}
+

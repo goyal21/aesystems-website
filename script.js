@@ -355,6 +355,16 @@ function sendWhatsApp() {
   showToast('Opening WhatsApp...');
 }
 
+/* ── THEME TOGGLE ── */
+(function(){
+  var btn = document.getElementById('themeToggle');
+  if(!btn) return;
+  btn.addEventListener('click', function(){
+    var isLight = document.documentElement.classList.toggle('light-mode');
+    localStorage.setItem('ae-theme', isLight ? 'light' : 'dark');
+  });
+})();
+
 document.addEventListener('DOMContentLoaded', function() {
   var form = document.getElementById('enquiryForm');
   var btn  = document.getElementById('submitBtn');

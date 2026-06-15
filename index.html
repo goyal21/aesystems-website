@@ -72,13 +72,15 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700;900&display=swap" rel="stylesheet">
 <link rel="preload" href="style.css" as="style">
 <link rel="stylesheet" href="style.css">
+<script>if(localStorage.getItem('ae-theme')==='light'){document.documentElement.classList.add('light-mode')}</script>
 </head>
 <body>
 
 <!-- ═══ NAVIGATION ═══ -->
 <nav id="mainNav">
   <a href="#hero" class="nav-logo">
-<img src="assets/logo.svg" alt="AE Systems" class="logo">
+    <img src="assets/logo.svg" alt="AE Systems" class="logo logo-dark">
+    <img src="assets/White%20Background%20Logo.svg" alt="AE Systems" class="logo logo-light">
   </a>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
@@ -90,9 +92,15 @@
     <li><a href="partners.html">Partners</a></li>
     <li><a href="#contact" class="nav-cta">Get in Touch</a></li>
   </ul>
-  <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
-    <span></span><span></span><span></span>
-  </button>
+  <div class="nav-right">
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme" title="Switch theme">
+      <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+      <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </button>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
 </nav>
  
 <div class="mobile-menu" id="mobileMenu">
