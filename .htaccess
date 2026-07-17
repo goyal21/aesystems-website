@@ -1,0 +1,41 @@
+# ── Redirect HTTP → HTTPS ────────────────────────────────────────────────────
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{HTTPS} off
+  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+</IfModule>
+
+# ── Security Headers ─────────────────────────────────────────────────────────
+<IfModule mod_headers.c>
+
+  # Prevent MIME-type sniffing
+  Header always set X-Content-Type-Options "nosniff"
+
+  # Clickjacking protection
+  Header always set X-Frame-Options "SAMEORIGIN"
+
+  # Disable legacy XSS auditor (deprecated and causes false positives)
+  Header always set X-XSS-Protection "0"
+
+  # Send origin only on cross-origin requests; no full URL leaked to third parties
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+
+  # Disable browser features this site does not use
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=()"
+
+  # HSTS — enforce HTTPS for 1 year
+  # Uncomment only after confirming SSL is fully working on aesystems.in
+  # Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+
+  # Content Security Policy
+  # Sources allowed:
+  #   Scripts  — self, inline (GTM/theme), Google Tag Manager, Google Analytics
+  #   Styles   — self, inline (partners.html), Google Fonts CSS
+  #   Fonts    — Google Fonts files
+  #   Fetch    — Formspree (form submit), Google Analytics, DoubleClick
+  #   Images   — self, data URIs, any HTTPS (OG images etc.)
+  #   Frames   — blocked entirely
+  #   Forms    — only submit to self or Formspree
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src https://formspree.io https://www.google-analytics.com https://stats.g.doubleclick.net; img-src 'self' data: https:; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self' https://formspree.io;"
+
+</IfModule>
