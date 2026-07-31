@@ -1,0 +1,62 @@
+import { site } from "@/content/site";
+import { faq } from "@/content/faq";
+
+export function organizationJsonLd() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: site.brandName,
+    legalName: site.legalName,
+    description:
+      "AI-powered HVAC optimization platform for commercial buildings. Reduce HVAC energy costs by up to 30% without replacing equipment. IIT Jammu validated.",
+    url: site.domain,
+    logo: `${site.domain}/assets/logo.svg`,
+    telephone: site.phone,
+    email: site.email,
+  };
+}
+
+export function localBusinessJsonLd() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    name: site.brandName,
+    legalName: site.legalName,
+    description:
+      "AI-powered HVAC optimization platform for commercial buildings. Reduce HVAC energy costs by up to 30% without replacing equipment. IIT Jammu validated.",
+    url: site.domain,
+    telephone: site.phone,
+    email: site.email,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: site.address.line1,
+      addressLocality: site.address.locality,
+      addressRegion: site.address.region,
+      postalCode: site.address.postalCode,
+      addressCountry: site.address.country,
+    },
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: site.geo.lat,
+      longitude: site.geo.lng,
+    },
+    openingHours: "Mo-Fr 09:00-18:00",
+    areaServed: "India",
+    priceRange: "Rs.Rs.",
+  };
+}
+
+export function faqPageJsonLd() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faq.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.answer,
+      },
+    })),
+  };
+}

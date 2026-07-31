@@ -1,0 +1,100 @@
+import type { Metadata, Viewport } from "next";
+import { Space_Grotesk, IBM_Plex_Sans, IBM_Plex_Mono } from "next/font/google";
+import { Nav } from "@/components/layout/Nav";
+import { Footer } from "@/components/layout/Footer";
+import { WhatsAppFloat } from "@/components/layout/WhatsAppFloat";
+import { organizationJsonLd, localBusinessJsonLd } from "@/lib/structuredData";
+import { site } from "@/content/site";
+import "./globals.css";
+
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  weight: ["500", "600", "700"],
+  variable: "--font-space-grotesk",
+  display: "swap",
+});
+
+const ibmPlexSans = IBM_Plex_Sans({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-ibm-plex-sans",
+  display: "swap",
+});
+
+const ibmPlexMono = IBM_Plex_Mono({
+  subsets: ["latin"],
+  weight: ["500", "600", "700"],
+  variable: "--font-ibm-plex-mono",
+  display: "swap",
+});
+
+export const metadata: Metadata = {
+  metadataBase: new URL(site.domain),
+  title: {
+    default: "AI-Powered HVAC Optimization | Cut Energy Costs up to 30% | AE Systems",
+    template: "%s | AE Systems",
+  },
+  description:
+    "AE Systems is an AI-powered HVAC optimization platform for commercial buildings. Reduce HVAC energy costs by up to 30% without replacing equipment. IIT Jammu validated. Pan-India.",
+  keywords: [
+    "AI HVAC optimization",
+    "building energy optimization",
+    "HVAC energy savings",
+    "commercial HVAC AI",
+    "building management AI",
+    "IIT Jammu HVAC",
+    "Make in India energy platform",
+  ],
+  authors: [{ name: "AE Systems — Avenix Engineering Systems Pvt Ltd" }],
+  robots: "index, follow",
+  alternates: { canonical: "/" },
+  openGraph: {
+    title: "AE Systems | AI-Powered HVAC Optimization",
+    description: "Reduce HVAC energy costs by up to 30% using AI — without replacing your existing equipment.",
+    url: site.domain,
+    images: [{ url: "/assets/og-image.png", width: 1200, height: 630 }],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "AE Systems | AI-Powered HVAC Optimization",
+    description: "AI that continuously optimizes your building's HVAC. Up to 30% energy savings. IIT Jammu validated.",
+  },
+  icons: {
+    icon: [
+      { url: "/assets/favicon.svg", type: "image/svg+xml" },
+      { url: "/assets/favicon.png", type: "image/png" },
+    ],
+    apple: "/assets/favicon.png",
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#0A0F1E",
+};
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html
+      lang="en"
+      className={`${spaceGrotesk.variable} ${ibmPlexSans.variable} ${ibmPlexMono.variable}`}
+    >
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd()) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessJsonLd()) }}
+        />
+      </head>
+      <body>
+        <Nav />
+        {children}
+        <Footer />
+        <WhatsAppFloat />
+      </body>
+    </html>
+  );
+}

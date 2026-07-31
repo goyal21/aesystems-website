@@ -1,0 +1,109 @@
+@import "tailwindcss";
+
+@theme {
+  /* ── Colour tokens (AE Systems brand kit) ───────────────────────── */
+  --color-ink: #0a0f1e;
+  --color-deepest: #05070d;
+  --color-panel: #0d1b2a;
+  --color-teal: #00e5c3; /* accent on dark */
+  --color-teal-light: #00a896; /* accent on light */
+  --color-teal-dark: #007f71;
+  --color-cyan: #00c2ff;
+  --color-surface: #f4f7fb; /* light surface */
+  --color-body-light: #3a5470; /* body text on light */
+  --color-muted-dark: #a8bdd0; /* muted text on dark */
+  --color-offwhite: #eaf2f8;
+
+  /* ── Type (font families are injected by next/font in app/layout.tsx) ── */
+  --font-display: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
+  --font-body: var(--font-ibm-plex-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-ibm-plex-mono), ui-monospace, monospace;
+
+  /* ── Radius ──────────────────────────────────────────────────────── */
+  --radius-control: 3px;
+  --radius-media: 8px;
+  --radius-card: 12px;
+  --radius-pill: 999px;
+
+  /* ── Easing ──────────────────────────────────────────────────────── */
+  --ease-reveal: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background: var(--color-ink);
+    color: var(--color-offwhite);
+    font-family: var(--font-body);
+    line-height: 1.8;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+
+  ::selection {
+    background: var(--color-teal);
+    color: var(--color-ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-teal);
+    outline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer utilities {
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-weight: 600;
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .section-pad {
+    padding-top: 36px;
+    padding-bottom: 36px;
+    padding-left: 6vw;
+    padding-right: 6vw;
+  }
+
+  @media (max-width: 900px) {
+    .section-pad {
+      padding-top: 28px;
+      padding-bottom: 28px;
+    }
+  }
+
+  .gradient-text {
+    background: linear-gradient(90deg, var(--color-cyan), var(--color-teal));
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+  }
+}
