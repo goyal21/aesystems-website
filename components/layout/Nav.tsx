@@ -5,10 +5,10 @@ import Link from "next/link";
 import Image from "next/image";
 
 const links = [
-  { label: "Platform", href: "/#platform" },
-  { label: "Industries", href: "/#industries" },
-  { label: "Case Studies", href: "/#case-studies" },
-  { label: "Why Us", href: "/#why" },
+  { label: "Industries", href: "/industries" },
+  { label: "Platform", href: "/platform" },
+  { label: "Case Studies", href: "/case-studies" },
+  { label: "Why Us", href: "/about" },
   { label: "Partners", href: "/partners" },
 ];
 
@@ -37,7 +37,7 @@ export function Nav() {
     >
       <nav className="flex h-16 items-center justify-between px-[6vw]">
         <Link href="/" className="flex items-center" aria-label="AE Systems home">
-          <Image src="/assets/logo.svg" alt="AE Systems" width={110} height={26} priority />
+          <Image src="/assets/logo.svg" alt="AE Systems" width={132} height={31} priority />
         </Link>
 
         <ul className="hidden items-center gap-8 min-[1000px]:flex">
@@ -53,7 +53,7 @@ export function Nav() {
           ))}
           <li>
             <Link
-              href="/#contact"
+              href="/contact"
               className="inline-flex items-center rounded-[999px] bg-teal px-5 py-2 text-sm font-medium text-ink transition-colors hover:bg-white"
             >
               Get Started
@@ -91,7 +91,7 @@ export function Nav() {
             </Link>
           ))}
           <Link
-            href="/#contact"
+            href="/contact"
             onClick={() => setMenuOpen(false)}
             className="mt-4 inline-flex items-center justify-center rounded-[999px] bg-teal px-5 py-2.5 text-sm font-medium text-ink"
           >

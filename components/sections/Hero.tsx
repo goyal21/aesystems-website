@@ -4,8 +4,7 @@ import { useEffect, useRef } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { Button } from "@/components/ui/Button";
 import { Pill } from "@/components/ui/Pill";
-import { StatRow } from "@/components/ui/StatRow";
-import { heroCredentials, heroStats } from "@/content/stats";
+import { heroCredentials } from "@/content/stats";
 
 export function Hero() {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -25,6 +24,7 @@ export function Hero() {
           muted
           loop
           playsInline
+          preload="none"
           poster="/assets/hero-poster.jpg"
           className="absolute inset-0 h-full w-full object-cover"
         >
@@ -53,15 +53,23 @@ export function Hero() {
         </div>
 
         {/* bottom band — headline, sub, CTAs */}
-        <div className="absolute inset-x-0 bottom-0 flex flex-col items-center gap-5 px-6 pb-12 text-center">
+        <div className="absolute inset-x-0 bottom-0 flex flex-col items-center gap-4 px-6 pb-2 text-center">
           <motion.h1
             initial={reduced ? undefined : { opacity: 0, y: 20 }}
             animate={reduced ? undefined : { opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-            className="text-[clamp(2.3rem,4.5vw,4rem)] font-bold text-white"
+            className="font-mono text-[0.85rem] font-semibold uppercase tracking-[0.14em] text-teal-light"
+          >
+            AI-Powered HVAC Optimisation for Commercial Buildings
+          </motion.h1>
+          <motion.p
+            initial={reduced ? undefined : { opacity: 0, y: 20 }}
+            animate={reduced ? undefined : { opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.15 }}
+            className="text-[clamp(2rem,3.8vw,3.5rem)] font-bold text-white"
           >
             Stop Wasting <span className="gradient-text">HVAC Energy.</span>
-          </motion.h1>
+          </motion.p>
           <motion.p
             initial={reduced ? undefined : { opacity: 0, y: 20 }}
             animate={reduced ? undefined : { opacity: 1, y: 0 }}
@@ -78,18 +86,14 @@ export function Hero() {
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
             className="flex flex-wrap items-center justify-center gap-4"
           >
-            <Button href="/#contact" variant="filled" tone="dark">
+            <Button href="/contact" variant="filled" tone="dark">
               Request a Pilot →
             </Button>
-            <Button href="/#platform" variant="outline" tone="dark">
+            <Button href="/platform" variant="outline" tone="dark">
               See the Platform
             </Button>
           </motion.div>
         </div>
-      </div>
-
-      <div className="section-pad">
-        <StatRow stats={heroStats} tone="dark" />
       </div>
     </section>
   );

@@ -46,6 +46,40 @@ export function localBusinessJsonLd() {
   };
 }
 
+export function softwareApplicationJsonLd() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name: "SAAR AI-BMS",
+    applicationCategory: "BusinessApplication",
+    operatingSystem: "Cloud",
+    description:
+      "AI building management system that optimises chillers, AHUs, pumps and VFDs in existing commercial buildings, delivering 20–30% HVAC energy savings without equipment replacement.",
+    provider: {
+      "@type": "Organization",
+      name: site.brandName,
+      url: site.domain,
+    },
+    offers: {
+      "@type": "Offer",
+      availability: "https://schema.org/InStock",
+    },
+  };
+}
+
+export function breadcrumbJsonLd(items: { name: string; path: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: item.name,
+      item: `${site.domain}${item.path}`,
+    })),
+  };
+}
+
 export function faqPageJsonLd() {
   return {
     "@context": "https://schema.org",

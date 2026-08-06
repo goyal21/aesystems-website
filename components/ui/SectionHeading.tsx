@@ -31,7 +31,7 @@ export function SectionHeading({
       </Reveal>
       <Reveal delay={0.08}>
         <h2
-          className={`${titleColor} text-[clamp(2.2rem,5vw,4rem)]`}
+          className={`${titleColor} text-[clamp(2rem,3.8vw,3.5rem)]`}
           style={{ maxWidth: center ? "780px" : undefined }}
         >
           {title}

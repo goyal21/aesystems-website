@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { RevealGroup, RevealItem } from "@/components/ui/Reveal";
 
@@ -11,9 +12,10 @@ const differentiators = [
 
 export function WhyAeSystems() {
   return (
-    <section id="why" className="section-pad bg-white">
+    <section id="why" className="section-pad bg-ink">
       <SectionHeading
         center
+        tone="dark"
         eyebrow="Why AE Systems"
         title={
           <>
@@ -27,21 +29,22 @@ export function WhyAeSystems() {
       />
 
       <div className="mx-auto grid max-w-[1100px] grid-cols-1 items-center gap-14 lg:grid-cols-2">
-        <div
-          className="relative flex h-[280px] w-full items-center justify-center overflow-hidden rounded-[var(--radius-media)] border border-ink/8"
-          style={{ background: "linear-gradient(135deg, #0A0F1E, #0D1B2A)" }}
-        >
-          <span className="font-mono text-[0.62rem] uppercase tracking-wider text-white/30">
-            Photo pending — controller on a VFD / engineer on site
-          </span>
+        <div className="relative h-[280px] w-full overflow-hidden rounded-[var(--radius-media)] border border-white/10">
+          <Image
+            src="/assets/site-controller.jpg"
+            alt="AE Systems industrial controller wired to a VFD on site, next to a chiller plant room"
+            fill
+            sizes="(max-width: 1024px) 100vw, 520px"
+            className="object-cover"
+          />
         </div>
 
         <RevealGroup className="flex flex-col justify-center">
           {differentiators.map((item, index) => (
             <RevealItem
               key={item}
-              className={`flex items-center justify-between gap-6 py-5 text-[0.95rem] text-ink ${
-                index !== differentiators.length - 1 ? "border-b border-ink/10" : ""
+              className={`flex items-center justify-between gap-6 py-5 text-[0.95rem] text-white ${
+                index !== differentiators.length - 1 ? "border-b border-white/10" : ""
               }`}
             >
               <span>{item}</span>

@@ -7,7 +7,7 @@ import { site } from "@/content/site";
 export function PartnerHero() {
   return (
     <section
-      className="section-pad pt-32"
+      className="px-[6vw] pb-9 pt-32 max-[900px]:pb-7"
       style={{ background: "linear-gradient(140deg, #0A0F1E 0%, #0D1B2A 55%, #0A0F1E 100%)" }}
     >
       <div className="mx-auto flex max-w-[880px] flex-col items-start gap-6">
@@ -30,7 +30,7 @@ export function PartnerHero() {
         </Reveal>
 
         <Reveal delay={0.14}>
-          <h1 className="text-[clamp(2.3rem,4.5vw,4rem)] text-white">
+          <h1 className="text-[clamp(2rem,3.8vw,3.5rem)] text-white">
             Grow Your Business
             <br />
             with <span className="gradient-text">AE Systems.</span>

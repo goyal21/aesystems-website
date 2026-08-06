@@ -6,34 +6,34 @@ const columns = [
   {
     title: "Platform",
     links: [
-      { label: "AI HVAC Optimisation", href: "/#platform" },
-      { label: "See It In Action", href: "/#see-it-in-action" },
-      { label: "3D Digital Twin", href: "/#platform" },
+      { label: "AI HVAC Optimisation", href: "/platform" },
+      { label: "See It In Action", href: "/platform#see-it-in-action" },
+      { label: "3D Digital Twin", href: "/platform" },
     ],
   },
   {
     title: "Industries",
     links: [
-      { label: "Hotels & Hospitality", href: "/#industries" },
-      { label: "Hospitals & Healthcare", href: "/#industries" },
-      { label: "Data Centers", href: "/#industries" },
-      { label: "All Industries", href: "/#industries" },
+      { label: "Hotels & Hospitality", href: "/industries" },
+      { label: "Hospitals & Healthcare", href: "/industries" },
+      { label: "Data Centers", href: "/industries" },
+      { label: "All Industries", href: "/industries" },
     ],
   },
   {
     title: "Company",
     links: [
-      { label: "Built With SAAR", href: "/#built-with" },
-      { label: "Why AE Systems", href: "/#why" },
+      { label: "Built With SAAR", href: "/about#saar-partnership" },
+      { label: "Why AE Systems", href: "/about" },
       { label: "Partner Programme", href: "/partners" },
-      { label: "Contact", href: "/#contact" },
+      { label: "Contact", href: "/contact" },
     ],
   },
   {
     title: "Resources",
     links: [
-      { label: "Case Studies", href: "/#case-studies" },
-      { label: "FAQ", href: "/#faq" },
+      { label: "Case Studies", href: "/case-studies" },
+      { label: "FAQ", href: "/faq" },
     ],
   },
 ];
@@ -43,11 +43,7 @@ export function Footer() {
     <footer className="bg-panel px-[6vw] pb-8 pt-20 text-white">
       <div className="mx-auto grid max-w-[1300px] grid-cols-1 gap-10 md:grid-cols-[1.3fr_1fr_1fr_1fr_1fr]">
         <div className="flex flex-col gap-4">
-          <Image src="/assets/logo.svg" alt="AE Systems" width={130} height={34} />
-          <p className="max-w-[280px] text-sm leading-relaxed text-muted-dark">
-            AI-powered HVAC optimisation for buildings that never stop running — 20–30% energy
-            savings, no equipment replacement.
-          </p>
+          <Image src="/assets/logo.svg" alt="AE Systems" width={156} height={41} />
           <address className="not-italic text-sm leading-relaxed text-muted-dark">
             {site.legalName}
             <br />

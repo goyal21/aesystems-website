@@ -58,6 +58,7 @@ export function ApplyForm() {
   return (
     <section id="apply" className="section-pad bg-surface">
       <SectionHeading
+        center
         eyebrow="Partner Application"
         title={
           <>

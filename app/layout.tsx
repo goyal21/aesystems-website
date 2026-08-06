@@ -3,7 +3,7 @@ import { Space_Grotesk, IBM_Plex_Sans, IBM_Plex_Mono } from "next/font/google";
 import { Nav } from "@/components/layout/Nav";
 import { Footer } from "@/components/layout/Footer";
 import { WhatsAppFloat } from "@/components/layout/WhatsAppFloat";
-import { organizationJsonLd, localBusinessJsonLd } from "@/lib/structuredData";
+import { organizationJsonLd, localBusinessJsonLd, softwareApplicationJsonLd } from "@/lib/structuredData";
 import { site } from "@/content/site";
 import "./globals.css";
 
@@ -36,29 +36,23 @@ export const metadata: Metadata = {
   },
   description:
     "AE Systems is an AI-powered HVAC optimization platform for commercial buildings. Reduce HVAC energy costs by up to 30% without replacing equipment. IIT Jammu validated. Pan-India.",
-  keywords: [
-    "AI HVAC optimization",
-    "building energy optimization",
-    "HVAC energy savings",
-    "commercial HVAC AI",
-    "building management AI",
-    "IIT Jammu HVAC",
-    "Make in India energy platform",
-  ],
   authors: [{ name: "AE Systems — Avenix Engineering Systems Pvt Ltd" }],
   robots: "index, follow",
   alternates: { canonical: "/" },
   openGraph: {
+    siteName: "AE Systems",
+    locale: "en_IN",
     title: "AE Systems | AI-Powered HVAC Optimization",
     description: "Reduce HVAC energy costs by up to 30% using AI — without replacing your existing equipment.",
     url: site.domain,
-    images: [{ url: "/assets/og-image.png", width: 1200, height: 630 }],
+    images: [{ url: "/assets/og-image.png", width: 1200, height: 630, alt: "AE Systems — AI-powered HVAC optimisation" }],
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
     title: "AE Systems | AI-Powered HVAC Optimization",
     description: "AI that continuously optimizes your building's HVAC. Up to 30% energy savings. IIT Jammu validated.",
+    images: ["/assets/og-image.png"],
   },
   icons: {
     icon: [
@@ -80,6 +74,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       className={`${spaceGrotesk.variable} ${ibmPlexSans.variable} ${ibmPlexMono.variable}`}
     >
       <head>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-DPT283QL6C" />
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-DPT283QL6C');",
+          }}
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd()) }}
@@ -87,6 +88,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessJsonLd()) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareApplicationJsonLd()) }}
         />
       </head>
       <body>

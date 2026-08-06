@@ -1,39 +1,68 @@
 export interface Capability {
   title: string;
-  description: string;
+  bullets: string[];
+  tag: string;
+  image: string;
   core?: boolean;
 }
 
 export const capabilities: Capability[] = [
   {
     title: "AI-Based HVAC Optimisation",
-    description:
-      "SAAR connects to existing chillers, AHUs, pumps and VFDs. Delivers 20–30% energy savings without replacing any equipment.",
-    core: true,
+    bullets: [
+      "SAAR AI-BMS connects to existing chillers, AHUs, pumps, and VFDs.",
+      "Delivers 20–30% energy savings without replacing any equipment.",
+    ],
+    tag: "SAAR Powered",
+    image: "/assets/platform/ai-optimisation.webp",
   },
   {
-    title: "Real-Time Energy Dashboard",
-    description:
-      "One screen for live control, energy analytics, automated alerts, and a 3D digital twin of your facility — from anywhere.",
+    title: "Smart BMS & Monitoring",
+    bullets: [
+      "Centralised dashboard for real-time control.",
+      "Energy analytics. Automated alerts.",
+      "3D digital twin visualisation of your facility.",
+    ],
+    tag: "Cloud Native",
+    image: "/assets/platform/smart-bms.webp",
   },
   {
     title: "VFD Integration & Control",
-    description:
-      "Direct VFD-level control for chillers, AHUs, pumps. No panel interference, no OEM warranty issues. Motor-level intelligence.",
+    bullets: [
+      "Direct VFD-level control for chillers, AHUs, and pumps.",
+      "No panel interference. No OEM warranty issues.",
+      "Motor-level intelligence.",
+    ],
+    tag: "Non-Invasive",
+    image: "/assets/platform/vfd-control.webp",
   },
   {
     title: "3D Digital Twin",
-    description:
-      "Live virtual model of your building mirroring real-time HVAC performance. Predict failures, simulate changes, plan maintenance remotely.",
+    bullets: [
+      "Live virtual model of your building mirroring real-time HVAC performance.",
+      "Predict failures. Simulate changes.",
+      "Plan maintenance remotely.",
+    ],
+    tag: "AI Powered",
+    image: "/assets/platform/digital-twin.webp",
   },
   {
-    title: "Equipment-Level Analytics",
-    description:
-      "Know exactly which chiller, AHU, or pump is wasting power — down to the equipment level. Data-driven decisions, not guesswork.",
+    title: "Energy Monitoring & Analytics",
+    bullets: [
+      "Equipment-level energy visibility.",
+      "Know exactly which chiller, AHU, or pump is wasting power.",
+      "Data-driven decisions, not guesswork.",
+    ],
+    tag: "Real-Time",
+    image: "/assets/platform/energy-monitoring.webp",
   },
   {
     title: "Safe Sequencing & Automation",
-    description:
-      "Automated startup interlocks for chiller-pump-tower sequences. Eliminates operator error — the #1 cause of HVAC system trips.",
+    bullets: [
+      "Automated startup interlocks for chiller–pump–tower sequences.",
+      "Eliminates operator error — the #1 cause of HVAC system trips.",
+    ],
+    tag: "24×7 Protection",
+    image: "/assets/platform/safe-sequencing.webp",
   },
 ];

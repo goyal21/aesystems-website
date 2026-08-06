@@ -1,16 +1,94 @@
 # AE Systems — Corporate Website
 
-**Live site:** [www.aesystems.in](https://www.aesystems.in)
+**Live site:** [www.aesystems.in](https://www.aesystems.in) — Next.js rebuild (cut over from GitHub Pages 2026-08-02)
 
-Marketing and lead-generation website for **Avenix Engineering Systems Pvt Ltd (AE Systems)** — an IT-OT convergence company and authorised national partner for SAAR System Solutions, an IIT Jammu-incubated deep-tech startup.
+---
+
+## Changelog
+
+### 2026-08-03 — Mobile case studies / industries redesign + `test.aesystems.in` retirement
+
+**Deployment workflow change**
+- `test.aesystems.in` DNS record has been deleted — it's no longer reachable and is retired as a staging domain. `aesystems.in` is now the only live domain (proxied through Cloudflare to the Oracle VM origin).
+- GitHub is no longer part of the deploy path at all (the `preprod-pages.yml` GitHub Actions workflow is unused/vestigial). Deploys go straight from a local build to the Oracle VM over SSH.
+- **New workflow going forward:** make changes → verify with `npm run dev` on localhost → once approved, `npm run build` and deploy the `out/` directory straight to `/var/www/aesystems.in` on the production VM. See the Deployment section below for the exact steps.
+
+**Case Studies (mobile)**
+- Mobile card view was one long vertical scroll of full case-study detail per card. Replaced with a compact card (category, status, logo, client name, headline stat) plus a "View details" link that opens a bottom-sheet with the full Challenge/Solution/Outcome and tags. Desktop/tablet layout unchanged.
+- Carousel is now swipeable (left/right drag) on top of the existing arrow-button navigation.
+
+**Industries (mobile)**
+- Mobile grid was 3 static rows of 2 images with no way to see more. Replaced with 2 swipeable rows of 3 (native horizontal scroll + snap), Data Centers closing row 1 and Airports closing row 2. Desktop/tablet keeps the original static 3-column grid and original ordering.
+- Added a right-edge fade gradient + narrower card width so the next card visibly peeks in, signaling that the row is swipeable.
+
+**Cloudflare security cleanup**
+- Consolidated down to a single API token (`CLOUDFLARE_SCOPED_TOKEN`, stored as a Windows user env var, never in this repo), resource-scoped to the `aesystems.in` zone only, permissioned for just Cache Purge / Zone Settings / SSL & Certificates / DNS. Revoked two prior account-owned tokens that had all-permission-groups, account-wide access (one unused since creation, one pasted directly into a chat session).
+- Zone hardening: SSL mode `full` → `strict` (origin already had valid certs), Always Use HTTPS turned on, min TLS version raised 1.0 → 1.2, DNSSEC enabled on Cloudflare's side (status `pending` until a DS record is added at the domain registrar — outside Cloudflare, so outside this repo's/session's reach).
+
+### 2026-08-02 — Production cutover + preprod content pass
+
+**Production cutover**
+- `aesystems.in` / `www.aesystems.in` DNS switched from GitHub Pages to the Oracle VM; dedicated nginx server block + Let's Encrypt cert issued for the production domain (previously only `test.aesystems.in` had a cert — production briefly rode on the preprod vhost as nginx's default fallback via Cloudflare's proxy masking the cert mismatch, now fixed with its own vhost/cert).
+- `public/CNAME` (GitHub Pages artifact) removed; README hosting/deployment sections updated to reflect the VM + nginx setup instead of GitHub Pages.
+- GitHub Pages should still be disabled in the repo's Settings → Pages to fully retire that path (not done via this session — no `gh` CLI available in the sandbox).
+
+**SEO**
+- Google Analytics (`G-DPT283QL6C`) restored — was present on the legacy site but missing entirely from the Next.js rebuild.
+- `/sitemap.xml` and `/robots.txt` now generated natively via `app/sitemap.ts` / `app/robots.ts` instead of a stale static `robots.txt` pointing at a sitemap that never existed.
+
+**Case Studies**
+- Rewrote all card copy and added a 6th case study (metro rail underground station AHU) using the client's real project data.
+- Redesigned cards with a Challenge / Solution / Outcome structure, a large stat number, and a Live / Validated POC status badge, adapted from a reference design the client supplied — kept the site's existing dark-card carousel rather than switching to the reference's light-theme all-visible-at-once grid.
+- Fixed a layout bug where cards without a client logo had their content start higher than cards with one, misaligning everything below across a row — the logo slot is now always reserved at a fixed height regardless of whether a logo exists.
+- Fixed mobile showing two cards stacked instead of one at a time (carousel page size is now viewport-responsive).
+
+**Platform section**
+- Replaced the programmatically-generated architecture-loop GIF with a client-supplied MP4 (native `<video>` loop instead of an `<img>` GIF).
+- Pump and cooling tower icons rebuilt on P&ID conventions with working rotation animation (two subtle CSS bugs fixed along the way: an `animation` shorthand specificity collision, and a CSS `transform` silently replacing an SVG's positioning `transform` attribute instead of composing with it).
+
+**See It In Action**
+- Replaced all placeholder/mismatched imagery with real product photography and a real dashboard recording; removed the old auto-rotating single-image carousel in favor of a static grid (wide column for GIFs, narrower column for product photos).
+
+**Site-wide**
+- Reduced the hero and all section headings to a smaller consistent size; removed the stats bar under the hero video and the "Read the full story" case-study CTA.
+- Fixed section background rhythm — Industries and Why AE Systems switched from white to dark so the page alternates properly instead of three white sections running together.
+- Nav reordered so Industries comes before Platform, matching the actual on-page scroll order.
+- Added a real site photo (chiller plant + SAAR controller wired to a VFD) to the Why AE Systems section, replacing a placeholder box.
+
+### 2026-08-01 — Next.js preprod rebuild
+
+**Added**
+- Homepage + Partners page rebuilt in Next.js 16 (App Router, TypeScript, Tailwind v4, static export) per the AE Systems design handoff — kept entirely on the `preprod` branch; `master`/production untouched.
+- Sections: Hero (full-bleed video loop), Built With (SAAR/IIT Jammu), Industries, Platform, See It In Action, Case Studies, Why AE Systems, Get In Touch, FAQ, Footer.
+- Platform section capability cards now use real product imagery with a static architecture-loop GIF (`design/saar-architecture-loop.html` → exported GIF, 1920×864, 24fps, 5s seamless loop) replacing the earlier placeholder diagram.
+- Organization + LocalBusiness + FAQPage JSON-LD structured data, per-section anchor IDs, `prefers-reduced-motion` support throughout.
+
+**Integrations**
+- Preprod deployed to `test.aesystems.in`, hosted on an Oracle Cloud VM (nginx + Let's Encrypt, auto-renewing SSL).
+- GitHub Actions workflow (`.github/workflows/preprod-pages.yml`) added for a GitHub Pages deploy path (currently secondary — the VM is the primary preprod host, since GitHub Pages only supports one custom domain per repo and `master` needs that slot for production).
+- Cloudflare API integration (scoped cache-purge-only token) for on-demand CDN cache invalidation after deploys.
+
+**Fixed**
+- Production `aesystems.in` outage: apex DNS `A` records were pointed at GitHub Pages' IPs, but GitHub Pages was never actually enabled on the repo — diagnosed and documented the fix (Settings → Pages → Source: Deploy from a branch → `master`).
+- Nginx cache headers on the preprod server: plain-named assets (images, video, the architecture GIF) were incorrectly cached as `immutable` for 30 days, so in-place updates never propagated through Cloudflare. Now only Next.js's content-hashed `_next/static/*` build output gets long-lived immutable caching; plain-named assets get a short cache instead.
+- "Already a registered partner" banner overlapping the nav on `/partners` (a CSS specificity collision between a custom utility class and a Tailwind override).
+- Architecture-loop animation: a missing equipment node at loop start (animation-delay caused one node to render invisible on the very first frame), an upside-down bar chart (bars were anchored to a fixed top edge instead of a shared baseline), and pulse-travel that moved box-by-box instead of simultaneously across all four equipment lines.
+
+**Repo reorganization**
+- Old static site (`index.html`, `style.css`, `script.js`, `partners.html`, `.htaccess`, `CNAME`, `robots.txt`) moved to `legacy/` — preserved as-is, not deleted, excluded from git.
+- Raw/source assets (unprocessed hero video, original photos) live in `assets/` (repo root) — excluded from git; the processed copies actually used by the site live in `public/assets/`.
+
+Marketing and lead-generation website for **Avenix Engineering Systems Pvt Ltd (AE Systems)** — an AI-powered HVAC optimisation company and authorised national partner for SAAR System Solutions, an IIT Jammu-incubated deep-tech startup.
+
+AE Systems' IT infrastructure / IT-OT convergence business has been intentionally spun out into a separate company. This website positions AE Systems exclusively as an AI HVAC optimisation platform — no IT infrastructure, ELV, or system integration content should be added back here.
 
 ---
 
 ## About the Business
 
-AE Systems delivers AI-driven HVAC intelligence, smart Building Management Systems (BMS), IT infrastructure, and ELV solutions to enterprise, industrial, and government customers across India.
+AE Systems brings SAAR — an AI platform for HVAC energy optimisation — to hotels, hospitals, factories, offices and other commercial buildings across India.
 
-**Core product:** SAAR AI-BMS — a non-invasive, AI-powered controller that overlays existing chillers, AHUs, pumps, and VFDs to achieve 20–30% HVAC electricity savings without replacing equipment.
+**Core product:** SAAR — a non-invasive, AI-powered platform that overlays existing chillers, AHUs, pumps, and VFDs to achieve 20–30% HVAC electricity savings without replacing equipment.
 
 **Key credentials:**
 - Validated at IIT Jammu campus (20%+ energy savings in live deployment)
@@ -32,15 +110,19 @@ Single-page website with smooth-scroll navigation to the following sections:
 |---|---|---|
 | Hero | `#hero` | Value proposition, key stats, primary CTAs |
 | About | `#about` | Company overview, IIT Jammu partnership, credentials |
-| Services | `#services` | Three service groups: IT-OT Core, IT Infrastructure, ELV |
+| Platform | `#platform` | Core AI HVAC optimisation feature cards |
+| Dashboard + Digital Twin | `#dashboard` | Illustrative energy dashboard and digital twin preview |
 | Problem | `#problem` | Four HVAC pain points addressed |
 | Cost | `#cost` | "Cost of doing nothing" — quantified waste |
-| Solution | `#solution` | SAAR AI-BMS architecture and features |
+| Solution | `#solution` | How SAAR works — architecture and features |
 | Why Us | `#why` | Competitive positioning against large OEMs and local integrators |
 | Competitive | `#competitive` | Feature comparison table vs. other market offerings |
-| Clients | `#clients` | Deployments: IIT Jammu (done), paint manufacturer + cold storage (live), two corporate POCs (upcoming) |
-| POC Programme | `#poc` | 30-day proof-of-concept programme with 4-step process |
+| Industries | `#industries` | Target verticals: hotels, hospitals, manufacturing, CRE, malls, airports, data centers, universities |
+| Case Studies | `#clients` | Deployments: IIT Jammu (done), paint manufacturer + cold storage (live), two corporate pilots (upcoming) |
+| Pilot Programme | `#pilot` | 30-day pilot programme with 4-step process |
 | Process | `#process` | 5-phase go-live timeline (4 weeks site assessment to production) |
+| FAQ | `#faq` | Common questions — installation, compatibility, data ownership, support |
+| Final CTA | `#cta` | Closing call-to-action banner before the contact form |
 | Contact | `#contact` | Enquiry form, email, phone, WhatsApp |
 
 ---
@@ -48,10 +130,10 @@ Single-page website with smooth-scroll navigation to the following sections:
 ## Tech Stack
 
 - **HTML / CSS / Vanilla JS** — no framework or build step
-- **Google Fonts:** Poppins, Playfair Display, Barlow, Barlow Condensed
+- **Google Fonts:** Space Grotesk (display), IBM Plex Sans (body), IBM Plex Mono (labels, stats, data)
 - **Form handling:** [Formspree](https://formspree.io) (form ID: `xqedogwg`, submits to `sales@aesystems.in`)
 - **Analytics:** Google Analytics 4 (`G-DPT283QL6C`)
-- **Hosting:** GitHub Pages (custom domain via `CNAME`)
+- **Hosting:** Self-managed Oracle Cloud VM (nginx + Let's Encrypt), behind Cloudflare DNS/proxy
 
 ---
 
@@ -67,7 +149,6 @@ assets/
   favicon.png   Browser tab icon (PNG) + Apple touch icon
   og-image.png  Open Graph / Twitter Card share image (1200×630)
   og-image.svg  SVG source for OG image
-CNAME           GitHub Pages custom domain → aesystems.in
 ```
 
 ---
@@ -112,7 +193,42 @@ python -m http.server 8080
 
 ## Deployment
 
-The site is deployed via **GitHub Pages** with a custom domain. Push to the main branch to deploy. The `CNAME` file maps the repository to `aesystems.in`.
+No GitHub Pages, no CI — deploys go straight from a local build to the production VM over SSH.
+
+**Workflow: check on localhost first, then push straight to production.** There is no separate staging site anymore (`test.aesystems.in` is retired — DNS record deleted 2026-08-03); `aesystems.in` is the only live target, so verify changes with `npm run dev` locally before deploying.
+
+1. `npm run build` — Next.js static export, output to `out/`.
+2. Copy `out/` to the server (SSH key: `.claude/ssh-key-2026-05-27.key`, user `ubuntu`, host `80.225.194.115`):
+   ```bash
+   tar -C out -cf - . | ssh -i ".claude/ssh-key-2026-05-27.key" ubuntu@80.225.194.115 "rm -rf /home/ubuntu/deploy-staging && mkdir -p /home/ubuntu/deploy-staging && tar -C /home/ubuntu/deploy-staging -xf -"
+   ```
+3. Move it into place with correct ownership (`ubuntu` has passwordless `sudo`; web root is owned by `www-data`):
+   ```bash
+   ssh -i ".claude/ssh-key-2026-05-27.key" ubuntu@80.225.194.115 "
+     sudo cp -r /home/ubuntu/deploy-staging/. /var/www/aesystems.in/
+     sudo chown -R www-data:www-data /var/www/aesystems.in
+     sudo find /var/www/aesystems.in -type d -exec chmod 755 {} \;
+     sudo find /var/www/aesystems.in -type f -exec chmod 644 {} \;
+     sudo rm -rf /home/ubuntu/deploy-staging
+     sudo nginx -t
+   "
+   ```
+4. Verify the origin directly (bypasses Cloudflare's edge cache, since DNS resolves through Cloudflare's proxy IPs, not the VM's IP directly):
+   ```bash
+   curl -sk --resolve aesystems.in:443:80.225.194.115 -o /dev/null -w "HTTP %{http_code}\n" https://aesystems.in/
+   ```
+5. Purge the Cloudflare edge cache so the change is visible immediately (token scoped to cache-purge only, stored as `CLOUDFLARE_API_TOKEN` / `CLOUDFLARE_ZONE_ID` user env vars — not in this repo):
+   ```powershell
+   $headers = @{ Authorization = "Bearer $env:CLOUDFLARE_API_TOKEN"; "Content-Type" = "application/json" }
+   Invoke-RestMethod -Uri "https://api.cloudflare.com/client/v4/zones/$env:CLOUDFLARE_ZONE_ID/purge_cache" -Method Post -Headers $headers -Body '{"purge_everything":true}'
+   ```
+6. Confirm publicly at `https://aesystems.in/` (normal path, through Cloudflare — not the `--resolve` override).
+
+`cp` is used instead of `rsync`/`--delete` deliberately — it only overwrites/adds files, never deletes, so server-only files (`CNAME`, `.well-known/`) that aren't part of the local build are left alone.
+
+**Cloudflare credentials** — stored only as Windows user environment variables on the dev machine, never in this repo:
+- `CLOUDFLARE_API_TOKEN` / `CLOUDFLARE_ZONE_ID` — scoped to cache-purge only. Use this for the routine purge step above.
+- `CLOUDFLARE_ACCOUNT_TOKEN` / `CLOUDFLARE_ACCOUNT_ID` — full account-level access (added 2026-08-03). Only use this for tasks the scoped token can't do (e.g. DNS changes); default to the scoped token otherwise.
 
 ---
 

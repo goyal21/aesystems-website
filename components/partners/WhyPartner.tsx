@@ -6,6 +6,7 @@ export function WhyPartner() {
   return (
     <section id="why-partner" className="section-pad bg-white">
       <SectionHeading
+        center
         eyebrow="Why Partner with AE Systems"
         title={
           <>
