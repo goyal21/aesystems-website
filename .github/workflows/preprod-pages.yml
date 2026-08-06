@@ -2,7 +2,7 @@ name: Deploy preprod to GitHub Pages
 
 on:
   push:
-    branches: [preprod]
+    branches: [preprod, master]
   workflow_dispatch:
 
 permissions:
