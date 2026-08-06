@@ -2,6 +2,7 @@ import Image from "next/image";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { RevealGroup, RevealItem } from "@/components/ui/Reveal";
 import { capabilities } from "@/content/capabilities";
+import { withBasePath } from "@/lib/basePath";
 
 export function Platform() {
   return (
@@ -20,7 +21,7 @@ export function Platform() {
 
       <div className="mx-auto mb-16 aspect-[20/9] max-w-[1100px] overflow-hidden rounded-[var(--radius-card)] border border-ink/8">
         <video
-          src="/assets/platform/archgif.mp4"
+          src={withBasePath("/assets/platform/archgif.mp4")}
           aria-label="SAAR AI-BMS architecture: sense, decide, act control loop"
           autoPlay
           muted

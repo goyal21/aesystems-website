@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { RevealGroup, RevealItem } from "@/components/ui/Reveal";
+import { withBasePath } from "@/lib/basePath";
 
 const CELL_HEIGHT = "md:h-[360px]";
 
@@ -41,12 +42,12 @@ export function SeeItInAction() {
                 muted
                 loop
                 playsInline
-                poster="/assets/products/digital-twin-poster.jpg"
+                poster={withBasePath("/assets/products/digital-twin-poster.jpg")}
                 aria-label={`${item.label} preview`}
                 className="h-full w-full object-cover"
               >
-                <source src="/assets/products/digital-twin.webm" type="video/webm" />
-                <source src="/assets/products/digital-twin.mp4" type="video/mp4" />
+                <source src={withBasePath("/assets/products/digital-twin.webm")} type="video/webm" />
+                <source src={withBasePath("/assets/products/digital-twin.mp4")} type="video/mp4" />
               </video>
             ) : (
               <Image

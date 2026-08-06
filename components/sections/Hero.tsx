@@ -5,6 +5,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import { Button } from "@/components/ui/Button";
 import { Pill } from "@/components/ui/Pill";
 import { heroCredentials } from "@/content/stats";
+import { withBasePath } from "@/lib/basePath";
 
 export function Hero() {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -25,11 +26,11 @@ export function Hero() {
           loop
           playsInline
           preload="none"
-          poster="/assets/hero-poster.jpg"
+          poster={withBasePath("/assets/hero-poster.jpg")}
           className="absolute inset-0 h-full w-full object-cover"
         >
-          <source src="/assets/hero.webm" type="video/webm" />
-          <source src="/assets/hero.mp4" type="video/mp4" />
+          <source src={withBasePath("/assets/hero.webm")} type="video/webm" />
+          <source src={withBasePath("/assets/hero.mp4")} type="video/mp4" />
         </video>
 
         {/* top & bottom scrims — middle 60% of the frame stays clear */}
