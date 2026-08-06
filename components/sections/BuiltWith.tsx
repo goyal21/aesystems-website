@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { AppImage as Image } from "@/components/ui/AppImage";
 import { Reveal } from "@/components/ui/Reveal";
 import { site } from "@/content/site";
 

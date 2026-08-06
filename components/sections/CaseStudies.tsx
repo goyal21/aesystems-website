@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion, type PanInfo } from "framer-motion";
-import Image from "next/image";
+import { AppImage as Image } from "@/components/ui/AppImage";
 import { caseStudies } from "@/content/caseStudies";
 
 const scrims = [
