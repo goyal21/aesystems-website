@@ -6,6 +6,14 @@
 
 ## Changelog
 
+### 2026-08-07 — Blog CMS, Phase 1 (backend core)
+
+- New `cms/server` — a standalone Express + TypeScript service (separate `package.json`/deps, isolated from the Next.js build) that will back a blog admin panel for the marketing team. Architecture: git remains the source of truth for published posts (MDX files committed to `preprod`); this backend only holds admin-side operational state (drafts-in-progress, the Authors list, login sessions) in a local SQLite file, using Node's built-in `node:sqlite` rather than `better-sqlite3` — the latter needs native compilation via node-gyp, which isn't available on this dev machine (no VS C++ Build Tools) and would add unnecessary deploy risk on the VM too.
+- Shared-login auth (bcrypt + session, with a basic in-memory brute-force throttle on `/api/auth/login`), an image upload endpoint (validates real file type via magic bytes, resizes to ~1600px and re-encodes to WebP — matters more than usual here since `images.unoptimized: true` means whatever's committed is served byte-for-byte), and a GitHub Git Data API commit builder that lands a post's MDX file + images as a single atomic commit and then triggers the existing `deploy-production.yml` workflow. The commit builder has an application-level rail: it refuses to write anywhere outside `content/blog/**` / `public/blog/**`, regardless of what a request contains.
+- Found and fixed a real bug during testing: an async route handler's rejected promise wasn't caught, which crashed the entire Node process (reproduced with a bad GitHub token during a local publish test). Fixed with a shared `asyncHandler` wrapper applied to every async route plus a global Express error-handling middleware, so a failed request now returns a clean JSON 500 instead of taking the whole server down.
+- Not yet done: a live end-to-end publish test against the real GitHub repo (needs a fine-grained PAT that hasn't been provisioned yet — deferred to Phase 4, CMS infra/deploy). Everything else in Phase 1 was verified locally (auth, session, draft CRUD, image upload, and the crash fix) using a placeholder token.
+- Full plan for the remaining phases (admin UI, public `/blog` pages + SEO, CMS deploy infra) is at `C:\Users\Amit\.claude\plans\iterative-seeking-origami.md`.
+
 ### 2026-08-07 — CI-based production deploy
 
 - Added `.github/workflows/deploy-production.yml`: a `workflow_dispatch`-only GitHub Actions workflow that builds the Next.js static export and deploys it to the Oracle VM over SSH, then purges Cloudflare's cache and verifies the origin/public response — the same steps the manual process below does, just automated. It only runs when someone manually clicks "Run workflow" in the Actions tab (no `push` trigger), so pushing commits never deploys by itself.
