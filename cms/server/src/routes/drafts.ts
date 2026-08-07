@@ -154,13 +154,18 @@ draftsRouter.post(
 
       const files: { path: string; content: Buffer }[] = [];
 
-      let coverImagePublicPath = "";
+      // Two different paths for the same file: the git commit needs the literal
+      // repo path (under public/), but the frontmatter needs the URL Next.js
+      // will actually serve it at - static export serves public/'s contents
+      // from the site root, so the "public/" segment must NOT appear in the URL.
+      let coverImageUrl = "";
       if (draft.cover_image_path) {
         const tmpFullPath = path.join(config.uploadTmpDir, draft.cover_image_path);
         const imageBuffer = await fs.promises.readFile(tmpFullPath);
         const ext = path.extname(draft.cover_image_path);
-        coverImagePublicPath = `${config.allowedPublicPrefix}${draft.slug}/cover${ext}`;
-        files.push({ path: coverImagePublicPath, content: imageBuffer });
+        const repoRelativePath = `${config.allowedPublicPrefix}${draft.slug}/cover${ext}`;
+        coverImageUrl = `/blog/${draft.slug}/cover${ext}`;
+        files.push({ path: repoRelativePath, content: imageBuffer });
       }
 
       const now = new Date().toISOString();
@@ -173,7 +178,7 @@ draftsRouter.post(
         author: author?.name ?? "AE Systems Team",
         categories: parseCommaList(draft.categories),
         tags: parseCommaList(draft.tags),
-        coverImage: coverImagePublicPath ? `/${coverImagePublicPath}` : "",
+        coverImage: coverImageUrl,
       };
 
       const mdxContent = buildMdxFile(frontmatter, draft.body);

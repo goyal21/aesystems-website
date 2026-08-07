@@ -1,0 +1,44 @@
+---
+title: "BMS vs AI-BMS: What's the Difference?"
+slug: "bms-vs-ai-bms-difference"
+excerpt: "A traditional BMS monitors and lets you schedule equipment manually. An AI-BMS actively decides how that equipment should run, continuously, without a human in the loop."
+date: "2026-08-07T00:00:00.000Z"
+updated: "2026-08-07T00:00:00.000Z"
+author: "AE Systems Team"
+categories: ["AI-BMS"]
+tags: ["BMS", "AI-BMS", "Building Automation"]
+coverImage: ""
+---
+
+Both terms get used loosely, so it's worth being precise about what each one actually does.
+
+## What a traditional BMS does
+
+A Building Management System (BMS) is fundamentally a monitoring and scheduling layer. It gives you:
+
+- A dashboard showing what's running, what the current readings are, and whether anything is in an alarm state
+- The ability to set schedules ("AHU-3 runs 8am-8pm on weekdays") and fixed setpoints
+- Manual override controls, so a facility manager can turn something on or off or change a setpoint by hand
+
+What a BMS doesn't do on its own is *decide* anything. It executes whatever schedule and setpoints a person configured, and it keeps executing them until someone changes them — which, as covered in [how HVAC energy gets wasted](/blog/how-to-reduce-hvac-energy-consumption-commercial-buildings), is exactly where a lot of avoidable energy consumption comes from.
+
+## What an AI-BMS adds
+
+An AI-BMS sits on top of the same equipment — chillers, AHUs, pumps, VFDs — but replaces static schedules and fixed setpoints with a control loop that's continuously adjusting based on real-time conditions: occupancy, outside air temperature, zone demand, chiller loading efficiency, and how equipment is actually performing right now rather than how it was configured to perform when it was commissioned.
+
+Concretely, that means:
+
+- Chiller staging and loading decisions made continuously against actual demand, not fixed on/off schedules
+- VFD speeds on pumps and fans actively modulated in real time, not set once and left alone
+- Setpoints that adjust within a safe, engineer-approved band instead of drifting from manual changes that never get reverted
+- Drift and fault detection that flags issues (a stuck valve, a sensor reading out of range) as they happen, rather than at the next scheduled inspection
+
+AE Systems' own AI-BMS, SAAR, works this way: it optimises chillers, AHUs, pumps and VFDs in a building's *existing* equipment, without requiring any hardware replacement, and typically delivers 20-30% HVAC energy savings on top of what the equipment was achieving under manual or schedule-based control.
+
+## Do you need to replace your BMS to get this?
+
+No — this is the part that surprises most facility managers. An AI-BMS layer is added on top of existing infrastructure, not instead of it. If a building already has a traditional BMS, metering, and controllable equipment (VFDs, actuators, BMS-integrated chillers), an AI-BMS typically integrates with what's already there rather than requiring a rip-and-replace.
+
+The real distinguishing question isn't "do we have a BMS" — most commercial buildings above a certain size already do. It's "is anything actively deciding how our equipment should run right now, or is it just executing a schedule someone set months ago."
+
+[Talk to an engineer](/contact) if you want a straight answer on whether your existing BMS and equipment are AI-BMS-ready — most buildings with basic metering and VFDs already are.
