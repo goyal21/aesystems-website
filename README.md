@@ -6,6 +6,12 @@
 
 ## Changelog
 
+### 2026-08-08 — Repurposed GitHub Pages as a team staging site
+
+- `https://goyal21.github.io/aesystems-website/` had been left running a stale build ever since production moved off GitHub Pages (2026-08-02/03) — nobody had disabled Pages in the repo settings, so it just sat there serving old content that nothing kept updated. Rather than fully retiring it as originally planned, repurposed it on purpose: it's now the team's staging URL, auto-deployed from every push to `preprod` via `.github/workflows/preprod-pages.yml` (restored — briefly deleted, then rebuilt exactly as it was, since the actual need turned out to be "team needs a live preview URL," not "delete this").
+- Verified the `GITHUB_PAGES=true` / `NEXT_PUBLIC_BASE_PATH=/aesystems-website` build path still works correctly with everything added this session (Phase 3's `/blog` pages, the new nav link) — the basePath-prefixing fixes from the earlier GitHub Pages bugs (`AppImage`'s `withBasePath()`, `next.config.ts`'s conditional `basePath`) already cover the new code without changes, confirmed by inspecting the built HTML's actual `href`/`src` output under a real Pages build, not just a clean compile.
+- Still true and unrelated to this: the manual local-build-and-SCP path and the CI `deploy-production.yml` workflow remain the only two ways anything reaches the real production domain (`aesystems.in`) — this GitHub Pages URL is preview-only, never production.
+
 ### 2026-08-08 — Blog CMS: unpublish, nav links, dev-server env fix
 
 - Added unpublish: `POST /api/drafts/:id/unpublish` in `cms/server` removes a live post's `.mdx` + cover image from `preprod` as a single atomic commit (new `deleteFiles()` in `github.ts`, same allow-list/retry rails as publishing), triggers a redeploy, and reverts the draft to `draft` status. `cms/admin`'s editor now has an "Unpublish" button (with a confirm prompt) and — since a published post's fields were previously still editable in the UI despite the backend silently rejecting those edits with a 409 — form fields are now disabled while a post is live, with a note pointing at Unpublish.
