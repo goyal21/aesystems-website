@@ -1,0 +1,64 @@
+name: Deploy to Production (aesystems.in)
+
+on:
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      # No GITHUB_PAGES/basePath env vars here — production is served from
+      # the domain root, unlike the GitHub Pages preview.
+      - run: npm run build
+
+      - name: Set up deploy SSH key
+        run: |
+          mkdir -p ~/.ssh
+          printf '%s\n' "${{ secrets.PROD_SSH_KEY }}" > ~/.ssh/prod_key
+          chmod 600 ~/.ssh/prod_key
+          ssh-keyscan -H 80.225.194.115 >> ~/.ssh/known_hosts
+
+      - name: Upload build to staging dir on server
+        run: |
+          tar -C out -cf - . | ssh -i ~/.ssh/prod_key ubuntu@80.225.194.115 \
+            "rm -rf /home/ubuntu/deploy-staging && mkdir -p /home/ubuntu/deploy-staging && tar -C /home/ubuntu/deploy-staging -xf -"
+
+      - name: Move into place with correct ownership
+        run: |
+          ssh -i ~/.ssh/prod_key ubuntu@80.225.194.115 '
+            sudo cp -r /home/ubuntu/deploy-staging/. /var/www/aesystems.in/
+            sudo chown -R www-data:www-data /var/www/aesystems.in
+            sudo find /var/www/aesystems.in -type d -exec chmod 755 {} \;
+            sudo find /var/www/aesystems.in -type f -exec chmod 644 {} \;
+            sudo rm -rf /home/ubuntu/deploy-staging
+            sudo nginx -t
+          '
+
+      - name: Verify origin directly (bypasses Cloudflare cache)
+        run: |
+          curl -sk --resolve aesystems.in:443:80.225.194.115 -o /dev/null -w "Origin HTTP %{http_code}\n" https://aesystems.in/
+
+      - name: Purge Cloudflare cache
+        run: |
+          curl -s -X POST "https://api.cloudflare.com/client/v4/zones/${{ secrets.CLOUDFLARE_ZONE_ID }}/purge_cache" \
+            -H "Authorization: Bearer ${{ secrets.CLOUDFLARE_API_TOKEN }}" \
+            -H "Content-Type: application/json" \
+            --data '{"purge_everything":true}' -o /dev/null -w "Cloudflare purge HTTP %{http_code}\n"
+
+      - name: Confirm publicly
+        run: |
+          curl -sk -o /dev/null -w "Public HTTP %{http_code}\n" https://aesystems.in/
+
+      - name: Clean up SSH key
+        if: always()
+        run: rm -f ~/.ssh/prod_key

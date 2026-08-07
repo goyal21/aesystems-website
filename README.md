@@ -6,6 +6,13 @@
 
 ## Changelog
 
+### 2026-08-07 — CI-based production deploy
+
+- Added `.github/workflows/deploy-production.yml`: a `workflow_dispatch`-only GitHub Actions workflow that builds the Next.js static export and deploys it to the Oracle VM over SSH, then purges Cloudflare's cache and verifies the origin/public response — the same steps the manual process below does, just automated. It only runs when someone manually clicks "Run workflow" in the Actions tab (no `push` trigger), so pushing commits never deploys by itself.
+- Requires repo secrets `PROD_SSH_KEY` (private key for `ubuntu@80.225.194.115`), `CLOUDFLARE_ZONE_ID`, and `CLOUDFLARE_API_TOKEN` to be set under Settings → Secrets and variables → Actions.
+- The workflow file is also present on `main` (GitHub only lists `workflow_dispatch` workflows in the Actions UI if they exist on the default branch) — `main` itself still holds the old legacy static site, only `preprod` has the current Next.js app. Run the workflow selecting the `preprod` branch as the ref.
+- The manual local-build-and-scp process (below) still works and remains the fallback if CI access isn't available.
+
 ### 2026-08-03 — Mobile case studies / industries redesign + `test.aesystems.in` retirement
 
 **Deployment workflow change**
@@ -193,9 +200,17 @@ python -m http.server 8080
 
 ## Deployment
 
-No GitHub Pages, no CI — deploys go straight from a local build to the production VM over SSH.
+**Workflow: check on localhost first, then deploy to production.** There is no separate staging site anymore (`test.aesystems.in` is retired — DNS record deleted 2026-08-03); `aesystems.in` is the only live target, so verify changes with `npm run dev` locally before deploying.
 
-**Workflow: check on localhost first, then push straight to production.** There is no separate staging site anymore (`test.aesystems.in` is retired — DNS record deleted 2026-08-03); `aesystems.in` is the only live target, so verify changes with `npm run dev` locally before deploying.
+### Option A — GitHub Actions (preferred)
+
+1. Push your changes to the `preprod` branch on GitHub (`preprod` is the branch with the live Next.js app — `main` and `master` hold older/legacy code).
+2. Go to the repo's **Actions** tab → **Deploy to Production (aesystems.in)** → **Run workflow** → branch `preprod` → **Run workflow**.
+3. The workflow builds, deploys over SSH, purges Cloudflare, and verifies the origin + public response — watch the run log for the final `Public HTTP 200`.
+
+Requires repo secrets `PROD_SSH_KEY`, `CLOUDFLARE_ZONE_ID`, `CLOUDFLARE_API_TOKEN` (Settings → Secrets and variables → Actions). This never runs on its own — it's `workflow_dispatch` only, so pushing/merging code never auto-deploys.
+
+### Option B — Manual local build + SCP (fallback)
 
 1. `npm run build` — Next.js static export, output to `out/`.
 2. Copy `out/` to the server (SSH key: `.claude/ssh-key-2026-05-27.key`, user `ubuntu`, host `80.225.194.115`):
