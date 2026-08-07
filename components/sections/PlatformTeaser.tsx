@@ -1,11 +1,9 @@
 import { AppImage as Image } from "@/components/ui/AppImage";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { RevealGroup, RevealItem } from "@/components/ui/Reveal";
+import { Carousel } from "@/components/ui/Carousel";
 import { Button } from "@/components/ui/Button";
 import { capabilities } from "@/content/capabilities";
 import { withBasePath } from "@/lib/basePath";
-
-const featured = capabilities.slice(0, 3);
 
 export function PlatformTeaser() {
   return (
@@ -34,17 +32,18 @@ export function PlatformTeaser() {
         />
       </div>
 
-      <RevealGroup className="mx-auto grid max-w-[1100px] grid-cols-1 gap-3.5 sm:grid-cols-3">
-        {featured.map((cap) => (
-          <RevealItem
+      <Carousel arrowTone="light" className="mx-auto max-w-[1100px]">
+        {capabilities.map((cap) => (
+          <div
             key={cap.title}
-            className="group relative aspect-[3/4] overflow-hidden rounded-[var(--radius-card)] bg-ink"
+            data-carousel-item
+            className="group relative aspect-[3/4] w-[68vw] shrink-0 snap-start overflow-hidden rounded-[var(--radius-card)] bg-ink sm:w-[calc((100%-2rem)/3)]"
           >
             <Image
               src={cap.image}
               alt={cap.title}
               fill
-              sizes="(max-width: 640px) 100vw, 33vw"
+              sizes="(max-width: 640px) 68vw, 33vw"
               className="object-contain transition-transform duration-500 group-hover:scale-105"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/20 to-transparent" />
@@ -52,9 +51,9 @@ export function PlatformTeaser() {
               <h3 className="font-display text-[0.9rem] font-semibold leading-tight text-white">{cap.title}</h3>
               <span className="eyebrow w-fit text-teal">{cap.tag}</span>
             </div>
-          </RevealItem>
+          </div>
         ))}
-      </RevealGroup>
+      </Carousel>
 
       <div className="mt-10 flex justify-center">
         <Button href="/platform" variant="outline" tone="light">

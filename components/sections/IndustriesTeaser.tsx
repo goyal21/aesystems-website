@@ -1,14 +1,8 @@
 import { AppImage as Image } from "@/components/ui/AppImage";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { RevealGroup, RevealItem } from "@/components/ui/Reveal";
+import { Carousel } from "@/components/ui/Carousel";
 import { Button } from "@/components/ui/Button";
 import { industries } from "@/content/industries";
-
-const featured = [
-  industries.find((i) => i.name === "Hotels & Hospitality")!,
-  industries.find((i) => i.name === "Hospitals & Healthcare")!,
-  industries.find((i) => i.name === "Data Centers")!,
-];
 
 export function IndustriesTeaser() {
   return (
@@ -28,26 +22,27 @@ export function IndustriesTeaser() {
         className="mb-14"
       />
 
-      <RevealGroup className="mx-auto grid max-w-[1100px] grid-cols-1 gap-4 sm:grid-cols-3">
-        {featured.map((industry) => (
-          <RevealItem
+      <Carousel arrowTone="dark" className="mx-auto max-w-[1100px]">
+        {industries.map((industry) => (
+          <div
             key={industry.name}
-            className="group relative h-[240px] overflow-hidden rounded-[var(--radius-media)]"
+            data-carousel-item
+            className="group relative h-[240px] w-[78vw] shrink-0 snap-start overflow-hidden rounded-[var(--radius-media)] sm:w-[calc((100%-2rem)/3)]"
           >
             <Image
               src={industry.image}
               alt={industry.name}
               fill
-              sizes="(max-width: 640px) 100vw, 33vw"
+              sizes="(max-width: 640px) 78vw, 33vw"
               className="object-cover transition-transform duration-500 group-hover:scale-105"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/10 to-transparent" />
             <div className="absolute inset-x-0 bottom-0 p-5">
               <h3 className="font-display text-lg font-semibold text-white">{industry.name}</h3>
             </div>
-          </RevealItem>
+          </div>
         ))}
-      </RevealGroup>
+      </Carousel>
 
       <div className="mt-10 flex justify-center">
         <Button href="/industries" variant="outline" tone="dark">

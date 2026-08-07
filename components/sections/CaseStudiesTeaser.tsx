@@ -1,13 +1,7 @@
 import { AppImage as Image } from "@/components/ui/AppImage";
-import { RevealGroup, RevealItem } from "@/components/ui/Reveal";
+import { Carousel } from "@/components/ui/Carousel";
 import { Button } from "@/components/ui/Button";
 import { caseStudies } from "@/content/caseStudies";
-
-const featured = [
-  caseStudies.find((s) => s.client === "IIT Jammu")!,
-  caseStudies.find((s) => s.client === "Berger Paints")!,
-  caseStudies.find((s) => s.client === "Leading Co-working Operator, Delhi NCR")!,
-];
 
 export function CaseStudiesTeaser() {
   return (
@@ -21,11 +15,12 @@ export function CaseStudiesTeaser() {
         </h2>
       </div>
 
-      <RevealGroup className="mx-auto grid max-w-[1100px] grid-cols-1 gap-4 sm:grid-cols-3">
-        {featured.map((study) => (
-          <RevealItem
+      <Carousel arrowTone="light" className="mx-auto max-w-[1100px]">
+        {caseStudies.map((study) => (
+          <div
             key={study.client}
-            className="flex flex-col gap-3 rounded-[var(--radius-card)] bg-ink p-6"
+            data-carousel-item
+            className="flex w-[74vw] shrink-0 snap-start flex-col gap-3 rounded-[var(--radius-card)] bg-ink p-6 sm:w-[calc((100%-2rem)/3)]"
           >
             {study.logo && (
               <div className="flex h-9 w-fit items-center rounded-[var(--radius-control)] bg-white/95 px-3">
@@ -45,9 +40,9 @@ export function CaseStudiesTeaser() {
             <p className="font-mono text-[0.68rem] font-semibold uppercase tracking-[0.06em] text-white/60">
               {study.statCaption}
             </p>
-          </RevealItem>
+          </div>
         ))}
-      </RevealGroup>
+      </Carousel>
 
       <div className="mt-10 flex justify-center">
         <Button href="/case-studies" variant="outline" tone="light">
