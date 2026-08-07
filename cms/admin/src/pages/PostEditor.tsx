@@ -93,15 +93,34 @@ export function PostEditor() {
     }
   }
 
-  function pollDeployStatus() {
+  async function handleUnpublish() {
+    if (!confirm("Remove this post from the live blog? It goes back to draft - you can publish it again later.")) {
+      return;
+    }
+    setPublishError(null);
+    setDeployProgress("Unpublishing…");
+    try {
+      await api.unpublishDraft(draftId);
+      const updated = await api.getDraft(draftId);
+      setDraft(updated);
+      pollDeployStatus("unpublish");
+    } catch (err) {
+      setDeployProgress(null);
+      setPublishError(err instanceof ApiError ? err.message : "Unpublish failed");
+    }
+  }
+
+  function pollDeployStatus(action: "publish" | "unpublish" = "publish") {
     const interval = setInterval(async () => {
       try {
         const status = await api.deployStatus(draftId);
         if (status.workflowStatus === "completed") {
           clearInterval(interval);
-          setDeployProgress(
-            status.workflowConclusion === "success" ? "Live ✓" : `Deploy finished: ${status.workflowConclusion}`
-          );
+          if (status.workflowConclusion === "success") {
+            setDeployProgress(action === "publish" ? "Live ✓" : "Removed from the live blog ✓");
+          } else {
+            setDeployProgress(`Deploy finished: ${status.workflowConclusion}`);
+          }
           const updated = await api.getDraft(draftId);
           setDraft(updated);
         } else {
@@ -135,12 +154,32 @@ export function PostEditor() {
         </div>
       </div>
 
+      {isPublished && (
+        <p
+          style={{
+            fontSize: "0.85rem",
+            color: "var(--color-teal-dark)",
+            background: "#e2f6f0",
+            borderRadius: 8,
+            padding: "10px 14px",
+            marginBottom: 16,
+          }}
+        >
+          This post is live — fields are locked. Unpublish it below to make changes.
+        </p>
+      )}
+
       <div className="card">
         <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: 0 }}>
           <div style={{ display: "flex", gap: 16 }}>
             <div className="field" style={{ flex: 2 }}>
               <label htmlFor="title">Title</label>
-              <input id="title" value={draft.title} onChange={(e) => handleTitleChange(e.target.value)} />
+              <input
+                id="title"
+                value={draft.title}
+                onChange={(e) => handleTitleChange(e.target.value)}
+                disabled={isPublished}
+              />
             </div>
             <div className="field" style={{ flex: 1 }}>
               <label htmlFor="author">Author</label>
@@ -148,6 +187,7 @@ export function PostEditor() {
                 id="author"
                 value={draft.author_id ?? ""}
                 onChange={(e) => update("author_id", e.target.value ? Number(e.target.value) : null)}
+                disabled={isPublished}
               >
                 <option value="">Select author…</option>
                 {authors.map((a) => (
@@ -172,6 +212,7 @@ export function PostEditor() {
                 setSlugTouched(true);
                 update("slug", slugify(e.target.value));
               }}
+              disabled={isPublished}
             />
             <div className="field-hint">Used in the public URL: /blog/{draft.slug || "…"}</div>
           </div>
@@ -183,6 +224,7 @@ export function PostEditor() {
               uploading={uploadingCover}
               hasExisting={Boolean(draft.cover_image_path)}
               onFile={handleCoverUpload}
+              disabled={isPublished}
             />
           </div>
 
@@ -194,6 +236,7 @@ export function PostEditor() {
                 value={draft.categories}
                 onChange={(e) => update("categories", e.target.value)}
                 placeholder="Operations, Customer Stories"
+                disabled={isPublished}
               />
               <div className="field-hint">Primary grouping shown on the post card. The first one leads.</div>
             </div>
@@ -204,6 +247,7 @@ export function PostEditor() {
                 value={draft.tags}
                 onChange={(e) => update("tags", e.target.value)}
                 placeholder="HVAC, Energy Savings"
+                disabled={isPublished}
               />
             </div>
           </div>
@@ -221,6 +265,7 @@ export function PostEditor() {
               value={draft.excerpt}
               onChange={(e) => update("excerpt", e.target.value)}
               placeholder="A one or two sentence summary that hooks the reader."
+              disabled={isPublished}
             />
           </div>
 
@@ -247,6 +292,7 @@ export function PostEditor() {
                 onChange={(e) => update("body", e.target.value)}
                 placeholder="Markdown - headings, lists, links, bold/italic, images all work."
                 style={{ marginTop: 8, fontFamily: "ui-monospace, monospace", fontSize: "0.85rem" }}
+                disabled={isPublished}
               />
             )}
           </div>
@@ -255,7 +301,12 @@ export function PostEditor() {
 
       <div style={{ display: "flex", alignItems: "center", gap: 12, marginTop: 20 }}>
         {isPublished ? (
-          <span className="badge badge-published">Published</span>
+          <>
+            <span className="badge badge-published">Published</span>
+            <button className="btn btn-danger" onClick={handleUnpublish} disabled={Boolean(deployProgress)}>
+              Unpublish
+            </button>
+          </>
         ) : (
           <button className="btn btn-primary" onClick={handlePublish} disabled={Boolean(deployProgress)}>
             Publish
@@ -288,11 +339,13 @@ function CoverImageInput({
   uploading,
   hasExisting,
   onFile,
+  disabled = false,
 }: {
   previewUrl: string | null;
   uploading: boolean;
   hasExisting: boolean;
   onFile: (file: File) => void;
+  disabled?: boolean;
 }) {
   const [dragOver, setDragOver] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -300,23 +353,26 @@ function CoverImageInput({
   return (
     <div
       onDragOver={(e) => {
+        if (disabled) return;
         e.preventDefault();
         setDragOver(true);
       }}
       onDragLeave={() => setDragOver(false)}
       onDrop={(e) => {
         e.preventDefault();
+        if (disabled) return;
         setDragOver(false);
         const file = e.dataTransfer.files?.[0];
         if (file) onFile(file);
       }}
-      onClick={() => inputRef.current?.click()}
+      onClick={() => !disabled && inputRef.current?.click()}
       style={{
         border: `2px dashed ${dragOver ? "var(--color-teal)" : "var(--color-border)"}`,
         borderRadius: 8,
         padding: previewUrl ? 12 : 28,
         textAlign: "center",
-        cursor: "pointer",
+        cursor: disabled ? "not-allowed" : "pointer",
+        opacity: disabled ? 0.6 : 1,
         background: dragOver ? "#f0faf8" : "transparent",
       }}
     >
@@ -325,6 +381,7 @@ function CoverImageInput({
         type="file"
         accept="image/png,image/jpeg,image/webp,image/gif,image/avif"
         hidden
+        disabled={disabled}
         onChange={(e) => {
           const file = e.target.files?.[0];
           if (file) onFile(file);

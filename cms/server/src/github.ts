@@ -110,6 +110,78 @@ export async function commitFiles(
   }
 }
 
+/**
+ * Removes one or more files from `branch` as a single atomic commit via the
+ * Git Data API - same shape as commitFiles but with null-sha tree entries,
+ * which is how the Git Data API expresses "delete this path". Same
+ * allow-list rail and retry-on-conflict as commitFiles.
+ */
+export async function deleteFiles(
+  paths: string[],
+  message: string,
+  maxRetries = 3
+): Promise<{ commitSha: string }> {
+  if (paths.length === 0) throw new Error("deleteFiles called with no paths");
+  for (const p of paths) assertPathAllowed(p);
+
+  let attempt = 0;
+  for (;;) {
+    attempt += 1;
+    try {
+      const { data: refData } = await octokit.git.getRef({
+        owner,
+        repo,
+        ref: `heads/${branch}`,
+      });
+      const baseCommitSha = refData.object.sha;
+
+      const { data: baseCommit } = await octokit.git.getCommit({
+        owner,
+        repo,
+        commit_sha: baseCommitSha,
+      });
+      const baseTreeSha = baseCommit.tree.sha;
+
+      const { data: newTree } = await octokit.git.createTree({
+        owner,
+        repo,
+        base_tree: baseTreeSha,
+        tree: paths.map((path) => ({
+          path,
+          mode: "100644" as const,
+          type: "blob" as const,
+          sha: null,
+        })),
+      });
+
+      const { data: newCommit } = await octokit.git.createCommit({
+        owner,
+        repo,
+        message,
+        tree: newTree.sha,
+        parents: [baseCommitSha],
+      });
+
+      await octokit.git.updateRef({
+        owner,
+        repo,
+        ref: `heads/${branch}`,
+        sha: newCommit.sha,
+      });
+
+      return { commitSha: newCommit.sha };
+    } catch (err) {
+      const isRefConflict =
+        typeof err === "object" &&
+        err !== null &&
+        "status" in err &&
+        (err as { status?: number }).status === 422;
+      if (isRefConflict && attempt < maxRetries) continue;
+      throw err;
+    }
+  }
+}
+
 /** Returns the raw content + blob sha of an existing file on `branch`, or null if it doesn't exist. */
 export async function getFile(
   filePath: string

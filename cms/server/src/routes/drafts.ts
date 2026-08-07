@@ -1,12 +1,20 @@
 import fs from "node:fs";
 import path from "node:path";
 import { Router } from "express";
+import matter from "gray-matter";
 import { db } from "../db.js";
 import { requireAuth } from "../auth.js";
 import { config } from "../config.js";
 import { asyncHandler } from "../asyncHandler.js";
 import { buildMdxFile, slugify, parseCommaList, type BlogPostFrontmatter } from "../mdx.js";
-import { commitFiles, listBlogSlugs, triggerDeploy, getLatestDeployRun } from "../github.js";
+import {
+  commitFiles,
+  deleteFiles,
+  getFile,
+  listBlogSlugs,
+  triggerDeploy,
+  getLatestDeployRun,
+} from "../github.js";
 
 export const draftsRouter = Router();
 draftsRouter.use(requireAuth);
@@ -210,6 +218,47 @@ draftsRouter.post(
   })
 );
 
+draftsRouter.post(
+  "/:id/unpublish",
+  asyncHandler(async (req, res) => {
+    const draft = db.prepare("SELECT * FROM drafts WHERE id = ?").get(req.params.id) as
+      | DraftRow
+      | undefined;
+    if (!draft) return res.status(404).json({ error: "Draft not found" });
+    if (draft.status !== "published") {
+      return res.status(409).json({ error: "Only published posts can be unpublished" });
+    }
+
+    try {
+      // The live .mdx is the source of truth for what image path (if any) needs
+      // deleting alongside it - the draft row's own cover_image_path was already
+      // cleared/consumed at publish time, so we read it back from git instead.
+      const contentPath = `${config.allowedContentPrefix}${draft.slug}.mdx`;
+      const pathsToDelete = [contentPath];
+
+      const liveFile = await getFile(contentPath);
+      if (liveFile) {
+        const { data } = matter(liveFile.content);
+        const coverImage = (data as Partial<BlogPostFrontmatter>).coverImage;
+        if (coverImage) pathsToDelete.push(`public${coverImage}`);
+      }
+
+      await deleteFiles(pathsToDelete, `Unpublish blog post: ${draft.title}`);
+      await triggerDeploy();
+
+      db.prepare(
+        `UPDATE drafts SET status = 'draft', published_commit_sha = NULL, published_by = NULL, updated_at = datetime('now')
+         WHERE id = ?`
+      ).run(draft.id);
+
+      res.json({ ok: true });
+    } catch (err) {
+      const message = err instanceof Error ? err.message : "Unknown error";
+      res.status(500).json({ error: `Unpublish failed: ${message}` });
+    }
+  })
+);
+
 draftsRouter.get(
   "/:id/deploy-status",
   asyncHandler(async (req, res) => {
@@ -217,9 +266,11 @@ draftsRouter.get(
       | { status: string }
       | undefined;
     if (!draft) return res.status(404).json({ error: "Draft not found" });
-    if (draft.status !== "published") {
-      return res.json({ status: draft.status });
-    }
+    // Always report the latest deploy workflow run alongside the draft's own
+    // status - both publish and unpublish trigger the same workflow, and the
+    // draft's status may already have moved on (e.g. to 'draft' post-unpublish)
+    // before that deploy run actually finishes, so gating on status here would
+    // cut off the frontend's progress polling too early.
     const run = await getLatestDeployRun();
     res.json({
       status: draft.status,

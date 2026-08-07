@@ -89,6 +89,7 @@ export const api = {
   deleteDraft: (id: number) => request<void>(`/drafts/${id}`, { method: "DELETE" }),
   publishDraft: (id: number) =>
     request<{ ok: true; commitSha: string }>(`/drafts/${id}/publish`, { method: "POST" }),
+  unpublishDraft: (id: number) => request<{ ok: true }>(`/drafts/${id}/unpublish`, { method: "POST" }),
   deployStatus: (id: number) => request<DeployStatus>(`/drafts/${id}/deploy-status`),
 
   uploadImage: async (file: File) => {
