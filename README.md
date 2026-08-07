@@ -6,6 +6,13 @@
 
 ## Changelog
 
+### 2026-08-07 — Blog CMS, Phase 2 (admin UI)
+
+- New `cms/admin` — a Vite + React + TypeScript SPA (own `package.json`, no impact on the Next.js build) implementing the admin panel from Phase 1's API: login screen, sidebar (Blogs, Master Data → Authors — the reference screenshot's Jobs/Applicants/Case Studies items weren't carried over, they're specific to the other product the screenshot was taken from), a post list, a "Write a new post" editor (title with auto-derived-but-editable URL slug, Author dropdown, drag/drop cover image upload with client-side preview, comma-separated Categories/Tags, Excerpt, Markdown body with a toggleable rendered preview via `marked`), debounced autosave, and Publish with polling for deploy status.
+- `cms/server` now serves the built `cms/admin/dist` as static assets at `/` when present, so the whole CMS is one deployable/one process, matching the plan.
+- Dependency note: `react-router-dom` is pinned to the 7.x line deliberately — v8 dropped the separate `react-router-dom` package (folded into `react-router` itself), and a `npm audit` finding against 7.x (GHSA-qwww-vcr4-c8h2) is specific to RSC/data-router "action" mode, which this plain client-side SPA doesn't use (no server components, no route actions) — migrating to v8 wasn't judged worth it for a non-applicable advisory at this stage.
+- Verification caveat: `npm run build` is clean (no TS errors) and every backend endpoint the UI calls was exercised end-to-end via the exact request shapes the UI sends (login, draft create/autosave, authors list, deploy-status). The Chrome browser extension wasn't connected in this environment, so the actual rendered UI has **not** been visually verified in a real browser — that's still outstanding before calling Phase 2 done.
+
 ### 2026-08-07 — Blog CMS, Phase 1 (backend core)
 
 - New `cms/server` — a standalone Express + TypeScript service (separate `package.json`/deps, isolated from the Next.js build) that will back a blog admin panel for the marketing team. Architecture: git remains the source of truth for published posts (MDX files committed to `preprod`); this backend only holds admin-side operational state (drafts-in-progress, the Authors list, login sessions) in a local SQLite file, using Node's built-in `node:sqlite` rather than `better-sqlite3` — the latter needs native compilation via node-gyp, which isn't available on this dev machine (no VS C++ Build Tools) and would add unnecessary deploy risk on the VM too.
