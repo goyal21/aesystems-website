@@ -6,6 +6,14 @@
 
 ## Changelog
 
+### 2026-08-08 — SEO Phase 3.2: HVAC savings calculator
+
+- New `/tools/hvac-savings-calculator` — extended beyond the SEO spec's original simple version (tonnage/hours/tariff/kW-TR only) per explicit request: also takes climate zone and current VFD status as inputs, since those materially change what a realistic savings estimate looks like.
+- Calculation design choice worth documenting: the estimate is always computed as a point *within* the already-published 20–30% HVAC savings range (FAQ, platform pages, IIT Jammu case study) — climate and VFD status only shift where in that range the estimate lands (verified: every combination of the 3 VFD states × 5 climate zones stays within [20, 30]), never outside it. This keeps every number the calculator shows traceable to a claim already made elsewhere on the site, per the SEO spec's "do not invent claims" guardrail — nothing new was fabricated, including the "typical non-optimised plants run 0.8–1.2 kW/TR" hint text, which is standard HVAC engineering reference, not an AE-specific claim. The "VFDs already actively controlled" case deliberately shows no percentage at all rather than guessing at diminishing returns.
+- Mandatory disclaimer per spec 3.2 ("indicative, not a guarantee"). Not gated — full estimate shows immediately; optional "email me this result" field posts to the same Formspree endpoint (`xqedogwg`) already used by the main contact form (`components/sections/GetInTouch.tsx`), rather than standing up a new lead-capture integration.
+- Added to Footer's Resources column and `app/sitemap.ts` (priority 0.7).
+- Verified: `npm run build` clean, calculation logic sanity-checked directly (all 15 VFD×climate combinations produce values inside [20,30] or correctly fall through to the no-estimate case), title/sitemap/footer-link/form-rendering checked against `out/`. Not verified: an actual click-through in a browser — the Chrome extension wasn't connected in this environment, same gap noted earlier for the CMS admin UI.
+
 ### 2026-08-08 — Case studies get real detail pages, cards now click through
 
 - Every case study card — homepage teaser and the `/case-studies` page — now navigates to a real detail page instead of doing nothing (homepage) or opening a mobile-only bottom sheet (`/case-studies`). Added `slug` to `content/caseStudies.ts` and a new `app/case-studies/[slug]/page.tsx` dynamic route (`generateStaticParams`, `generateMetadata`, Challenge/Solution/Outcome layout, `RelatedLinks` to other case studies) for the 5 case studies that only ever lived as cards. IIT Jammu keeps its existing, richer hand-built static page (`app/case-studies/iit-jammu/page.tsx`) — the dynamic route explicitly excludes that slug from `generateStaticParams` so Next's static route wins there, confirmed by checking the built HTML still has IIT Jammu's fuller content, not a generic template overwrite.

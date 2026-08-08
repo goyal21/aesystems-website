@@ -34,6 +34,7 @@ const columns = [
     links: [
       { label: "Case Studies", href: "/case-studies" },
       { label: "Blog", href: "/blog" },
+      { label: "Savings Calculator", href: "/tools/hvac-savings-calculator" },
       { label: "FAQ", href: "/faq" },
     ],
   },
