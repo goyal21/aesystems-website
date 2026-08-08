@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { AppImage as Image } from "@/components/ui/AppImage";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { RevealGroup, RevealItem } from "@/components/ui/Reveal";
@@ -13,7 +14,7 @@ const mobileRows: Industry[][] = [
 
 function IndustryCard({ industry, eager }: { industry: Industry; eager: boolean }) {
   return (
-    <>
+    <Link href={`/industries/${industry.slug}`} className="relative block h-full w-full">
       <Image
         src={industry.image}
         alt={industry.name}
@@ -29,7 +30,7 @@ function IndustryCard({ industry, eager }: { industry: Industry; eager: boolean 
           {industry.benefit}
         </p>
       </div>
-    </>
+    </Link>
   );
 }
 

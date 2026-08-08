@@ -1,5 +1,6 @@
 export interface Capability {
   title: string;
+  slug: string;
   bullets: string[];
   tag: string;
   image: string;
@@ -9,6 +10,7 @@ export interface Capability {
 export const capabilities: Capability[] = [
   {
     title: "AI-Based HVAC Optimisation",
+    slug: "ai-hvac-optimisation",
     bullets: [
       "SAAR AI-BMS connects to existing chillers, AHUs, pumps, and VFDs.",
       "Delivers 20–30% energy savings without replacing any equipment.",
@@ -18,6 +20,7 @@ export const capabilities: Capability[] = [
   },
   {
     title: "Smart BMS & Monitoring",
+    slug: "smart-bms-monitoring",
     bullets: [
       "Centralised dashboard for real-time control.",
       "Energy analytics. Automated alerts.",
@@ -28,6 +31,7 @@ export const capabilities: Capability[] = [
   },
   {
     title: "VFD Integration & Control",
+    slug: "vfd-integration-control",
     bullets: [
       "Direct VFD-level control for chillers, AHUs, and pumps.",
       "No panel interference. No OEM warranty issues.",
@@ -38,6 +42,7 @@ export const capabilities: Capability[] = [
   },
   {
     title: "3D Digital Twin",
+    slug: "3d-digital-twin",
     bullets: [
       "Live virtual model of your building mirroring real-time HVAC performance.",
       "Predict failures. Simulate changes.",
@@ -48,6 +53,7 @@ export const capabilities: Capability[] = [
   },
   {
     title: "Energy Monitoring & Analytics",
+    slug: "energy-monitoring-analytics",
     bullets: [
       "Equipment-level energy visibility.",
       "Know exactly which chiller, AHU, or pump is wasting power.",
@@ -58,6 +64,7 @@ export const capabilities: Capability[] = [
   },
   {
     title: "Safe Sequencing & Automation",
+    slug: "safe-sequencing-automation",
     bullets: [
       "Automated startup interlocks for chiller–pump–tower sequences.",
       "Eliminates operator error — the #1 cause of HVAC system trips.",

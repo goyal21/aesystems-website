@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { AppImage as Image } from "@/components/ui/AppImage";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Carousel } from "@/components/ui/Carousel";
@@ -24,10 +25,11 @@ export function IndustriesTeaser() {
 
       <Carousel arrowTone="dark" className="mx-auto max-w-[1100px]">
         {industries.map((industry) => (
-          <div
+          <Link
             key={industry.name}
+            href={`/industries/${industry.slug}`}
             data-carousel-item
-            className="group relative h-[240px] w-[78vw] shrink-0 snap-start overflow-hidden rounded-[var(--radius-media)] sm:w-[calc((100%-2rem)/3)]"
+            className="group relative block h-[240px] w-[78vw] shrink-0 snap-start overflow-hidden rounded-[var(--radius-media)] sm:w-[calc((100%-2rem)/3)]"
           >
             <Image
               src={industry.image}
@@ -40,7 +42,7 @@ export function IndustriesTeaser() {
             <div className="absolute inset-x-0 bottom-0 p-5">
               <h3 className="font-display text-lg font-semibold text-white">{industry.name}</h3>
             </div>
-          </div>
+          </Link>
         ))}
       </Carousel>
 

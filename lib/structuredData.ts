@@ -116,11 +116,11 @@ export function blogPostingJsonLd(post: {
   };
 }
 
-export function faqPageJsonLd() {
+export function faqPageJsonLd(items: { question: string; answer: string }[] = faq) {
   return {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: faq.map((item) => ({
+    mainEntity: items.map((item) => ({
       "@type": "Question",
       name: item.question,
       acceptedAnswer: {

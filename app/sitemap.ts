@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { site } from "@/content/site";
 import { getAllPosts } from "@/lib/blog";
+import { industries } from "@/content/industries";
 
 export const dynamic = "force-static";
 
@@ -35,6 +36,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.8,
     },
+    ...industries.map((industry) => ({
+      url: `${site.domain}/industries/${industry.slug}`,
+      lastModified: now,
+      changeFrequency: "monthly" as const,
+      priority: 0.8,
+    })),
     {
       url: `${site.domain}/blog`,
       lastModified: now,
