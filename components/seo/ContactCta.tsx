@@ -23,7 +23,7 @@ export function ContactCta({
         <h2 className={`text-[clamp(1.6rem,3vw,2.4rem)] ${titleColor}`}>{title}</h2>
         <p className={`text-[0.98rem] leading-[1.8] ${subColor}`}>{sub}</p>
         <Button href="/contact" variant="filled" tone={tone}>
-          Talk to an Engineer →
+          Talk to a Consultant →
         </Button>
       </Reveal>
     </section>
