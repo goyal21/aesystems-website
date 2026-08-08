@@ -14,10 +14,13 @@
   --color-muted-dark: #a8bdd0; /* muted text on dark */
   --color-offwhite: #eaf2f8;
 
-  /* ── Type (font families are injected by next/font in app/layout.tsx) ── */
-  --font-display: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
-  --font-body: var(--font-ibm-plex-sans), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-ibm-plex-mono), ui-monospace, monospace;
+  /* ── Type: Poppins only, per the official AE Systems Brand Kit — display/
+     body/mono all resolve to the same typeface, distinguished by weight
+     (900 hero, 800/700 section titles, 600 labels, 400/300 body), not by
+     swapping fonts. Font is injected by next/font in app/layout.tsx. ── */
+  --font-display: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
+  --font-body: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
 
   /* ── Radius ──────────────────────────────────────────────────────── */
   --radius-control: 3px;

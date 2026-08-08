@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Space_Grotesk, IBM_Plex_Sans, IBM_Plex_Mono } from "next/font/google";
+import { Poppins } from "next/font/google";
 import { Nav } from "@/components/layout/Nav";
 import { Footer } from "@/components/layout/Footer";
 import { WhatsAppFloat } from "@/components/layout/WhatsAppFloat";
@@ -7,24 +7,13 @@ import { organizationJsonLd, localBusinessJsonLd, softwareApplicationJsonLd } fr
 import { site } from "@/content/site";
 import "./globals.css";
 
-const spaceGrotesk = Space_Grotesk({
+// Single brand typeface per the official AE Systems Brand Kit (OneDrive/AE
+// Systems/Brand kit) - Poppins across every role (display, body, labels),
+// distinguished by weight rather than by swapping typefaces.
+const poppins = Poppins({
   subsets: ["latin"],
-  weight: ["500", "600", "700"],
-  variable: "--font-space-grotesk",
-  display: "swap",
-});
-
-const ibmPlexSans = IBM_Plex_Sans({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-ibm-plex-sans",
-  display: "swap",
-});
-
-const ibmPlexMono = IBM_Plex_Mono({
-  subsets: ["latin"],
-  weight: ["500", "600", "700"],
-  variable: "--font-ibm-plex-mono",
+  weight: ["300", "400", "500", "600", "700", "800", "900"],
+  variable: "--font-poppins",
   display: "swap",
 });
 
@@ -69,10 +58,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html
-      lang="en"
-      className={`${spaceGrotesk.variable} ${ibmPlexSans.variable} ${ibmPlexMono.variable}`}
-    >
+    <html lang="en" className={poppins.variable}>
       <head>
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-DPT283QL6C" />
         <script

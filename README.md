@@ -6,6 +6,12 @@
 
 ## Changelog
 
+### 2026-08-08 — Fixed fonts to match the official brand kit (Poppins)
+
+- Checked the actual AE Systems Brand Kit (`OneDrive/AE Systems/Brand kit/ae-systems-brand-kit (1).html`, user-supplied) against what the site was shipping. Colors already matched the brand kit exactly (just some internal naming differences, e.g. site's `teal-light` = brand kit's `teal-dark`, same hex `#00A896`) — but the fonts didn't. The brand kit specifies one typeface for everything, **Poppins** (weights 300–900, distinguished by weight not by swapping fonts: 900 for hero/wordmark, 800/700 section titles, 600 labels, 400/300 body). The site was shipping three unrelated Google Fonts — Space Grotesk (display), IBM Plex Sans (body), IBM Plex Mono (labels/eyebrows) — none of which is Poppins.
+- Fixed in `app/layout.tsx` (single `Poppins` `next/font/google` load, weights 300–900, replacing all three previous font loads) and `app/globals.css` (the `--font-display`/`--font-body`/`--font-mono` theme tokens all now resolve to the same `--font-poppins` variable). Every component across the site references fonts through those three tokens already, so this was a 2-file fix rather than touching every component individually — confirmed via the built HTML: the `<html>` tag's font-loader class and the compiled CSS's `--font-display` value both now show Poppins.
+- Colors were not touched — they already matched.
+
 ### 2026-08-08 — SEO Phase 3.2: HVAC savings calculator
 
 - New `/tools/hvac-savings-calculator` — extended beyond the SEO spec's original simple version (tonnage/hours/tariff/kW-TR only) per explicit request: also takes climate zone and current VFD status as inputs, since those materially change what a realistic savings estimate looks like.
