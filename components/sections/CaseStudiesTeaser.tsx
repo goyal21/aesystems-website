@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { AppImage as Image } from "@/components/ui/AppImage";
 import { Carousel } from "@/components/ui/Carousel";
 import { Button } from "@/components/ui/Button";
@@ -17,10 +18,11 @@ export function CaseStudiesTeaser() {
 
       <Carousel arrowTone="light" className="mx-auto max-w-[1100px]">
         {caseStudies.map((study) => (
-          <div
+          <Link
             key={study.client}
+            href={`/case-studies/${study.slug}`}
             data-carousel-item
-            className="flex w-[74vw] shrink-0 snap-start flex-col gap-3 rounded-[var(--radius-card)] bg-ink p-6 sm:w-[calc((100%-2rem)/3)]"
+            className="group flex w-[74vw] shrink-0 snap-start flex-col gap-3 rounded-[var(--radius-card)] bg-ink p-6 transition-colors hover:bg-panel sm:w-[calc((100%-2rem)/3)]"
           >
             {study.logo && (
               <div className="flex h-9 w-fit items-center rounded-[var(--radius-control)] bg-white/95 px-3">
@@ -40,7 +42,7 @@ export function CaseStudiesTeaser() {
             <p className="font-mono text-[0.68rem] font-semibold uppercase tracking-[0.06em] text-white/60">
               {study.statCaption}
             </p>
-          </div>
+          </Link>
         ))}
       </Carousel>
 

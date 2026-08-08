@@ -3,6 +3,7 @@ import { site } from "@/content/site";
 import { getAllPosts } from "@/lib/blog";
 import { industries } from "@/content/industries";
 import { capabilities } from "@/content/capabilities";
+import { caseStudies } from "@/content/caseStudies";
 
 export const dynamic = "force-static";
 
@@ -25,12 +26,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly" as const,
       priority: 0.9,
     })),
-    {
-      url: `${site.domain}/case-studies/iit-jammu`,
+    ...caseStudies.map((study) => ({
+      url: `${site.domain}/case-studies/${study.slug}`,
       lastModified: now,
       changeFrequency: "monthly" as const,
       priority: 0.8,
-    },
+    })),
     {
       url: `${site.domain}/partners`,
       lastModified: now,

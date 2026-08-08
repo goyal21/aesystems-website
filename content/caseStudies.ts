@@ -1,5 +1,6 @@
 export interface CaseStudy {
   client: string;
+  slug: string;
   category: string;
   status: "Live" | "Validated POC";
   statValue: string;
@@ -18,6 +19,7 @@ export interface CaseStudy {
 export const caseStudies: CaseStudy[] = [
   {
     client: "IIT Jammu",
+    slug: "iit-jammu",
     category: "Campus / Institutional",
     status: "Live",
     statValue: "25",
@@ -35,6 +37,7 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     client: "Leading Co-working Operator, Delhi NCR",
+    slug: "coworking-operator-delhi-ncr",
     category: "Commercial Real Estate",
     status: "Validated POC",
     statValue: "57.8",
@@ -50,6 +53,7 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     client: "Berger Paints",
+    slug: "berger-paints",
     category: "Manufacturing",
     status: "Live",
     statValue: "15–20",
@@ -65,6 +69,7 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     client: "5-Star International Hotel, Delhi NCR",
+    slug: "5-star-hotel-delhi-ncr",
     category: "Hospitality",
     status: "Validated POC",
     statValue: "~40",
@@ -80,6 +85,7 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     client: "JK Agro Cold Storage, Chenani",
+    slug: "jk-agro-cold-storage",
     category: "Cold Chain",
     status: "Live",
     statValue: "9",
@@ -97,6 +103,7 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     client: "Major Urban Metro Rail Operator, North India",
+    slug: "metro-rail-operator-north-india",
     category: "Urban Rail / Metro",
     status: "Validated POC",
     statValue: "40.2",

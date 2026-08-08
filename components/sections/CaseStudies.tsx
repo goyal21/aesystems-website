@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion, type PanInfo } from "framer-motion";
+import Link from "next/link";
 import { AppImage as Image } from "@/components/ui/AppImage";
 import { caseStudies } from "@/content/caseStudies";
 
@@ -16,7 +17,6 @@ const AUTO_ADVANCE_MS = 6000;
 export function CaseStudies() {
   const [perPage, setPerPage] = useState(1);
   const [active, setActive] = useState(0);
-  const [detailsFor, setDetailsFor] = useState<string | null>(null);
 
   useEffect(() => {
     const mq = window.matchMedia("(min-width: 640px)");
@@ -77,9 +77,10 @@ export function CaseStudies() {
             {items.map((study, i) => {
               const globalIndex = active * perPage + i;
               return (
-                <div
+                <Link
                   key={study.client}
-                  className={`flex min-h-[410px] flex-col overflow-hidden rounded-[var(--radius-card)] p-7 sm:min-h-[690px] ${
+                  href={`/case-studies/${study.slug}`}
+                  className={`flex min-h-[410px] flex-col overflow-hidden rounded-[var(--radius-card)] p-7 transition-transform hover:scale-[1.01] sm:min-h-[690px] ${
                     items.length === 1 ? "sm:col-span-2" : ""
                   }`}
                   style={{ background: scrims[globalIndex % scrims.length] }}
@@ -153,17 +154,13 @@ export function CaseStudies() {
                     ))}
                   </div>
 
-                  <button
-                    type="button"
-                    onClick={() => setDetailsFor(study.client)}
-                    className="mt-auto flex items-center justify-between border-t border-white/10 pt-4 text-left sm:hidden"
-                  >
+                  <div className="mt-auto flex items-center justify-between border-t border-white/10 pt-4">
                     <span className="font-mono text-[0.7rem] font-semibold uppercase tracking-[0.1em] text-teal-light">
-                      View details
+                      View full case study
                     </span>
                     <span aria-hidden className="text-teal-light">→</span>
-                  </button>
-                </div>
+                  </div>
+                </Link>
               );
             })}
           </motion.div>
@@ -201,100 +198,6 @@ export function CaseStudies() {
           />
         ))}
       </div>
-
-      <AnimatePresence>
-        {detailsFor &&
-          (() => {
-            const detailIndex = caseStudies.findIndex((s) => s.client === detailsFor);
-            const study = caseStudies[detailIndex];
-            if (!study) return null;
-            return (
-              <motion.div
-                key="case-study-backdrop"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                className="fixed inset-0 z-50 flex items-end bg-ink/60 backdrop-blur-sm sm:hidden"
-                onClick={() => setDetailsFor(null)}
-              >
-                <motion.div
-                  initial={{ y: "100%" }}
-                  animate={{ y: 0 }}
-                  exit={{ y: "100%" }}
-                  transition={{ type: "spring", damping: 30, stiffness: 300 }}
-                  onClick={(event) => event.stopPropagation()}
-                  className="max-h-[85vh] w-full overflow-y-auto rounded-t-[1.25rem] p-6 pb-8"
-                  style={{ background: scrims[detailIndex % scrims.length] }}
-                >
-                  <div className="mx-auto mb-4 h-1 w-10 rounded-full bg-white/20" />
-
-                  <div className="flex items-start justify-between gap-3">
-                    <span className="font-mono text-[0.62rem] font-semibold uppercase tracking-[0.12em] text-white/50">
-                      {study.category}
-                    </span>
-                    <span className="shrink-0 rounded-[3px] border border-teal/30 bg-teal/10 px-2 py-0.5 font-mono text-[0.6rem] font-semibold uppercase tracking-[0.08em] text-teal">
-                      {study.status}
-                    </span>
-                  </div>
-
-                  <h3 className="mt-3 font-display text-[1.05rem] font-bold leading-tight text-white">
-                    {study.client}
-                  </h3>
-
-                  <div className="mt-4 flex items-baseline gap-1.5">
-                    <span className="font-display text-[2.8rem] font-bold leading-none text-teal-light">
-                      {study.statValue}
-                    </span>
-                    <span className="font-display text-[1.3rem] font-bold text-teal-light">{study.statUnit}</span>
-                  </div>
-                  <p className="mt-1 font-mono text-[0.7rem] font-semibold uppercase tracking-[0.08em] text-white/60">
-                    {study.statCaption}
-                  </p>
-
-                  <div className="mt-4 flex flex-col gap-3 border-t border-white/10 pt-4">
-                    <div className="flex flex-col gap-1">
-                      <span className="font-mono text-[0.6rem] font-semibold uppercase tracking-[0.1em] text-cyan">
-                        Challenge
-                      </span>
-                      <p className="text-[0.85rem] leading-relaxed text-white/80">{study.challenge}</p>
-                    </div>
-                    <div className="flex flex-col gap-1">
-                      <span className="font-mono text-[0.6rem] font-semibold uppercase tracking-[0.1em] text-cyan">
-                        Solution
-                      </span>
-                      <p className="text-[0.85rem] leading-relaxed text-white/80">{study.solution}</p>
-                    </div>
-                    <div className="flex flex-col gap-1 rounded-r border-l-2 border-teal-light bg-teal/[0.07] px-3.5 py-2.5">
-                      <span className="font-mono text-[0.6rem] font-semibold uppercase tracking-[0.1em] text-teal-light">
-                        Outcome
-                      </span>
-                      <p className="text-[0.85rem] leading-relaxed text-white">{study.outcome}</p>
-                    </div>
-                  </div>
-
-                  <div className="mt-4 flex flex-wrap gap-1.5">
-                    {study.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="rounded-[3px] border border-white/12 bg-white/[0.04] px-2 py-1 font-mono text-[0.58rem] font-semibold uppercase tracking-[0.06em] text-white/60"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-
-                  <button
-                    type="button"
-                    onClick={() => setDetailsFor(null)}
-                    className="mt-6 w-full rounded-[var(--radius-control)] border border-white/15 py-2.5 text-center font-mono text-[0.7rem] font-semibold uppercase tracking-[0.1em] text-white/70"
-                  >
-                    Close
-                  </button>
-                </motion.div>
-              </motion.div>
-            );
-          })()}
-      </AnimatePresence>
     </section>
   );
 }
