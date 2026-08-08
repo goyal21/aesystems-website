@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { AppImage as Image } from "@/components/ui/AppImage";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { RevealGroup, RevealItem } from "@/components/ui/Reveal";
@@ -37,29 +38,31 @@ export function Platform() {
             key={cap.title}
             className="group relative aspect-[3/4] overflow-hidden rounded-[var(--radius-card)] bg-ink"
           >
-            <Image
-              src={cap.image}
-              alt={cap.title}
-              fill
-              sizes="(max-width: 640px) 50vw, 33vw"
-              loading={index < 3 ? "eager" : "lazy"}
-              className="object-contain transition-transform duration-500 group-hover:scale-105"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/20 to-transparent" />
-            {cap.core && (
-              <span className="eyebrow absolute right-3 top-3 rounded-[var(--radius-control)] bg-teal-light px-2 py-0.5 text-white">
-                CORE
-              </span>
-            )}
-            <div className="absolute inset-x-0 bottom-0 flex flex-col gap-1 p-4">
-              <div className="flex items-center justify-between gap-2">
-                <h3 className="font-display text-[0.9rem] font-semibold leading-tight text-white">{cap.title}</h3>
+            <Link href={`/platform/${cap.slug}`} className="relative block h-full w-full">
+              <Image
+                src={cap.image}
+                alt={cap.title}
+                fill
+                sizes="(max-width: 640px) 50vw, 33vw"
+                loading={index < 3 ? "eager" : "lazy"}
+                className="object-contain transition-transform duration-500 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/20 to-transparent" />
+              {cap.core && (
+                <span className="eyebrow absolute right-3 top-3 rounded-[var(--radius-control)] bg-teal-light px-2 py-0.5 text-white">
+                  CORE
+                </span>
+              )}
+              <div className="absolute inset-x-0 bottom-0 flex flex-col gap-1 p-4">
+                <div className="flex items-center justify-between gap-2">
+                  <h3 className="font-display text-[0.9rem] font-semibold leading-tight text-white">{cap.title}</h3>
+                </div>
+                <span className="eyebrow w-fit text-teal">{cap.tag}</span>
+                <p className="max-h-0 overflow-hidden text-xs leading-snug text-white/85 opacity-0 transition-all duration-300 group-hover:max-h-20 group-hover:opacity-100">
+                  {cap.bullets.join(" · ")}
+                </p>
               </div>
-              <span className="eyebrow w-fit text-teal">{cap.tag}</span>
-              <p className="max-h-0 overflow-hidden text-xs leading-snug text-white/85 opacity-0 transition-all duration-300 group-hover:max-h-20 group-hover:opacity-100">
-                {cap.bullets.join(" · ")}
-              </p>
-            </div>
+            </Link>
           </RevealItem>
         ))}
       </RevealGroup>

@@ -6,6 +6,15 @@
 
 ## Changelog
 
+### 2026-08-08 — SEO Phase 2 P1: 12 new subpages (industries + platform)
+
+- Shipped the SEO spec's P1 tier: 6 industry subpages (`/industries/hotels-hospitality`, `hospitals-healthcare`, `data-centers`, `commercial-real-estate`, `universities-campuses`, `airports`) and 6 platform capability subpages (`/platform/ai-hvac-optimisation`, `smart-bms-monitoring`, `vfd-integration-control`, `3d-digital-twin`, `energy-monitoring-analytics`, `safe-sequencing-automation`) — each ~700-1000 words, structured per the spec (energy problem / how SAAR optimises / what's connected / what the operator sees / deployment / FAQs for industries; problem / mechanism / what's connected / what's seen / getting started / FAQs for platform pages). Every claim already existed elsewhere on the site (20-30% savings, 25% at IIT Jammu, 3-4 week deployment, the VFD/brand list, 12 patents) — nothing new invented, per the spec's own guardrail.
+- Homepage and hub-page cards (`Industries.tsx`, `IndustriesTeaser.tsx`, `Platform.tsx`, `PlatformTeaser.tsx`) now link to their child pages — deliberately left unlinked in Phase 2 P0 to avoid shipping 404s before these pages existed. Added `slug` to `content/industries.ts` and `content/capabilities.ts` to drive the routes and links from one source instead of hardcoding paths at each call site.
+- New reusable `components/seo/RelatedLinks.tsx` (3-5 internal links per page) and generalized `lib/structuredData.ts`'s `faqPageJsonLd()` to accept page-specific FAQ items instead of only the global `/faq` list — both used by all 12 new pages.
+- `app/sitemap.ts` extended with all 12 new URLs at priority 0.8, matching the P1 tier priority in the spec.
+- Verified: `npm run build` clean (28 routes total), sitemap/titles/JSON-LD/card-links spot-checked against the actual built HTML in `out/`, not just a successful compile.
+- Still open from the spec: P2 tier (`/locations/delhi-ncr`), the HVAC savings calculator tool, and the `/about` E-E-A-T section (needs real leadership bios — not something to invent).
+
 ### 2026-08-08 — Blog CMS, Phase 4: live at cms.aesystems.in
 
 - The CMS is no longer local-only. Deployed to the production VM: Node 24 + pm2 installed fresh, `cms/server` shipped as source (not `node_modules` — `sharp` needs its Linux-native prebuild, so `npm install` runs on the VM itself, not copied from Windows), built with `tsc`, running under pm2 (`aesystems-cms`) with a systemd unit so it survives reboots. New nginx vhost reverse-proxies `cms.aesystems.in` → `127.0.0.1:4000`; Let's Encrypt cert issued via `certbot --nginx`. Production `.env` uses fresh credentials generated for this — not the local dev throwaways from Phase 1 testing.

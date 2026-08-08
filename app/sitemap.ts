@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { site } from "@/content/site";
 import { getAllPosts } from "@/lib/blog";
 import { industries } from "@/content/industries";
+import { capabilities } from "@/content/capabilities";
 
 export const dynamic = "force-static";
 
@@ -38,6 +39,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     ...industries.map((industry) => ({
       url: `${site.domain}/industries/${industry.slug}`,
+      lastModified: now,
+      changeFrequency: "monthly" as const,
+      priority: 0.8,
+    })),
+    ...capabilities.map((cap) => ({
+      url: `${site.domain}/platform/${cap.slug}`,
       lastModified: now,
       changeFrequency: "monthly" as const,
       priority: 0.8,

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { AppImage as Image } from "@/components/ui/AppImage";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Carousel } from "@/components/ui/Carousel";
@@ -34,10 +35,11 @@ export function PlatformTeaser() {
 
       <Carousel arrowTone="light" className="mx-auto max-w-[1100px]">
         {capabilities.map((cap) => (
-          <div
+          <Link
             key={cap.title}
+            href={`/platform/${cap.slug}`}
             data-carousel-item
-            className="group relative aspect-[3/4] w-[68vw] shrink-0 snap-start overflow-hidden rounded-[var(--radius-card)] bg-ink sm:w-[calc((100%-2rem)/3)]"
+            className="group relative block aspect-[3/4] w-[68vw] shrink-0 snap-start overflow-hidden rounded-[var(--radius-card)] bg-ink sm:w-[calc((100%-2rem)/3)]"
           >
             <Image
               src={cap.image}
@@ -51,7 +53,7 @@ export function PlatformTeaser() {
               <h3 className="font-display text-[0.9rem] font-semibold leading-tight text-white">{cap.title}</h3>
               <span className="eyebrow w-fit text-teal">{cap.tag}</span>
             </div>
-          </div>
+          </Link>
         ))}
       </Carousel>
 
