@@ -6,6 +6,10 @@
 
 ## Changelog
 
+### 2026-08-08 — "Talk to an Engineer" → "Talk to a Consultant"
+
+- Changed the CTA copy site-wide: the shared `ContactCta` component (`components/seo/ContactCta.tsx`, used at the bottom of every SEO/hub page — industries, platform, case studies, blog, calculator) plus the same phrase inline in both blog post bodies. Deployed and verified live on `aesystems.in`.
+
 ### 2026-08-08 — Fixed fonts to match the official brand kit (Poppins)
 
 - Checked the actual AE Systems Brand Kit (`OneDrive/AE Systems/Brand kit/ae-systems-brand-kit (1).html`, user-supplied) against what the site was shipping. Colors already matched the brand kit exactly (just some internal naming differences, e.g. site's `teal-light` = brand kit's `teal-dark`, same hex `#00A896`) — but the fonts didn't. The brand kit specifies one typeface for everything, **Poppins** (weights 300–900, distinguished by weight not by swapping fonts: 900 for hero/wordmark, 800/700 section titles, 600 labels, 400/300 body). The site was shipping three unrelated Google Fonts — Space Grotesk (display), IBM Plex Sans (body), IBM Plex Mono (labels/eyebrows) — none of which is Poppins.
