@@ -6,6 +6,10 @@
 
 ## Changelog
 
+### 2026-09-01 — Live Demo button in nav
+
+- Added a "Live Demo" pill button to the header nav (`components/layout/Nav.tsx`), both desktop and mobile menus, linking to `https://www.saarsystems.com/demo`. Clicking it shows a `window.confirm` interstitial ("You're about to leave the AE Systems website...") before opening the demo in a new tab (`window.open(..., "_blank", "noopener,noreferrer")`) — no dedicated modal component exists in the codebase yet, so this uses the native browser confirm rather than adding one for a single use case.
+
 ### 2026-08-08 — "Talk to an Engineer" → "Talk to a Consultant"
 
 - Changed the CTA copy site-wide: the shared `ContactCta` component (`components/seo/ContactCta.tsx`, used at the bottom of every SEO/hub page — industries, platform, case studies, blog, calculator) plus the same phrase inline in both blog post bodies. Deployed and verified live on `aesystems.in`.

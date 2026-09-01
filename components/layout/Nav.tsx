@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, type MouseEvent } from "react";
 import Link from "next/link";
 import { AppImage as Image } from "@/components/ui/AppImage";
 
@@ -12,6 +12,18 @@ const links = [
   { label: "Why Us", href: "/about" },
   { label: "Partners", href: "/partners" },
 ];
+
+const DEMO_URL = "https://www.saarsystems.com/demo";
+
+function handleLiveDemoClick(e: MouseEvent) {
+  e.preventDefault();
+  const confirmed = window.confirm(
+    "You're about to leave the AE Systems website to view a live demo. Continue?"
+  );
+  if (confirmed) {
+    window.open(DEMO_URL, "_blank", "noopener,noreferrer");
+  }
+}
 
 export function Nav() {
   const [scrolled, setScrolled] = useState(false);
@@ -53,6 +65,15 @@ export function Nav() {
             </li>
           ))}
           <li>
+            <a
+              href={DEMO_URL}
+              onClick={handleLiveDemoClick}
+              className="inline-flex items-center rounded-[999px] border border-teal/60 px-5 py-2 text-sm font-medium text-teal transition-colors hover:border-teal hover:bg-teal/10"
+            >
+              Live Demo
+            </a>
+          </li>
+          <li>
             <Link
               href="/contact"
               className="inline-flex items-center rounded-[999px] bg-teal px-5 py-2 text-sm font-medium text-ink transition-colors hover:bg-white"
@@ -91,10 +112,20 @@ export function Nav() {
               {link.label}
             </Link>
           ))}
+          <a
+            href={DEMO_URL}
+            onClick={(e) => {
+              handleLiveDemoClick(e);
+              setMenuOpen(false);
+            }}
+            className="mt-4 inline-flex items-center justify-center rounded-[999px] border border-teal/60 px-5 py-2.5 text-sm font-medium text-teal"
+          >
+            Live Demo
+          </a>
           <Link
             href="/contact"
             onClick={() => setMenuOpen(false)}
-            className="mt-4 inline-flex items-center justify-center rounded-[999px] bg-teal px-5 py-2.5 text-sm font-medium text-ink"
+            className="mt-2 inline-flex items-center justify-center rounded-[999px] bg-teal px-5 py-2.5 text-sm font-medium text-ink"
           >
             Get Started
           </Link>
