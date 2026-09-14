@@ -63,7 +63,7 @@ export function Footer() {
 
         {columns.map((col) => (
           <div key={col.title} className="flex flex-col gap-3">
-            <h4 className="eyebrow text-muted-dark/70">{col.title}</h4>
+            <p className="eyebrow text-muted-dark/70">{col.title}</p>
             <ul className="flex flex-col gap-2.5">
               {col.links.map((link) => (
                 <li key={link.label}>

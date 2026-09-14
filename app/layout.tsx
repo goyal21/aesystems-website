@@ -31,11 +31,11 @@ const ibmPlexMono = IBM_Plex_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(site.domain),
   title: {
-    default: "AI-Powered HVAC Optimization | Cut Energy Costs up to 30% | AE Systems",
+    default: "AI-Powered HVAC Optimization | 30% Savings | AE Systems",
     template: "%s | AE Systems",
   },
   description:
-    "AE Systems is an AI-powered HVAC optimization platform for commercial buildings. Reduce HVAC energy costs by up to 30% without replacing equipment. IIT Jammu validated. Pan-India.",
+    "AE Systems: AI-powered HVAC optimization for commercial buildings. Cut energy costs by up to 30% without replacing equipment. IIT Jammu validated. Pan-India.",
   authors: [{ name: "AE Systems — Avenix Engineering Systems Pvt Ltd" }],
   robots: "index, follow",
   alternates: { canonical: "/" },
