@@ -55,22 +55,22 @@ export function Hero() {
 
         {/* bottom band — headline, sub, CTAs */}
         <div className="absolute inset-x-0 bottom-0 flex flex-col items-center gap-4 px-6 pb-2 text-center">
-          <motion.h1
+          <motion.p
             initial={reduced ? undefined : { opacity: 0, y: 20 }}
             animate={reduced ? undefined : { opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
             className="font-mono text-[0.85rem] font-semibold uppercase tracking-[0.14em] text-teal-light"
           >
             AI-Powered HVAC Optimisation for Commercial Buildings
-          </motion.h1>
-          <motion.p
+          </motion.p>
+          <motion.h1
             initial={reduced ? undefined : { opacity: 0, y: 20 }}
             animate={reduced ? undefined : { opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.15 }}
             className="text-[clamp(2rem,3.8vw,3.5rem)] font-bold text-white"
           >
             Stop Wasting <span className="gradient-text">HVAC Energy.</span>
-          </motion.p>
+          </motion.h1>
           <motion.p
             initial={reduced ? undefined : { opacity: 0, y: 20 }}
             animate={reduced ? undefined : { opacity: 1, y: 0 }}
