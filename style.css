@@ -22,6 +22,8 @@ padding:12px 4%;background:#0D1B2A;border-bottom:1px solid rgba(0,194,255,0.2);b
 .nav-links a:hover{color:var(--cyan)}.nav-links a:hover::after{width:100%}
 .nav-cta{background:var(--teal)!important;color:#0A0F1E!important;padding:9px 22px;border-radius:3px;letter-spacing:1px!important;font-weight:700!important}
 .nav-cta:hover{background:var(--cyan)!important;color:#0A0F1E!important}.nav-cta::after{display:none!important}
+.nav-partner{border:1.5px solid var(--gold)!important;color:var(--gold)!important;padding:8px 18px;border-radius:3px;letter-spacing:1px!important;font-weight:700!important;transition:background .2s,color .2s!important}
+.nav-partner:hover{background:var(--gold)!important;color:#0A0F1E!important}.nav-partner::after{display:none!important}
 /* Mobile hamburger */
 .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;background:none;border:none;z-index:10000;position:relative}
 .hamburger span{width:26px;height:2.5px;background:#FFFFFF;border-radius:2px;transition:all .3s;display:block}
@@ -33,6 +35,8 @@ padding:12px 4%;background:#0D1B2A;border-bottom:1px solid rgba(0,194,255,0.2);b
 .mobile-menu a{text-decoration:none;color:#A8BDD0;font-size:0.8rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:14px 0;border-bottom:1px solid rgba(0,194,255,0.1);transition:color .2s}
 .mobile-menu a:hover{color:var(--red)}
 .mobile-menu a:last-child{border-bottom:none;background:var(--teal);color:#0A0F1E!important;text-align:center;padding:13px;border-radius:3px;margin-top:10px;font-weight:700}
+.mobile-partner-login{text-decoration:none;color:var(--gold)!important;font-size:0.8rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:13px;border:1.5px solid var(--gold);border-radius:3px;margin-top:6px;text-align:center;display:block;transition:background .2s,color .2s}
+.mobile-partner-login:hover{background:var(--gold)!important;color:#0A0F1E!important}
 @media(max-width:820px){.nav-links{display:none}.hamburger{display:flex}.nav-logo img{height:50px;max-width:216px}}
 
 /* ═══ LAYOUT HELPERS ═══ */
