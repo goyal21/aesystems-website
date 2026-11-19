@@ -8,9 +8,9 @@
 
 ### 2026-11-19 — New Universal Gateway, Industrial Controller & Energy Dashboard images
 
-- `public/assets/products/energy-dashboard.webp` was also replaced (640×310). The supplied file was actually JPEG data with a `.webp` extension, so it was re-encoded to a true WebP in place.
-- Replaced the two "See It In Action" product images with the new artwork from `assets/products/*.png` (gitignored source). Resized to 1200×900 and re-encoded into the existing `public/assets/products/universal-gateway.jpg` and `industrial-controller.webp`, so no component changes were needed. Local only — not yet deployed.
-
+- `public/assets/products/energy-dashboard.webp` was also replaced, first with a 640×310 file (JPEG data wrongly named `.webp`, re-encoded to true WebP), then with a higher-res 1200×582 `energy-dashboard.jpg` converted to WebP.
+- Deployed to production (manual build + SSH copy, Cloudflare purge of the three image URLs).
+- Replaced the two "See It In Action" product images with the new artwork from `assets/products/*.png` (gitignored source). Resized to 1200×900 and re-encoded into the existing `public/assets/products/universal-gateway.jpg` and `industrial-controller.webp`, so no component changes were needed.
 ### 2026-09-01 — Live Demo button in nav
 
 - Added a "Live Demo" pill button to the header nav (`components/layout/Nav.tsx`), both desktop and mobile menus, linking to `https://www.saarsystems.com/demo`. Clicking it shows a `window.confirm` interstitial ("You're about to leave the AE Systems website...") before opening the demo in a new tab (`window.open(..., "_blank", "noopener,noreferrer")`) — no dedicated modal component exists in the codebase yet, so this uses the native browser confirm rather than adding one for a single use case.
